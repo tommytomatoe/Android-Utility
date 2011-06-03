@@ -1,0 +1,402 @@
+#! /bin/bash
+
+##FUNCTIONS
+
+#enterKey
+enterKey()
+{	echo "Press [enter] or [space] to $COM, any other key to quit";
+	read -s -n 1 key
+	if [[ $key = "" ]]; then 
+  		echo "Initiating..."
+		echo
+	else
+  		echo "Command not executed";
+		enter
+	fi
+}
+
+#enter
+enter()
+{	echo "Please press [enter] to continue";
+	read -s -n 1 key
+	if [[ $key = "" ]]; then 
+  		adb_script
+	fi
+}
+
+#error
+error()
+{	echo "## Error while processing command"
+	echo
+}
+
+#error1
+error1()
+{	echo "## Error while processing command: Please specify valid file name or directory"
+	echo
+}
+
+#User Decline
+user_d()
+{	echo "## Error while processing command: User declined"
+	echo
+}
+
+#load
+load()
+{	echo -n "   ."
+	sleep .125
+	echo -n ".."
+	sleep .125
+	echo -n ".."
+	sleep .125
+	echo ".."
+	sleep .125
+	echo -n "    ."
+	sleep .125
+	echo -n ".."
+	sleep .125
+	echo -n ".."
+	sleep .125
+	echo ".."
+	sleep .125
+	echo -n "     ."
+	sleep .125
+	echo -n ".."
+	sleep .125
+	echo -n ".."
+	sleep .125
+	echo ".."
+	sleep .125
+}
+
+#load back
+daol()
+{	echo -n "    ."
+	sleep .125
+	echo -n ".."
+	sleep .125
+	echo -n ".."
+	sleep .125
+	echo ".."
+	sleep .125
+}
+
+#loader
+loader()
+{	daol
+	load	
+	daol
+	load
+	daol
+	load
+	daol
+	load
+	daol
+	load
+	daol
+	load
+	daol
+	echo
+	sleep .5
+	echo "    ......."
+	echo
+	sleep .5
+	echo "     ....."
+	echo
+	sleep .5
+	echo "      ..."
+	echo
+	sleep .5
+	echo "       ."
+}
+
+#adb remount
+adb_rem()
+{	clear;
+	COM="adb remount"
+	echo
+	echo "Remounting device as R/W";
+	echo
+	enterKey
+	adb remount
+	echo
+	enter
+}
+
+#adb pull
+adb_pull()
+{	clear
+	COM="adb pull"
+	enterKey
+	printf "[adb pull] from which directory? [ie. /system/app/] = "
+	read DIR
+	echo
+	printf "[adb pull] which file? [ie. Rosie.apk] = "
+	read NAM
+	echo
+	for a in "adb pull $DIR$NAM $d"
+	do
+	if [ -e "$d$NAM" ] ; then
+		echo "Overwrite existing $NAM? [y/n] "
+		echo
+		read -s -n 1 ans
+		case "$ans" in
+		y|Y) $a;;
+		n|N) user_d;
+		esac
+	else
+		$a;
+	fi
+	done
+	if [[ "$DIR" == "" ]] ; then
+		error
+	fi
+	enter
+}
+
+
+#adb pull express
+adb_pull_e()
+{	clear
+	COM="adb pull"
+	enterKey
+	echo "adb pull..."
+	printf "which /directory/filename? [ie. /system/app/Rosie.apk] = "
+	read DIRNAM
+	echo
+	NAM=`basename $DIRNAM`
+	for a in "adb pull $DIRNAM $e"
+	do
+	if [ -e "$e$NAM" ] ; then
+		echo "Overwrite existing $NAM? [y/n] "
+		echo
+		read -s -n 1 ans
+		case "$ans" in
+		y|Y) $a;;
+		n|N) user_d;
+		esac
+	else
+		$a;
+	fi
+	done
+	enter
+}
+
+#adb shell stop
+adb_stop()
+{	COM="stop device"
+	echo
+	enterKey
+	echo "Stopping device process"
+	adb shell stop
+	enter
+}
+
+#adb shell start
+adb_sta()
+{	COM="start device"
+	echo
+	enterKey
+	echo "Starting device"
+	adb shell start
+	enter
+}
+
+#adb devices
+adb_dev()
+{	COM="list device info"
+	echo
+	enterKey
+	echo
+	echo "Gathering information about your device"
+	echo
+	adb devices
+	enter
+}
+
+#adb reboot
+adb_r()
+{	COM="adb reboot"
+	echo
+	enterKey
+	echo
+	echo "Rebooting Device"
+	adb reboot
+	enter
+}
+	
+#adb reboot recovery
+adb_re()
+{	COM="adb reboot to recovery"
+	echo
+	enterKey
+	echo "Rebooting Device"
+	adb reboot recovery
+	enter
+}
+
+#adb reboot bootloader
+adb_bl()
+{	COM="adb reboot to bootloader"
+	echo
+	enterKey
+	echo "Rebooting Device"
+	adb reboot bootloader
+	enter
+}
+
+#hot restart...kind of
+hot_res()
+{	COM="hot restart"
+	echo
+	enterKey
+	echo
+	echo "Stopping Device "
+	adb shell stop
+	daol
+	adb shell start
+	daol
+	daol
+	daol
+	daol
+	daol
+	echo "Starting Device"
+	loader
+	sleep 1
+	echo
+	echo "Device is up and running"
+	echo
+	enter
+}
+
+#adb push
+adb_push()
+{	clear
+	COM="adb push"
+	enterKey
+	echo "Remounting R/W"
+	echo
+	adb remount
+	echo
+	printf %s "[adb push] to which directory? [ie. /system/app/] = "
+	read DIR
+	echo
+	echo "These files are available in $d:"
+	echo
+	ls -t -1 $d
+	echo
+	printf %s "[adb push] which file? [ie. Rosie.apk] = "
+	read NAM
+	for a in "adb push $d$NAM $DIR"
+	do
+	if [[ "$NAM" == "" ]] ; then
+		echo
+		error1;
+	else
+		$a
+	fi
+	done
+	enter
+}
+
+#adb install
+adb_inst()
+{	clear
+	COM="adb install"
+	enterKey
+	echo
+	echo "These files are available in $d:"
+	echo
+	ls -t -1 $d
+	echo
+	printf %s "[adb install] which file? [ie. DataApp.apk] = "
+	read INS
+	for a in "adb install $d$INS"
+	do
+	if [[ "$INS" == "" ]] ; then
+		echo
+		error1;
+	else
+		$a
+	fi
+	done
+	enter
+}
+	
+
+#adb shell
+adb_shell() 
+{	clear
+	COM="enter dab shell"
+	enterKey
+	echo "Remounting R/W"
+	adb remount
+	sleep 1
+	clear
+	echo `adb devices`
+	echo
+	adb shell
+}
+
+#adb script
+adb_script() {
+#export PATH
+cd $HOME/android-utility/
+d="$HOME/android-utility/working-folder/0.mod-multiple-apk/"
+e="$HOME/android-utility/working-folder/0.mod-single-apk/"
+PATH="$PATH:$PWD/utility"
+export PATH
+clear
+echo "     ------------------     "
+echo "|   Android Debug Bridge   |"
+echo "|--------------------------|"
+echo "|    Basic ADB Commands    |"
+echo "|--------------------------|"
+echo "| 1.  remount              |"
+echo "| 2.  devices              |"
+echo "| 3.  reboot               |"
+echo "| 4.  reboot recovery      |"
+echo "| 5.  reboot bootloader    |"
+echo "| 6.  hot restart          |"
+echo "|--------------------------|"
+echo "|  Advanced ADB Commands   |"
+echo "|--------------------------|"
+echo "| 7.  pull                 |"
+echo "| 8.  pull express         |"
+echo "| 9.  push                 |"
+echo "|10.  shell                |"
+echo "|11.  shell stop           |"
+echo "|12.  shell start          |"
+echo "|13.  install              |"
+echo "|--------------------------|"
+echo "|--------------------------|"
+echo "|--------------------------|"
+echo "| q. Go Back to Main Menu  |"
+echo "     ------------------     "
+echo
+printf "%s" "  Choose an ADB Command: "
+read num
+case "$num" in
+  1)  adb_rem;;
+  2)  adb_dev;;
+  3)  adb_r;;
+  4)  adb_re;;
+  5)  adb_bl;;
+  6)  hot_res;;
+  7)  adb_pull;;
+  8)  adb_pull_e;;
+  9)  adb_push;;
+ 10)  adb_shell;;
+ 11)  adb_stop;;
+ 12)  adb_sta;;
+ 13)  adb_inst;;
+  q) clear; exit;;
+ *) echo; echo "Please enter valid option"; enter;
+esac
+}
+
+while :
+do
+	adb_script
+done
