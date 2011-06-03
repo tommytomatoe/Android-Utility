@@ -1,0 +1,81 @@
+#! /bin/bash
+
+#export PATH
+cd $HOME/android-utility/
+PATH="$PATH:$PWD/utility"
+export PATH
+echo "$PATH"
+
+#introduction
+clear
+echo "Welcome" $USER,
+echo "Today is" `date`
+echo
+echo "You are using Android Utility."
+echo "brought to you by tommytomatoe,"
+echo "enjoy the possibilities..."
+echo
+
+##functions
+#enter
+enter()
+{	echo
+	echo "Please press [enter] to continue";
+	read -s -n 1 key
+	if [[ $key = "" ]]; then 
+  		echo
+  		clear
+	fi
+}
+
+#quit
+quit()
+{	echo
+	echo "Thank you for choosing Android Utility"
+	echo "brought to you by tommytomatoe :-)"
+	echo
+	echo "Please Don't Drink and Drive"
+	echo
+	exit
+}
+
+android () 
+{
+echo "     -----------------------     "
+echo "|        Android Utility        |"
+echo "|     Blue Waffle Magic Pack    |"
+echo "|-------------------------------|"
+echo "|-------------------------------|"
+echo "|         BASIC COMMANDS        |"
+echo "|-------------------------------|"
+echo "| 1.  adb tools                 |"
+echo "| 2.                            |"
+echo "| 3.                            |"
+echo "|-------------------------------|"
+echo "|       ADVANCED COMMANDS       |"
+echo "|-------------------------------|"
+echo "| 4.  apktool                   |"
+echo "| 5.  draw9patch utilities      |"
+echo "| 6.                            |"
+echo "|-------------------------------|"
+echo "|             SETUP             |"
+echo "|-------------------------------|"
+echo "| x.  Run Installation Guide    |"
+echo "|-------------------------------|"
+echo "|-------------------------------|"
+echo "| q.  Quit                      |"
+echo "     -----------------------     "
+printf %s "Select an Option: "
+read num
+case $num in
+ 1) clear; ttadb;;
+ x) installau;;
+ q) quit;;
+ *) echo; echo "$num is not a valid option"; enter;
+esac
+}
+
+while :
+do
+	android
+done
