@@ -52,8 +52,8 @@ makedir ()
 		n|N) echo; echo "Working folder remained unchanged"; enter;;
 		*) echo; echo "Working folder replaced "; makedirA; enter;;
 		esac
-		else
-			makedirA
+	else
+		makedirB
 	fi
 		
 }
@@ -66,6 +66,16 @@ makedirA ()
 	mkdir $w/2.png-opt
 	mkdir $w/2.ninepatch-decompiler
 	mkdir $w/2.ninepatch-compiler
+	}
+
+makedirB ()
+{	mkdir $HOME/android-utility/working-folder
+	mkdir $w/0.mod-multiple-apk
+	mkdir $w/0.mod-single-apk
+	mkdir $w/2.png-opt
+	mkdir $w/2.ninepatch-decompiler
+	mkdir $w/2.ninepatch-compiler
+	enter
 	}
 
 #quit
