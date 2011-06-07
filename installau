@@ -61,20 +61,18 @@ makedir ()
 makedirA ()
 {	rm -r $HOME/android-utility/working-folder
 	mkdir $HOME/android-utility/working-folder
-	mkdir $w/0.mod-multiple-apk
-	mkdir $w/0.mod-single-apk
-	mkdir $w/2.png-opt
-	mkdir $w/2.ninepatch-decompiler
-	mkdir $w/2.ninepatch-compiler
+	mkdir $w/apk-here-solo
+	mkdir $w/apks-here-multi
+	mkdir $w/framework-here
+	mkdir $w/ninepatch
 	}
 
 makedirB ()
 {	mkdir $HOME/android-utility/working-folder
-	mkdir $w/0.mod-multiple-apk
-	mkdir $w/0.mod-single-apk
-	mkdir $w/2.png-opt
-	mkdir $w/2.ninepatch-decompiler
-	mkdir $w/2.ninepatch-compiler
+	mkdir $w/apk-here-solo
+	mkdir $w/apks-here-multi
+	mkdir $w/framework-here
+	mkdir $w/ninepatch
 	enter
 	}
 
