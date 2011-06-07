@@ -44,7 +44,7 @@ export_PATH ()
 #make directories
 makedir ()
 {	w=$HOME/android-utility/working-folder
-	if [[ -s $h/$w ]] ; then
+	if [[ -s $w ]] ; then
 		echo
 		echo "Working folder exists, would you like to start over? [Y/n] [default=Y]"
 		read -s -n 1 ans
@@ -110,7 +110,7 @@ first_time ()
 	echo
 	sudo cp resources/clean/aapt-9 /usr/local/bin/aapt
 	sudo cp resources/clean/adb /usr/local/bin/adb
-    sudo cp resources/clean/andutil /usr/local/bin/
+   	sudo cp resources/clean/andutil /usr/local/bin/
 	sudo cp resources/clean/apktool /usr/local/bin/
 	sudo cp resources/clean/apktool-1.4.1.jar /usr/local/bin/apktool.jar
 	sudo cp resources/clean/baksmali /usr/local/bin/
