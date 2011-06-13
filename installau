@@ -14,7 +14,7 @@ bpro ()
 	echo "Checking status of .bash_profile..."
 	if [[ -s $HOME/$b ]] ; then
 		echo
-		echo "$b exists, would you like to:"
+		echo "$b exists, would you like to: [default=3]"
 		echo 
 		echo "  1. Overwrite"
 		echo "  2. Append to $b"
@@ -23,8 +23,7 @@ bpro ()
 		case $ans in 
 		1) bpro1;;
 		2) bpro2;;
-		3) echo; echo "$b remained unchanged"; enter;;
-		*) echo; echo "$ans is not a valid option"; echo;;
+		*) echo; echo "$b remained unchanged"; enter;;
 		esac
 	else
 		bpro3
@@ -100,23 +99,38 @@ export_PATH ()
 #make directories
 makedir ()
 {	w=$HOME/android-utility/working-folder
-	if [[ -s $w ]] ; then
-		echo "Working folder exists, would you like to start over? [Y/n] [default=Y]"
+	echo "Checking status of $w..."
+	if [[ -s $w ]] ; then	
+		echo
+		echo "Working folder exists, would you like to start over? [default=Y]"
+		echo
+		echo "  1. Yes"
+		echo "  2. No"
 		read -s -n 1 ans
 		case $ans in 
-		n|N) echo; echo "Working folder remained unchanged"; enter;;
+		1) echo; rm -r $w; echo "Working folder replaced "; makedirB;;
+		2) echo; echo "Working folder remained unchanged"; enter;;
 		*) echo; rm -r $w; echo "Working folder replaced "; makedirB;;
 		esac
 	else
 		makedirB
 	fi
-	w=$HOME/bin
+}
+
+makedirBIN ()
+{	w=$HOME/bin
+	echo "Checking status of $w..."
 	if [[ -s $w ]] ; then
-		echo "$w exists, would you like to overwrite? [Y/n] [default=Y]"
+		echo
+		echo "$w exists, would you like to overwrite? [default=Y]"
+		echo
+		echo "  1. Yes"
+		echo "  2. No"
 		read -s -n 1 ans
 		case $ans in 
-		*) echo; rm -r $w; makedirC; echo "/bin replaced "; enter;;
-		n|N) echo; echo "/bin remained unchanged"; enter;;
+		1) echo; rm -r $w; makedirC; echo "$w replaced "; enter;;
+		2) echo; echo "/bin remained unchanged"; enter;;
+		*) echo; rm -r $w; makedirC; echo "$w replaced "; enter;;
 		esac
 	else
 		makedirC
@@ -167,7 +181,9 @@ first_time ()
 	enterKey
 	bpro
 	makedir
+	makedirBIN
 	export_PATH
+	sleep .75
 	echo "Adding executable permission to resources"
 	chmod 755 resources/clean/*
 	echo
@@ -184,9 +200,11 @@ first_time ()
 	cp resources/clean/smali $HOME/bin/
 	cp resources/clean/smali.jar $HOME/bin/
 	echo
+	sleep .75
 	echo "Fixing permissions"
 	echo
 	sudo chmod 755 $HOME/bin/*
+	echo "All Done. Now, enjoy android-utility"
 	enter
 }
 
@@ -280,7 +298,7 @@ case $num in
  2) ins_apktool;;
  3) ins_aapt;;
  4) ins_addon;;
- 5) makedir;;
+ 5) clear; makedir;;
  x) andutil;;
  b) bpro;;
  q) quit;;
