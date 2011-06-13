@@ -7,6 +7,62 @@ clear
 
 # Functions
 
+# .bash_profile
+bpro ()
+{	b=.bash_profile
+	clear
+	echo "Checking status of .bash_profile..."
+	if [[ -s $HOME/$b ]] ; then
+		echo
+		echo "$b exists, would you like to:"
+		echo 
+		echo "  1. Overwrite"
+		echo "  2. Append to $b"
+		echo "  3. Do not create new $b"
+		read -s -n 1 ans
+		case $ans in 
+		1) bpro1;;
+		2) bpro2;;
+		3) echo; echo "$b remained unchanged"; enter;;
+		*) echo; echo "$ans is not a valid option"; echo;;
+		esac
+	else
+		bpro3
+	fi	
+}
+
+bpro1 ()
+{	b=.bash_profile
+	cp $HOME/$b $HOME/$b.bak
+	echo
+	echo "Removing $b"
+	sudo rm $HOME/$b
+	echo
+	echo "Creating new $b"
+	touch $HOME/$b
+	( echo; echo "export PATH=\${PATH}:\$HOME/bin:\$HOME/android-utility:\$HOME/android-utility/utility:\$HOME/android-sdk/platform-tools/:\$HOME/android-sdk/tools" ) >>$b
+	source $HOME/$b
+	enter
+}
+
+bpro2 ()
+{	b=.bash_profile
+	cp $HOME/$b $HOME/$b.bak
+	echo
+	echo "Appending Information to $b"
+	( echo; echo "export PATH=\${PATH}:\$HOME/bin:\$HOME/android-utility:\$HOME/android-utility/utility:\$HOME/android-sdk/platform-tools/:\$HOME/android-sdk/tools" ) >>$b
+	source $HOME/$b
+	enter
+}
+
+bpro3 ()
+{	echo
+	echo "$b does not exist. Preparing to create $b"
+	echo "export PATH=\${PATH}:\$HOME/bin:\$HOME/android-utility:\$HOME/android-utility/utility:\$HOME/android-sdk/platform-tools/:\$HOME/android-sdk/tools" >>$b
+	source $HOME/$b
+	enter
+}
+
 #enterKey
 enterKey()
 {	echo "### Press [enter] to continue, any other key to quit";
@@ -35,8 +91,8 @@ enter()
 #export PATH
 export_PATH ()
 {	cd $HOME/android-utility/
-	PATH="$PATH:$PWD/utility"
-	export PATH
+	echo "Your PATH:"
+	echo
 	echo "$PATH"
 	echo
 }
@@ -45,27 +101,29 @@ export_PATH ()
 makedir ()
 {	w=$HOME/android-utility/working-folder
 	if [[ -s $w ]] ; then
-		echo
 		echo "Working folder exists, would you like to start over? [Y/n] [default=Y]"
 		read -s -n 1 ans
 		case $ans in 
 		n|N) echo; echo "Working folder remained unchanged"; enter;;
-		*) echo; echo "Working folder replaced "; makedirA; enter;;
+		*) echo; rm -r $w; echo "Working folder replaced "; makedirB;;
 		esac
 	else
 		makedirB
 	fi
-		
+	w=$HOME/bin
+	if [[ -s $w ]] ; then
+		echo "$w exists, would you like to overwrite? [Y/n] [default=Y]"
+		read -s -n 1 ans
+		case $ans in 
+		*) echo; rm -r $w; makedirC; echo "/bin replaced "; enter;;
+		n|N) echo; echo "/bin remained unchanged"; enter;;
+		esac
+	else
+		makedirC
+		enter
+	fi	
 }
 
-makedirA ()
-{	rm -r $HOME/android-utility/working-folder
-	mkdir $HOME/android-utility/working-folder
-	mkdir $w/apk-here-solo
-	mkdir $w/apks-here-multi
-	mkdir $w/framework-here
-	mkdir $w/ninepatch
-	}
 
 makedirB ()
 {	mkdir $HOME/android-utility/working-folder
@@ -75,6 +133,13 @@ makedirB ()
 	mkdir $w/ninepatch
 	enter
 	}
+
+makedirC ()
+{	y=$HOME/bin
+	echo "Creating New bin Directory"
+	mkdir $y
+	echo 
+}
 
 #quit
 quit()
@@ -100,25 +165,29 @@ first_time ()
 {	COM="First Time Install"
 	selection
 	enterKey
+	bpro
+	makedir
 	export_PATH
 	echo "Adding executable permission to resources"
 	chmod 755 resources/clean/*
 	echo
-	echo "Adding resources to usr/local/bin"
+	echo "Adding resources to $HOME/bin"
 	echo
-	sudo cp resources/clean/aapt-9 /usr/local/bin/aapt
-	sudo cp resources/clean/adb /usr/local/bin/adb
-   	sudo cp resources/clean/andutil /usr/local/bin/
-	sudo cp resources/clean/apktool /usr/local/bin/
-	sudo cp resources/clean/apktool-1.4.1.jar /usr/local/bin/apktool.jar
-	sudo cp resources/clean/baksmali /usr/local/bin/
-	sudo cp resources/clean/baksmali.jar /usr/local/bin/
-	sudo cp resources/clean/decode9patchPng.jar /usr/local/bin/
-	sudo cp resources/clean/smali /usr/local/bin/
-	sudo cp resources/clean/smali.jar /usr/local/bin/
+	cp resources/clean/aapt-9 $HOME/bin/aapt
+	cp resources/clean/adb $HOME/bin/adb
+   	cp resources/clean/andutil $HOME/bin/
+	cp resources/clean/apktool $HOME/bin/
+	cp resources/clean/apktool-1.4.1.jar $HOME/bin/apktool.jar
+	cp resources/clean/baksmali $HOME/bin/
+	cp resources/clean/baksmali.jar $HOME/bin/
+	cp resources/clean/decode9patchPng.jar $HOME/bin/
+	cp resources/clean/smali $HOME/bin/
+	cp resources/clean/smali.jar $HOME/bin/
+	echo
 	echo "Fixing permissions"
-	sudo chmod 755 /usr/local/bin/*
-	makedir
+	echo
+	sudo chmod 755 $HOME/bin/*
+	enter
 }
 
 ins_apktool ()
@@ -139,9 +208,9 @@ ins_apktool ()
 	printf "Please make your selection: "
 	read sel
 	case $sel in
-	 1) sudo cp $HOME/android-utility/resources/apktool1.3.1/apktool.jar /usr/local/bin/;;
-	 2) sudo cp $HOME/android-utility/resources/apktool1.3.2/apktool.jar /usr/local/bin/;;
-	 3) sudo cp $HOME/android-utility/resources/apktool1.4.1/apktool.jar /usr/local/bin/;;
+	 1) sudo cp $HOME/android-utility/resources/apktool1.3.1/apktool.jar $HOME/bin/;;
+	 2) sudo cp $HOME/android-utility/resources/apktool1.3.2/apktool.jar $HOME/bin/;;
+	 3) sudo cp $HOME/android-utility/resources/apktool1.4.1/apktool.jar $HOME/bin/;;
 	 *) echo; echo "$sel is not a valid option"; echo;;	
 	esac
 	echo
@@ -165,9 +234,9 @@ ins_aapt ()
 	printf "Please make your selection: "
 	read sel
 	case $sel in
-	 1) sudo cp $HOME/android-utility/resources/aapt/aapt-8 /usr/local/bin/aapt;;
-	 2) sudo cp $HOME/android-utility/resources/aapt/aapt-9 /usr/local/bin/aapt;;
-	 3) sudo cp $HOME/android-utility/resources/aapt/aapt-10 /usr/local/bin/aapt;;
+	 1) sudo cp $HOME/android-utility/resources/aapt/aapt-8 $HOME/bin/aapt;;
+	 2) sudo cp $HOME/android-utility/resources/aapt/aapt-9 $HOME/bin/aapt;;
+	 3) sudo cp $HOME/android-utility/resources/aapt/aapt-10 $HOME/bin/aapt;;
 	 *) echo; echo "$sel is not a valid option"; echo;;	
 	esac
 	echo
@@ -213,6 +282,7 @@ case $num in
  4) ins_addon;;
  5) makedir;;
  x) andutil;;
+ b) bpro;;
  q) quit;;
  *) echo; echo "$num is not a valid option"; enter;
 esac
