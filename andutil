@@ -1,10 +1,10 @@
 #! /bin/bash
 
-#export PATH
-cd $HOME/android-utility/
-PATH="$PATH:$PWD/utility"
-export PATH
-echo "$PATH"
+# Android Utility
+# Author: Tommy Nguyen [tommytoamtoe]
+# Version: a-0.89
+# Date: June 15, 2011
+# Contact: tommytomatoe@gmail.com
 
 #introduction
 clear
