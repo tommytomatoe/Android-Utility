@@ -11,10 +11,6 @@ clear
 echo "Welcome" $USER,
 echo "Today is" `date`
 echo
-echo "You are using Android Utility."
-echo "brought to you by tommytomatoe,"
-echo "enjoy the possibilities..."
-echo
 
 ##functions
 #enter
@@ -39,36 +35,44 @@ quit()
 	exit
 }
 
+#future features
+ff ()
+{	clear
+	echo "Feature coming in a future release. Stay tuned."
+	enter
+}
+
+
 android () 
 {
-echo "     -----------------------     "
-echo "|        Android Utility        |"
-echo "|     Blue Waffle Magic Pack    |"
-echo "|-------------------------------|"
-echo "|-------------------------------|"
-echo "|         BASIC COMMANDS        |"
-echo "|-------------------------------|"
-echo "| 1.  adb tools                 |"
-echo "| 2.                            |"
-echo "| 3.                            |"
-echo "|-------------------------------|"
-echo "|       ADVANCED COMMANDS       |"
-echo "|-------------------------------|"
-echo "| 4.  apktool                   |"
-echo "| 5.  draw9patch utilities      |"
-echo "| 6.                            |"
-echo "|-------------------------------|"
-echo "|             SETUP             |"
-echo "|-------------------------------|"
-echo "| x.  Run Installation Guide    |"
-echo "|-------------------------------|"
-echo "|-------------------------------|"
-echo "| q.  Quit                      |"
-echo "     -----------------------     "
+echo "   Android Utility by tommytomatoe"
+echo "                      ----------------------     "
+echo "   Blue Waffle Magic Pack v a-0.89"
+echo "|-------------------------------||-------------------------------|"
+echo "|-------------------------------||-------------------------------|"
+echo "|         BASIC TOOLS           ||         AWESOME SAUCE         |"
+echo "|-------------------------------||-------------------------------|"
+echo "| 1.  adb tools                 || 4.  apk Re-Engineerin         |"
+echo "| 2.  keystore manager          || 5.  draw9patch utilities      |"
+echo "| 3.                            || 6.  smali and baksmali        |"
+echo "|-------------------------------||-------------------------------|"
+echo "|-------------------------------||-------------------------------|"
+echo "|             SETUP             ||"
+echo "|-------------------------------||"
+echo "| x.  Run Installation Guide    ||"
+echo "|-------------------------------||"
+echo "|-------------------------------||"
+echo "| q.  Quit                      ||"
+echo "                      ----------------------     "
 printf %s "Select an Option: "
 read num
 case $num in
  1) clear; ttadb;;
+ 2) ff;;
+ 3) ff;;
+ 4) echo;;
+ 5) echo;;
+ 6) ff;;
  x) installau;;
  q) quit;;
  *) echo; echo "$num is not a valid option"; enter;

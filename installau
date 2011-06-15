@@ -168,8 +168,8 @@ makedirBIN ()
 
 makedirB ()
 {	mkdir $HOME/android-utility/working-folder
-	mkdir $w/apk-here-solo
-	mkdir $w/apks-here-multi
+	mkdir $w/mod-here-solo
+	mkdir $w/mod-here-multi
 	mkdir $w/framework-here
 	mkdir $w/ninepatch
 	enter
@@ -213,8 +213,8 @@ clean_in ()
 	ins_sed
 	echo "Adding resources to $b"
 	load_dot
-	cp -v -v $c/7z $b/
-	cp -v -v $c/7z.so $b/	
+	cp -v $c/7z $b/
+	cp -v $c/7z.so $b/	
 	cp -v $c/adb $b/adb
 	cp -v $c/baksmali $b/
 	cp -v $c/baksmali.jar $b/
@@ -242,6 +242,7 @@ first_time ()
 	load_dot
 	echo "Fixing permissions"
 	load_dot
+	sudo chmod 755 /usr/local/bin/*
 	sudo chmod 755 $HOME/bin/*
 	echo "All Done. Now, enjoy android-utility"
 	enter
@@ -334,7 +335,6 @@ ins_sed ()
 	COM="Install GNU sed"
 	selection
 	enterKey
-	clear
 	echo "Renaming FreeBSD sed"
 	load_dot
 	sudo mv -v /usr/bin/sed /usr/bin/sed-BSD
@@ -350,7 +350,7 @@ inst ()
 {	date +%b%e_%H%M%S
 	clear
 echo "     -----------------------     "
-echo "|     Android Utility v0.0.1    |"
+echo "|    Android Utility v a0.89    |"
 echo "|      Installaltion Guide      |"
 echo "|-------------------------------|"
 echo "|-------------------------------|"
