@@ -1,0 +1,173 @@
+#! /bin/bash
+
+# Apktool Decode Script
+# Author: Tommy Nguyen [tommytoamtoe]
+# Version: a-0.89
+# Date: June 16, 2011
+# Contact: tommytomatoe@gmail.com
+
+# Setting Loop Variable
+clear
+APPLE=$1
+
+# Functions
+
+#enterKey
+enterKey()
+{	echo "### Press [enter] to continue, any other key to quit";
+	read -s -n 1 key
+	if [[ $key = "" ]]; then 
+  		echo 
+	else
+  		echo
+  		echo "Installation aborted";
+		enter
+		apk_tool
+	fi
+}
+
+#enter
+enter()
+{	echo
+	echo "Please press [enter] to continue";
+	read -s -n 1 key
+	if [[ $key = "" ]]; then 
+  		echo
+		clear
+	fi
+}
+
+#enter
+enterA()
+{	echo
+	echo "Please press [enter] when ready";
+	read -s -n 1 key
+	if [[ $key = "" ]]; then 
+  		echo
+	fi
+}
+
+#load
+load_dot ()
+{	echo -n "."
+	sleep .1
+	echo -n "."
+	sleep .1
+	echo -n "."
+	sleep .1
+	echo -n "."
+	sleep .1
+	echo -n "."
+	sleep .1
+	echo "."
+}
+
+#quit
+quit()
+{	echo
+	echo "Thank you for choosing Android Utility"
+	echo "brought to you by tommytomatoe :-)"
+	echo
+	echo "Please Don't Drink and Drive"
+	echo
+	exit
+}
+
+#select
+selection ()
+{	echo
+	echo "You've selcted [$COM]"
+	echo
+}
+
+#Decode
+decode ()
+{	COM="apktool d[ecode]"
+	d=$HOME/android-utility/working-folder/mod-here-solo
+	clear
+	a=`ls -d $d/* | grep .apk`
+	if [[ "$?" == "0" ]] ; then
+		echo -n "Android Utility found this apk: "
+		ls $d | grep .apk
+		echo
+		echo "Would you like to decode it? [default=Yes]"
+		echo
+		echo "  1. Yes"
+		echo "  2. No"
+		echo
+		cd $d
+		read -s -n 1 ans
+		case $ans in 
+		1) do_it_s;;
+		2) enter;;
+		*) do_it_s;;
+		esac
+	else
+		clear
+		echo "Android Utility did not find a valid apk file"
+		enter
+	fi
+	enter
+}
+
+#decode Multi
+decode_m ()
+{	COM="apktool d[ecode]"
+	d=$HOME/android-utility/working-folder/mod-here-multi
+	clear
+	a=`ls -d $d/* | grep .apk`
+	if [[ "$?" == "0" ]] ; then
+		echo "Android Utility found these apks: "
+		echo
+		ls $d | grep .apk
+		echo
+		cd $d
+		echo "Would you like to decode them? [default=Yes]"
+		echo
+		echo "  1. Yes"
+		echo "  2. No"
+		echo
+		read -s -n 1 ans
+		case $ans in 
+			1) do_it_m;;
+			2) clear; exit;;
+			*) do_it_m;;
+		esac
+	else
+		echo
+		clear
+		echo "Android Utility did not find a valid apk file"
+		enter
+	fi
+	enter
+}
+
+#do it
+do_it_s ()
+{	for b in *.apk
+	do
+	echo "Decoding $b to ../mod-here-solo/${b/.apk}:"
+	echo 
+	apktool d -f $b
+	echo
+	done
+}
+
+do_it_m ()
+{	for b in *.apk
+	do
+	echo "Decoding $b to ../mod-here-multi/${b/.apk}:"
+	echo 
+	apktool d -f $b
+	echo
+	done
+}
+
+
+
+if [[ "$1" == "" ]] ; then
+	decode
+elif [[ "$1" == "-m" ]] ; then
+	decode_m
+fi
+

@@ -1,5 +1,11 @@
 #! /bin/bash
 
+# Android Debug Script Script
+# Author: Tommy Nguyen [tommytoamtoe]
+# Version: a-0.89
+# Date: June 15, 2011
+# Contact: tommytomatoe@gmail.com
+
 ##FUNCTIONS
 
 #enterKey
@@ -138,50 +144,24 @@ adb_pull()
 	for a in "adb pull $DIR$NAM $d"
 	do
 	if [ -e "$d$NAM" ] ; then
-		echo "Overwrite existing $NAM? [y/n] "
+		echo "Overwrite existing $NAM? [Y/n] [default=Y]"
 		echo
 		read -s -n 1 ans
 		case "$ans" in
 		y|Y) $a;;
-		n|N) user_d;
+		n|N) user_d;;
+		*) $a;;
 		esac
 	else
 		$a;
 	fi
 	done
-	if [[ "$DIR" == "" ]] ; then
+	if [[ "$NAM" == "" ]] ; then
 		error
 	fi
 	enter
 }
 
-
-#adb pull express
-adb_pull_e()
-{	clear
-	COM="adb pull"
-	enterKey
-	echo "adb pull..."
-	printf "which /directory/filename? [ie. /system/app/Rosie.apk] = "
-	read DIRNAM
-	echo
-	NAM=`basename $DIRNAM`
-	for a in "adb pull $DIRNAM $e"
-	do
-	if [ -e "$e$NAM" ] ; then
-		echo "Overwrite existing $NAM? [y/n] "
-		echo
-		read -s -n 1 ans
-		case "$ans" in
-		y|Y) $a;;
-		n|N) user_d;
-		esac
-	else
-		$a;
-	fi
-	done
-	enter
-}
 
 #adb shell stop
 adb_stop()
@@ -275,10 +255,6 @@ adb_push()
 {	clear
 	COM="adb push"
 	enterKey
-	echo "Remounting R/W"
-	echo
-	adb remount
-	echo
 	printf %s "[adb push] to which directory? [ie. /system/app/] = "
 	read DIR
 	echo
@@ -328,7 +304,7 @@ adb_inst()
 #adb shell
 adb_shell() 
 {	clear
-	COM="enter dab shell"
+	COM="enter adb shell"
 	enterKey
 	echo "Remounting R/W"
 	adb remount
@@ -339,41 +315,40 @@ adb_shell()
 	adb shell
 }
 
+enter_e()
+{	echo "Please press [enter] to continue";
+	read -s -n 1 key
+	if [[ $key = "" ]]; then 
+  		clear
+	fi
+}
+
+
 #adb script
 adb_script() {
 #export PATH
 cd $HOME/android-utility/
-d="$HOME/android-utility/working-folder/0.mod-multiple-apk/"
-e="$HOME/android-utility/working-folder/0.mod-single-apk/"
-PATH="$PATH:$PWD/utility"
-export PATH
+d="$HOME/android-utility/working-folder/mod-here-multi/"
+e="$HOME/android-utility/working-folder/mod-here-solo/"
 clear
-echo "     ------------------     "
-echo "|   Android Debug Bridge   |"
-echo "|--------------------------|"
-echo "|    Basic ADB Commands    |"
-echo "|--------------------------|"
-echo "| 1.  remount              |"
-echo "| 2.  devices              |"
-echo "| 3.  reboot               |"
-echo "| 4.  reboot recovery      |"
-echo "| 5.  reboot bootloader    |"
-echo "| 6.  hot restart          |"
-echo "|--------------------------|"
-echo "|  Advanced ADB Commands   |"
-echo "|--------------------------|"
-echo "| 7.  pull                 |"
-echo "| 8.  pull express         |"
-echo "| 9.  push                 |"
-echo "|10.  shell                |"
-echo "|11.  shell stop           |"
-echo "|12.  shell start          |"
-echo "|13.  install              |"
-echo "|--------------------------|"
-echo "|--------------------------|"
-echo "|--------------------------|"
-echo "| q. Go Back to Main Menu  |"
-echo "     ------------------     "
+echo "                   ------------------     "
+echo "                  Android Debug Bridge                  "
+echo "|--------------------------||--------------------------|"
+echo "|    Basic ADB Commands    ||  Advanced ADB Commands   |"
+echo "|--------------------------||--------------------------|"
+echo "|  1.  remount             ||  7.  pull                |"
+echo "|  2.  devices             ||  8.  push                |"
+echo "|  3.  reboot              ||  9.  shell               |"
+echo "|  4.  reboot recovery     || 10.  shell stop          |"
+echo "|  5.  reboot bootloader   || 11.  shell start         |"
+echo "|  6.  hot restart         || 12.  instal              |"
+echo "|                          ||                          |"
+echo "|--------------------------||--------------------------|"
+echo "|--------------------------||--------------------------|"
+echo "|--------------------------||--------------------------|"
+echo "     E. Go to Express Menu (use with 'mod-here-solo')"
+echo "     q. Go Back to Main Menu                "
+echo "                   ------------------     "
 echo
 printf "%s" "  Choose an ADB Command: "
 read num
@@ -385,12 +360,12 @@ case "$num" in
   5)  adb_bl;;
   6)  hot_res;;
   7)  adb_pull;;
-  8)  adb_pull_e;;
-  9)  adb_push;;
- 10)  adb_shell;;
- 11)  adb_stop;;
- 12)  adb_sta;;
- 13)  adb_inst;;
+  8)  adb_push;;
+  9)  adb_shell;;
+ 10)  adb_stop;;
+ 11)  adb_sta;;
+ 12)  adb_inst;;
+ e|E) express_adb;;
   q) clear; exit;;
  *) echo; echo "Please enter valid option"; enter;
 esac

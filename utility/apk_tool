@@ -1,0 +1,234 @@
+#! /bin/bash
+
+# Apktool Script
+# Author: Tommy Nguyen [tommytoamtoe]
+# Version: a-0.89
+# Date: June 16, 2011
+# Contact: tommytomatoe@gmail.com
+
+# Setting Loop Variable
+clear
+APPLE=$1
+
+# Functions
+
+#enterKey
+enterKey()
+{	echo "### Press [enter] to continue, any other key to quit";
+	read -s -n 1 key
+	if [[ $key = "" ]]; then 
+  		echo 
+	else
+  		echo
+  		echo "Installation aborted";
+		enter
+		apktool_s
+	fi
+}
+
+#enter
+enter()
+{	echo
+	echo "Please press [enter] to continue";
+	read -s -n 1 key
+	if [[ $key = "" ]]; then 
+  		echo
+		clear
+	fi
+}
+
+#enter
+enterA()
+{	echo
+	echo "Please press [enter] when ready";
+	read -s -n 1 key
+	if [[ $key = "" ]]; then 
+  		echo
+	fi
+}
+
+#load
+load_dot ()
+{	echo -n "."
+	sleep .1
+	echo -n "."
+	sleep .1
+	echo -n "."
+	sleep .1
+	echo -n "."
+	sleep .1
+	echo -n "."
+	sleep .1
+	echo "."
+}
+
+#quit
+quit()
+{	echo
+	echo "Thank you for choosing Android Utility"
+	echo "brought to you by tommytomatoe :-)"
+	echo
+	echo "Please Don't Drink and Drive"
+	echo
+	exit
+}
+
+#select
+selection ()
+{	echo
+	echo "You've selcted [$COM]"
+	echo
+}
+
+#install framework
+a_if ()
+{	COM="Install framework"
+	f=$HOME/android-utility/working-folder/framework-here
+	selection
+	clear
+	echo
+	echo "Please place framework-res.apk and/or other framework in:"
+	echo 
+	echo $f 
+	enterA
+	echo "Android Utility is preparing to install these frameworks:"
+	echo
+	ls -t -1 $f
+	sleep .5
+	echo
+	cd $f
+	a=framework-res.apk
+	if [[ -f $a ]] ; then
+		echo -n "Installing $a."
+		load_dot
+		apktool if $a
+		echo
+	else
+		echo ..
+	fi
+	b=com.htc.resources.apk
+	if [[ -f $b ]] ; then
+		echo -n "Installing $b."
+		load_dot
+		apktool if $b
+	else
+		echo ..
+	fi
+	enter
+}
+
+#apktool install
+ins_apktool ()
+{	COM="Install new apktool"
+	c=$HOME/android-utility/resources/clean
+	u=/usr/local/bin
+	selection
+	enterKey
+	clear
+	echo "Your current verion of apktool is listed as:"
+	echo
+	echo "### `apktool | sed -n 1p`"
+	echo
+	echo "Which version of apktool would you like to install?"
+	echo
+	echo "  1.  apktool 1.3.1"
+	echo "  2.  apktool 1.3.2"
+	echo "  3.  apktool 1.4.1"
+	echo
+	echo "  x.  Keep current version"
+	echo
+	printf "Please make your selection: "
+	read sel
+	case $sel in
+	 1) echo; sudo cp -v $c/apktool1.3.1/apktool.jar $u/; atool_v;;
+	 2) echo; sudo cp -v -v $c/apktool1.3.2/apktool.jar $u/; atool_v;;
+	 3) echo; sudo cp -v -v $c/apktool1.4.1/apktool.jar $u/; atool_v;;
+	 x) echo; echo "Current version has not been changed";;
+	 *) echo; echo "$sel is not a valid option"; echo;;	
+	esac
+	enter
+	}
+
+#just to remind apktool version
+atool_v ()
+{	echo
+	echo "Your version of apktool is now:"
+	echo 
+	echo "### `apktool | sed -n 1p`"
+	}
+
+ins_aapt ()
+{	COM="Install new aapt"
+	c=$HOME/android-utility/resources/clean/aapt
+	u=/usr/local/bin
+	selection
+	enterKey
+	clear
+	echo "Which version of aapt would you like to install?"
+	echo
+	echo "  1.  aapt sdk  8 - Froyo Development"
+	echo "  2.  aapt sdk  9 - Gingerbread Development"
+	echo "  3.  aapt sdk 10 - Honeycomb Development"
+	echo
+	echo "  x.  Keep current version"
+	echo
+	echo
+	printf "Please make your selection: "
+	read sel
+	case $sel in
+	 1) echo; sudo cp -v $c/aapt-8 $u/aapt; aapt_vv;;
+	 2) echo; sudo cp -v $c/aapt-9 $u/aapt; aapt_vv;;
+	 3) echo; sudo cp -v $c/aapt-10 $u/aapt; aapt_vv;;
+	 x) echo; echo "Current version has not been changed";;
+	 *) echo; echo "$sel is not a valid option"; echo; echo "Current version has not been changed";;	
+	esac
+	enter
+	}
+
+#aapt updated
+aapt_vv ()
+{	echo
+	echo "Your version of aapt has been updated"
+}
+
+
+#apktool 
+apktool_s ()
+{	echo "Welcome to Android Application Re-Engineering Manager"
+	echo
+	echo "|----------------------------------------------------------------|"
+	echo "|### `apktool | sed -n 1p` |"
+	echo "|----------------------------------------------------------------|"
+	echo
+	echo "|  Apktool Utility                                    |"
+	echo "|-----------------------------------------------------|"
+	echo "|  1.  Install framework first (ie. framework-res.apk)|"
+	echo "|  2.  Decompile Apk                                  | " 
+	echo "|  3.  Decompile Multiple Apk                         | "
+	echo "|  4.  Recompile Apk                                  |"
+	echo "|  5.  Recompile Multiple Apk                         |"
+	echo "|-----------------------------------------------------|"
+	echo
+	echo "|  Optional Flavors                                   |"
+	echo "|-----------------------------------------------------|"
+	echo "|  a.  Use different version of apktool               |"
+	echo "|  b.  Use different version of aapt                  |"
+	echo "|-----------------------------------------------------|"
+	echo
+	printf %s "  Please Select Feature: "
+	read num
+	case $num in
+	1) a_if;;
+	2) apk_dec;;
+	3) apk_dec -m;;
+	a) ins_apktool;;
+	b) ins_aapt;;
+ 	q) clear; exit;;
+ 	*) echo; echo "$num is not a valid option"; enter;
+	esac
+}
+
+while [ "$APPLE" = "" ]
+do
+	apktool_s
+done
