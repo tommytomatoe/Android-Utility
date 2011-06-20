@@ -184,12 +184,7 @@ makedirC ()
 
 #quit
 quit()
-{	echo
-	echo "Thank you for choosing Android Utility"
-	echo "brought to you by tommytomatoe :-)"
-	echo
-	echo "Please Don't Drink and Drive"
-	echo
+{	clear
 	exit
 }
 
@@ -219,6 +214,7 @@ clean_in ()
 	cp -v $c/baksmali $b/
 	cp -v $c/baksmali.jar $b/
 	cp -v $c/decode9patchPng.jar $b/
+	cp -v $c/pngout $b/
 	cp -v $c/smali $b/
 	cp -v $c/smali.jar $b/
 }
@@ -335,6 +331,11 @@ ins_sed ()
 	COM="Install GNU sed"
 	selection
 	enterKey
+	sed --version &>/dev/null
+	if [[ "$?" = "0" ]] ; then
+		echo "You already have GNU sed."
+		echo "Continue with Install"
+	else
 	echo "Renaming FreeBSD sed"
 	load_dot
 	sudo mv -v /usr/bin/sed /usr/bin/sed-BSD
@@ -342,6 +343,7 @@ ins_sed ()
 	echo "Installing GNU sed"
 	load_dot
 	sudo cp -v $c/gnused /usr/bin/sed
+	fi
 	enter
 }
 	

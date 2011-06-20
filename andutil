@@ -7,10 +7,12 @@
 # Contact: tommytomatoe@gmail.com
 
 #introduction
+intro ()
+{
 clear
-echo "Welcome" $USER,
-echo "Today is" `date`
+echo "Welcome back" $USER,
 echo
+}
 
 ##functions
 #enter
@@ -42,6 +44,213 @@ ff ()
 	enter
 }
 
+#Welcome
+welcome ()
+{	clear
+echo
+echo -n "W"
+sleep .1
+echo -n "e"
+sleep .1
+echo -n "l"
+sleep .1
+echo -n "c"
+sleep .1
+echo -n "o"
+sleep .1
+echo -n "m"
+sleep .1
+echo -n "e"
+sleep .1
+echo -n " "
+sleep .1
+echo -n "t"
+sleep .1
+echo -n "o"
+sleep .1
+echo -n " "
+sleep .2
+echo -n "A"
+sleep .1
+echo -n "n"
+sleep .1
+echo -n "d"
+sleep .1
+echo -n "r"
+sleep .1
+echo -n "o"
+sleep .1
+echo -n "i"
+sleep .2
+echo -n "d"
+sleep .1
+echo -n " "
+sleep .1
+echo -n "U"
+sleep .1
+echo -n "t"
+sleep .1
+echo -n "i"
+sleep .1
+echo -n "l"
+sleep .1
+echo -n "i"
+sleep .1
+echo -n "t"
+sleep .1
+echo -n "y"
+sleep .1
+echo ","
+sleep .2
+echo 
+sleep .1
+echo -n "b"
+sleep .1
+echo -n "r"
+sleep .25
+echo -n "o"
+sleep .1
+echo -n "u"
+sleep .1
+echo -n "g"
+sleep .1
+echo -n "h"
+sleep .1
+echo -n "t"
+sleep .1
+echo -n " "
+sleep .2
+echo -n "t"
+sleep .1
+echo -n "o"
+sleep .1
+echo -n " "
+sleep .1
+echo -n "y"
+sleep .1
+echo -n "o"
+sleep .1
+echo -n "u"
+sleep .1
+echo -n " "
+sleep .1
+echo -n "b"
+sleep .1
+echo -n "y"
+sleep .1
+echo ":"
+sleep .1
+echo
+echo -n "t"
+sleep .2
+echo -n "o"
+sleep .1
+echo -n "m"
+sleep .2
+echo -n "m"
+sleep .1
+echo -n "y"
+sleep .1
+echo -n "t"
+sleep .1
+echo -n "o"
+sleep .1
+echo -n "m"
+sleep .2
+echo -n "a"
+sleep .1
+echo -n "t"
+sleep .1
+echo -n "o"
+sleep .1
+echo "e"
+echo
+echo -n "e"
+sleep .2
+echo -n "n"
+sleep .1
+echo -n "j"
+sleep .2
+echo -n "o"
+sleep .1
+echo -n "y"
+sleep .1
+echo -n " "
+sleep .1
+echo -n "t"
+sleep .1
+echo -n "h"
+sleep .2
+echo -n "e"
+sleep .1
+echo -n " "
+sleep .1
+echo -n "p"
+sleep .1
+echo -n "o"
+sleep .2
+echo -n "s"
+sleep .1
+echo -n "s"
+sleep .2
+echo -n "i"
+sleep .1
+echo -n "b"
+sleep .1
+echo -n "i"
+sleep .1
+echo -n "l"
+sleep .1
+echo -n "i"
+sleep .2
+echo -n "t"
+sleep .1
+echo -n "i"
+sleep .1
+echo -n "e"
+sleep .1
+echo -n "s"
+sleep .1
+echo "."
+echo
+sleep .25
+}
+
+#load
+load_dot ()
+{	echo -n "."
+	sleep .15
+	echo -n "."
+	sleep .15
+	echo -n "."
+	sleep .15
+	echo -n "."
+	sleep .15
+	echo -n "."
+	sleep .15
+	echo "."
+}
+
+#System Check
+check_s ()
+{
+w=$HOME/android-utility/
+if ! [[ -s $w ]] ; then
+	echo "Please place android-utility in the directory $HOME before preceding. Thank you very much"	
+	enter
+	check_s
+else
+	echo "Preparing to run the Installation Guide."
+	echo -n "Please wait."
+	load_dot
+	echo
+	echo "ALERT: You will only see this screen once."
+	sleep .25
+	enter
+	$w/installau
+fi
+}
+ 
 
 android () 
 {
@@ -79,6 +288,15 @@ case $num in
  *) echo; echo "$num is not a valid option"; enter;
 esac
 }
+
+z=$HOME/android-utility/
+if ! [[ -a $z/resources/.1 ]] ; then
+	touch $z/resources/.1
+	welcome
+	check_s
+else
+	intro
+fi
 
 while :
 do
