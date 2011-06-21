@@ -2,14 +2,34 @@
 # README
 # Author: Tommy Nguyen [tommytoamtoe]
 # Version: a-0.89
-# Date: June 15, 2011
+# Date: June 20, 2011
 # Contact: tommytomatoe@gmail.com
 
-### Update. June 06, 2011
-> github repo created
+### Update. June 20, 2011
+> added some major changes
+> got confirmation for use of PNGOUT
+> preparing for initial release
 
 ### Update. June 15, 2011
 > major changes to install script 
 > minor changes to andutil script
 > Version a-0.89 should be up and running soon
+
+### Update. June 06, 2011
+> github repo created
+
+
+
+### CREDITS
+> brut.all for apktool.jar and decode9patchPng.jar
+> jesusfreke for smali and baksmali
+> PNGOUT.EXE used with permission of Ardfry Imaging, LLC.
+> Igor Pavlov for 7zip
+> Google
+> Android
+> HTC
+> xda developers
+> themikmik.com
+> tommytomatoe
+
 
