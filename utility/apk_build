@@ -1,0 +1,161 @@
+#! /bin/bash
+
+# Apktool Build Script
+# Author: Tommy Nguyen [tommytoamtoe]
+# Version: a-0.89
+# Date: July 03, 2011
+# Contact: tommytomatoe@gmail.com
+
+# Setting Loop Variable
+clear
+APPLE=$1
+
+# Functions
+
+#enterKey
+enterKey()
+{	echo "### Press [enter] to continue, any other key to quit";
+	read -s -n 1 key
+	if [[ $key = "" ]]; then 
+  		echo 
+	else
+  		echo
+  		echo "Installation aborted";
+		enter
+		apk_tool
+	fi
+}
+
+#enter
+enter()
+{	echo
+	echo "Please press [enter] to continue";
+	read -s -n 1 key
+	if [[ $key = "" ]]; then 
+  		echo
+		clear
+	fi
+}
+
+#enter
+enterA()
+{	echo
+	echo "Please press [enter] when ready";
+	read -s -n 1 key
+	if [[ $key = "" ]]; then 
+  		echo
+	fi
+}
+
+#load
+load_dot ()
+{	echo -n "."
+	sleep .1
+	echo -n "."
+	sleep .1
+	echo -n "."
+	sleep .1
+	echo -n "."
+	sleep .1
+	echo -n "."
+	sleep .1
+	echo "."
+}
+
+#quit
+quit()
+{	echo
+	echo "Thank you for choosing Android Utility"
+	echo "brought to you by tommytomatoe :-)"
+	echo
+	echo "Please Don't Drink and Drive"
+	echo
+	exit
+}
+
+#select
+selection ()
+{	echo
+	echo "You've selcted [$COM]"
+	echo
+}
+
+#Build
+build ()
+{	COM="apktool b[uild]"
+	d=$HOME/android-utility/working-folder/mod-here-solo
+	clear
+	a=`ls -R $d | grep apktool.yml`
+	if [[ "$?" == "0" ]] ; then
+		echo -n "Android Utility found this project: "
+		ls $d | grep -v .apk
+		echo
+		echo "Would you like to build it? [default=Yes]"
+		echo
+		echo "  1. Yes"
+		echo "  2. No"
+		echo
+		cd $d
+		read -s -n 1 ans
+		case $ans in 
+		1) do_it_s;;
+		2) enter;;
+		*) do_it_s;;
+		esac
+	else
+		clear
+		echo "Android Utility did not find a valid project"
+		enter
+	fi
+	enter
+}
+
+#decode Multi
+build_m ()
+{	COM="apktool d[ecode]"
+	d=$HOME/android-utility/working-folder/mod-here-multi
+	clear
+	a=`ls -R $d | grep apktool.yml`
+	if [[ "$?" == "0" ]] ; then
+		echo "Android Utility found these Projects: "
+		echo
+		ls $d | grep -v .apk
+		echo
+		cd $d
+		echo -n "Please type the name of the project you would like to build: "
+		read ans
+		echo
+		b=`apktool b $ans`
+		if [[ "$?" == "0" ]] ; then
+			apktool b $ans
+		else
+			echo
+			echo "Please enter a valid project name"
+			enter
+		fi
+	else
+		echo
+		clear
+		echo "Android Utility did not find a valid project"
+		enter
+	fi
+	enter
+}
+
+#do it
+do_it_s ()
+{	for b in `ls $d | grep -v .apk`
+	do
+	echo "Building $b "
+	echo 
+	apktool b -f $b
+	done
+}
+
+
+if [[ "$1" == "" ]] ; then
+	build
+elif [[ "$1" == "-m" ]] ; then
+	build_m
+fi
+
