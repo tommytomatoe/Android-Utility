@@ -1,9 +1,14 @@
 ### Welcome to Android Utility
 # README
 # Author: Tommy Nguyen [tommytoamtoe]
-# Version: a-0.89
-# Date: June 20, 2011
+# Version: b-0.89
+# Date: July 05, 2011
 # Contact: tommytomatoe@gmail.com
+
+### Update. July 05, 2011
+> preparing for initial release
+> added apktool build script
+> added draw9patch stuff
 
 ### Update. June 20, 2011
 > added some major changes
