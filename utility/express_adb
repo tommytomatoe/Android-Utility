@@ -2,8 +2,8 @@
 
 # ADB Express Script
 # Author: Tommy Nguyen [tommytoamtoe]
-# Version: a-0.89
-# Date: June 15, 2011
+# Version: b-0.89
+# Date: July 05, 2011
 # Contact: tommytomatoe@gmail.com
 
 echo "Express Commands are to be used in conjunction with "mod-here-solo" folder, where only one file (apk, jar, et cetera) should be present at a time."

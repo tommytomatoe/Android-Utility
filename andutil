@@ -2,8 +2,8 @@
 
 # Android Utility
 # Author: Tommy Nguyen [tommytoamtoe]
-# Version: a-0.89
-# Date: July 03, 2011
+# Version: b-0.89
+# Date: July 05, 2011
 # Contact: tommytomatoe@gmail.com
 
 #introduction
@@ -256,7 +256,7 @@ android ()
 {
 echo "   Android Utility by tommytomatoe"
 echo "      ----------------------     "
-echo "   Blue Waffle Magic Pack v a-0.89"
+echo "   Blue Waffle Magic Pack v b-0.89"
 echo "|-------------------------------||-------------------------------|"
 echo "|-------------------------------||-------------------------------|"
 echo "|         BASIC TOOLS           ||         AWESOME SAUCE         |"
