@@ -26,14 +26,299 @@ enter()
 	fi
 }
 
+#credits
+credits ()
+{	clear
+	echo -n T
+	sleep .1
+	echo -n h
+	sleep .1
+	echo -n a
+	sleep .1
+	echo -n n
+	sleep .1
+	echo -n k 
+	sleep .1	
+	sleep .1
+	echo -n " " 
+	echo -n y
+	sleep .1
+	echo -n o
+	sleep .1
+	echo -n u
+	sleep .1
+	echo -n  " "
+	sleep .1
+	echo -n f
+	sleep .1
+	echo -n o
+	sleep .1
+	echo -n r
+	sleep .1
+	echo -n  " "
+	sleep .1
+	echo -n u
+	sleep .1
+	echo -n s
+	sleep .1
+	echo -n i
+	sleep .1
+	echo -n n
+	sleep .1
+	echo -n g
+	sleep .1
+	echo -n  " "
+	sleep .1
+	echo -n A
+	sleep .1
+	echo -n n
+	sleep .1
+	echo -n d
+	sleep .1
+	echo -n r
+	sleep .1
+	echo -n o
+	sleep .1
+	echo -n i
+	sleep .1
+	echo -n d
+	sleep .1
+	echo -n " "  
+	sleep .1
+	echo -n U
+	sleep .1
+	echo -n t
+	sleep .1
+	echo -n i
+	sleep .1
+	echo -n l
+	sleep .1
+	echo -n i
+	sleep .1
+	echo -n t
+	sleep .1
+	echo -n y
+	sleep .1
+	echo "."
+	echo
+	sleep .5
+	echo -n "The"
+	sleep .1
+	echo -n " " 
+	sleep .1
+	echo -n goal 
+	sleep .1
+	echo -n " "
+	sleep .1
+	echo -n of 
+	sleep .1
+	echo -n " "
+	sleep .1
+	echo -n this 
+	sleep .1
+	echo -n " "
+	sleep .1
+	echo -n project 
+	sleep .1
+	echo -n " "
+	sleep .1
+	echo -n is 
+	sleep .1
+	echo -n " "
+	sleep .1
+	echo -n to 
+	sleep .1
+	echo -n " "
+	sleep .1
+	echo -n assist
+	sleep .1
+	echo -n " "
+	sleep .1
+	echo -n you,
+	sleep .1
+	echo -n " "
+	sleep .1
+	echo -n $USER, 
+	sleep .1
+	echo -n " "
+	sleep .1
+	echo -n in 
+	sleep .1
+	echo -n " "
+	sleep .1
+	echo -n android 
+	sleep .1
+	echo -n " "
+	sleep .1
+	echo development.
+	echo
+	sleep .5
+	echo -n I 
+	sleep .1
+	sleep .1
+	echo -n " "
+	echo -n h
+	sleep .1
+	echo -n o
+	sleep .1
+	echo -n p
+	sleep .1
+	echo -n e
+	sleep .1
+	echo -n  
+	sleep .1
+	echo -n " "
+	sleep .1
+	echo -n t
+	sleep .1
+	echo -n h
+	sleep .1
+	echo -n e
+	sleep .1
+	echo -n s
+	sleep .1
+	echo -n e
+	sleep .1
+	echo -n  
+	sleep .1
+	echo -n " "
+	sleep .1
+	echo -n g
+	sleep .1
+	echo -n o
+	sleep .1
+	echo -n a
+	sleep .1
+	echo -n l
+	sleep .1
+	echo -n s
+	sleep .1
+	echo -n  
+	sleep .1
+	echo -n " "
+	sleep .1
+	echo -n a
+	sleep .1
+	echo -n r
+	sleep .1
+	echo -n e
+	sleep .1
+	echo -n  
+	sleep .1
+	echo -n " "
+	sleep .1
+	echo -n m
+	sleep .1
+	echo -n e
+	sleep .1
+	echo -n t
+	sleep .1
+	echo "."
+	echo
+	sleep .5
+	echo "   ### Thanks and Credits ###"
+	echo
+	sleep .5
+	echo "Brut.all - apktool.jar and sound advice"
+	sleep .5
+	echo "JesusFreke - baksmali.jar and smali.jar"
+	sleep .5
+	echo "Google - AOSP"
+	sleep .5
+	echo "aamikam - sound advice"
+	sleep .5
+	echo "themikmik.com - Awesome sauce"
+	sleep .1
+	echo "xda developers - Roots" 
+	sleep .5
+	echo "JsChiSurf - sound advice"
+	sleep .5
+	echo "dsixda - sound advice"
+	sleep .5
+	echo "Igor Pavlov - 7zip"
+	sleep .5
+	echo "Ardfry Imaging, LLC. - pngout"
+	sleep .5
+	echo -n T
+	sleep .1
+	echo -n o
+	sleep .1
+	echo -n m
+	sleep .1
+	echo -n m
+	sleep .1
+	echo -n y
+	sleep .1
+	echo -n " " 
+	sleep .1
+	echo -n N
+	sleep .1
+	echo -n g
+	sleep .1
+	echo -n u
+	sleep .1
+	echo -n y
+	sleep .1
+	echo -n e
+	sleep .1
+	echo -n n
+	sleep .1
+	echo -n " " 
+	sleep .1
+	echo -n -
+	sleep .1
+	echo -n " " 
+	sleep .1
+	echo -n A
+	sleep .1
+	echo -n n
+	sleep .1
+	echo -n d
+	sleep .1
+	echo -n r
+	sleep .1
+	echo -n o
+	sleep .1
+	echo -n i
+	sleep .1
+	echo -n d
+	sleep .1
+	echo -n  
+	sleep .1
+	echo -n " "
+	sleep .1
+	echo -n U
+	sleep .1
+	echo -n t
+	sleep .1
+	echo -n i
+	sleep .1
+	echo -n l
+	sleep .1
+	echo -n i
+	sleep .1
+	echo -n t
+	sleep .1
+	echo y
+	sleep .1
+	echo
+	echo "You will only see this message once."
+	enter
+}
+	
 #quit
 quit()
-{	echo
+{	if ! [[ -a $z/resources/.2 ]] ; then
+	touch $z/resources/.2
+	credits
+else
+	echo
 	echo "Thank you for choosing Android Utility"
 	echo "brought to you by tommytomatoe :-)"
 	echo
 	echo "Please Don't Drink and Drive"
 	echo
+fi
 	exit
 }
 
@@ -247,7 +532,7 @@ else
 	echo "ALERT: You will only see this screen once."
 	sleep .25
 	enter
-	$w/installau
+	$w/installau -f
 fi
 }
  

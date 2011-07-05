@@ -222,6 +222,7 @@ clean_in ()
 	cp -v $c/pngout $b/
 	cp -v $c/smali $b/
 	cp -v $c/smali.jar $b/
+	cp -v $c/zipalign $b/
 	ins_sed
 }
 
@@ -396,6 +397,10 @@ then
 	$0 | tee $HOME/android-utility/logs/LOGinstall_`date +%H%M%S`.txt
 fi
 
+if [[ ${1} == "-f" ]]
+then
+	first_time
+fi
 
 while [ "$APPLE" = "" ]
 do
