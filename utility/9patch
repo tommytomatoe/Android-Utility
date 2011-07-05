@@ -1,0 +1,138 @@
+#! /bin/bash
+
+# Draw9Patch Script
+# Author: Tommy Nguyen [tommytoamtoe]
+# Version: a-0.89
+# Date: July 03, 2011
+# Contact: tommytomatoe@gmail.com
+
+##FUNCTIONS
+
+#load
+load_dot ()
+{	echo -n "."
+	sleep .15
+	echo -n "."
+	sleep .15
+	echo -n "."
+	sleep .15
+	echo -n "."
+	sleep .15
+	echo -n "."
+	sleep .15
+	echo "."
+}
+
+#enterKey
+enterKey()
+{	echo "Press [enter] or [space] to $COM, any other key to quit";
+	read -s -n 1 key
+	if [[ $key = "" ]]; then 
+  		echo "Initiating..."
+		echo
+	else
+  		echo "Command not executed";
+		enter
+	fi
+}
+
+#enter
+enter()
+{	echo "Please press [enter] to continue";
+	read -s -n 1 key
+	if [[ $key = "" ]]; then 
+  		echo
+	fi
+}
+
+#future features
+ff ()
+{	clear
+	echo "Feature coming in a future release. Stay tuned."
+	enter
+}
+
+#compile
+compile_it ()
+{	echo "Please place your raw ninepatch images in:"
+	echo
+	echo "/working-folder/ninepatch/SOURCE"
+	echo
+	enter
+	mkdir $n/res
+	mkdir $n/res/drawable
+	for a in *.9.png ; do 
+		cp $r/$a $o
+	done
+	cd $n
+	echo "Compiling Images. Please Wait"
+	load_dot
+	touch AndroidManifest.xml
+	echo "<?xml version=\"1.0\" encoding=\"utf-8\"?>
+<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"
+      package=\"com.blank\"
+/>" > AndroidManifest.xml
+	aapt p -F out.apk -M AndroidManifest.xml -S res -f
+	$HOME/bin/7z e -r -o$q -y $n/out.apk *.9.png &>/dev/null
+	rm AndroidManifest.xml
+	rm -r res
+	rm out.apk
+	echo "Images Compiled to:"
+	load_dot
+	echo "$q"
+	echo
+	enter
+}
+
+#decompile
+decompile_it ()
+{	echo "Please place your raw ninepatch images in:"
+	echo
+	echo "/working-folder/ninepatch/compiled"
+	echo
+	enter
+	cd $q
+	for a in *9.png ; do
+	echo "Decompiling $a. Please wait."
+	load_dot
+	java -jar $HOME/bin/decode9patchPng.jar < $a > $p/$a
+	done
+	echo "Images Decompiled to:"
+	load_dot
+	echo "$p"
+	echo
+	enter
+}
+
+clear
+#variables
+n=$HOME/android-utility/working-folder/ninepatch
+o=$n/res/drawable
+p=$HOME/android-utility/working-folder/ninepatch/decompiled
+q=$HOME/android-utility/working-folder/ninepatch/compiled
+r=$HOME/android-utility/working-folder/ninepatch/SOURCE
+echo "|--------------------------------|"
+echo "|      Draw9Patch Utilities      |"
+echo "|--------------------------------|"
+echo "|--------------------------------|"
+echo "|  1.  compile RAW 9.png         |"
+echo "|--------------------------------|"
+echo "|  2.  decompile compiled 9.png  |"
+echo "|--------------------------------|"
+echo "|  3.  INFO on draw9patch        |"
+echo "|--------------------------------|"
+echo "|  4.  Run draw9patch tool       |"
+echo "|--------------------------------|"
+echo "|--------------------------------|"
+echo "   q. Go Back to Main Menu      "
+echo
+printf %s "Select an Option: "
+read num
+case $num in
+ 1) clear; compile_it; 9patch;;
+ 2) clear; decompile_it; 9patch;;
+ 3) open http://code.google.com/p/android-apktool/wiki/9PatchImages; echo; enter; 9patch;;
+ 4) clear; $HOME/bin/draw9patch; 9patch;;
+ q) clear; exit;;
+ *) echo; echo "Not a Valid Option" ; echo; enter; 9patch;;
+esac

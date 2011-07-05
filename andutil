@@ -263,7 +263,7 @@ echo "|         BASIC TOOLS           ||         AWESOME SAUCE         |"
 echo "|-------------------------------||-------------------------------|"
 echo "| 1.  adb tools                 || 5.  apk Re-Engineering        |"
 echo "| 2.  keystore manager          || 6.  smali and baksmali        |"
-echo "| 3.                            || 7.  PNG optimize              |"
+echo "| 3.  zipalign                  || 7.  PNG optimize              |"
 echo "| 4.                            || 8.  draw9patch utilities      |"
 echo "|-------------------------------||                               |"
 echo "|-------------------------------||                               |"
@@ -284,7 +284,7 @@ case $num in
  5) apk_tool;;
  6) ff;;
  7) ff;;
- 8) ff;;
+ 8) 9patch;;
  x) installau;;
  q) quit;;
  *) echo; echo "$num is not a valid option"; enter;
