@@ -3,7 +3,7 @@
 # Android Utility
 # Author: Tommy Nguyen [tommytoamtoe]
 # Version: a-0.89
-# Date: June 15, 2011
+# Date: July 03, 2011
 # Contact: tommytomatoe@gmail.com
 
 #introduction
@@ -280,9 +280,11 @@ case $num in
  1) clear; ttadb;;
  2) ff;;
  3) ff;;
- 4) echo;;
+ 4) ff;;
  5) apk_tool;;
  6) ff;;
+ 7) ff;;
+ 8) ff;;
  x) installau;;
  q) quit;;
  *) echo; echo "$num is not a valid option"; enter;
