@@ -1,0 +1,186 @@
+#! /bin/bash
+
+# Apk and Update.zip Script
+# Author: Tommy Nguyen [tommytomatoe]
+# Version: b-0.89
+# Date: July 08, 2011
+# Contact: tommytomatoe@gmail.com
+
+# Functions
+
+#enterKey
+enterKey()
+{	echo "### Press [enter] to continue, any other key to quit";
+	read -s -n 1 key
+	if [[ $key = "" ]]; then 
+  		echo 
+	else
+  		echo
+  		echo "Installation aborted";
+		enter
+		apktool_s
+	fi
+}
+
+#enter
+enter()
+{	echo
+	echo "Please press [enter] to continue";
+	read -s -n 1 key
+	if [[ $key = "" ]]; then 
+  		echo
+		clear
+	fi
+}
+
+#enter
+enterA()
+{	echo
+	echo "Please press [enter] when ready";
+	read -s -n 1 key
+	if [[ $key = "" ]]; then 
+  		echo
+	fi
+}
+
+#load
+load_dot ()
+{	echo -n "."
+	sleep .1
+	echo -n "."
+	sleep .1
+	echo -n "."
+	sleep .1
+	echo -n "."
+	sleep .1
+	echo -n "."
+	sleep .1
+	echo "."
+}
+
+#quit
+quit()
+{	echo
+	echo "Thank you for choosing Android Utility"
+	echo "brought to you by tommytomatoe :-)"
+	echo
+	echo "Please Don't Drink and Drive"
+	echo
+	exit
+}
+
+
+#test sign
+test_sign ()
+{	cd $x
+	echo "Android-Utility will sign this apk with test keys: "
+	echo
+	ls -1 *.apk
+	echo
+	for a in *.apk ; do
+	echo "Signing $a with test keys"
+	java -classpath $HOME/bin/testsign.jar testsign $a signed-$a	
+	load_dot
+	echo "$a has been signed"
+	echo
+	done
+	enter	
+}
+
+#test sign batch
+test_sign_b ()
+{	cd $y
+	echo "Please place apks in $y"
+	enter
+	echo "Android-Utility will sign these apks with test keys: "
+	echo
+	ls -1 *.apk
+	echo
+	for a in *.apk ; do
+	echo "Signing $a with test keys"
+	java -classpath $HOME/bin/testsign.jar testsign $a signed-$a	
+	load_dot
+	echo "$a has been signed"
+	echo
+	done
+	enter	
+}
+
+test_sign_z ()
+{	cd $x
+	echo "Android-Utility will sign this update.zip with test keys: "
+	echo
+	ls -1 *.zip
+	echo
+	for a in *.zip ; do
+	echo "Signing $a with test keys"
+	java -classpath $HOME/bin/testsign.jar testsign $a signed-$a
+	load_dot
+	echo "$a has been signed"	
+	echo
+	done
+	enter	
+}
+
+#Sign apk
+sign_it ()
+{	cd $x
+	echo "Android-Utility will sign this apk: "
+	echo
+	ls -1 *.apk
+	echo
+	cd $w
+	echo "Android-Utility found these keystores: "
+	echo	
+	cd $w/keystore
+	ls -1 *.keystore
+	echo
+	echo -n "Please enter name of your desired keystore: "
+	read KEYSTORE
+	echo -n "Please enter alias of your desired keystore: "
+	read ALIAS
+	cd $x
+	for a in *.apk ; do
+	jarsigner -verbose -keystore $w/$KEYSTORE $a $ALIAS	
+	done
+	enter
+}
+
+
+#sign
+sign_menu ()
+{	clear
+	w=$HOME/android-utility/
+	x=$HOME/android-utility/working-folder/mod-here-solo
+	y=$HOME/android-utility/working-folder/mod-here-multi
+	clear
+	echo "|  APK and ZIP Sign Manager            |"
+	echo "|--------------------------------------|"
+	echo "|--------------------------------------|"
+	echo "|  1.  Sign APK with Test Keys         |"
+	echo "|--------------------------------------|"
+	echo "|  2.  Sign Apk with Private Key       |"
+	echo "|--------------------------------------|"
+	echo "|  3.  Batch Sign APKs                 |"
+	echo "|--------------------------------------|"
+	echo "|  4.  Sign UPDATE.zip with Test Keys  |"
+	echo "|--------------------------------------|"
+	echo "|--------------------------------------|"
+	echo "|  q.  Go Back to Main Menu            |"
+	echo
+	printf %s "  Please Select Feature: "
+	read num
+	case $num in
+	1) clear; test_sign;;
+	2) clear; sign_it;;
+	3) clear; test_sign_b;;
+	4) clear; test_sign_z;;
+ 	q) clear; exit;;
+ 	*) echo; echo "$num is not a valid option"; enter;
+	esac
+}
+
+while :
+do
+	sign_menu
+done

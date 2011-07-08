@@ -1,9 +1,9 @@
 #! /bin/bash
 
 # Apktool Decode Script
-# Author: Tommy Nguyen [tommytoamtoe]
+# Author: Tommy Nguyen [tommytomatoe]
 # Version: b-0.89
-# Date: July 05, 2011
+# Date: July 08, 2011
 # Contact: tommytomatoe@gmail.com
 
 # Setting Loop Variable
@@ -133,6 +133,16 @@ decode_m ()
 			2) clear; exit;;
 			*) do_it_m;;
 		esac
+		echo "Would you like to extract original META-INF? [default=Yes]"
+		echo
+		echo "  1. Yes"
+		echo "  2. No"
+		read ans
+		case $ans in
+			1) extract_miM;;
+			2) echo;;
+			*) extract_miM;;
+		esac
 	else
 		echo
 		clear
@@ -150,6 +160,44 @@ do_it_s ()
 	echo 
 	apktool d -f $b
 	echo
+	done
+	echo "Would you like to extract original META-INF? [default=Yes]"
+	echo
+	echo "  1. Yes"
+	echo "  2. No"
+	read ans
+	case $ans in
+		1) extract_mi;;
+		2) echo;;
+		*) extract_mi;;
+	esac
+}
+
+extract_mi ()
+{	if [[ -s original_META-INF ]] ; then
+		rm -r original_META-INF
+		mkdir original_META-INF
+	else
+		mkdir original_META-INF
+	fi
+	for c in *.apk ; do 
+	echo "Extracting Original META-INF from $c" 
+	$HOME/bin/7z x -ooriginal_META-INF -y $c "META-INF" &>/dev/null
+	load_dot
+	done
+}
+
+extract_miM ()
+{	if [[ -s original_META-INF ]] ; then
+		rm -r original_META-INF
+		mkdir original_META-INF
+	else
+		mkdir original_META-INF
+	fi
+	for c in *.apk ; do 
+	echo "Extracting Original META-INF from $c" 
+	$HOME/bin/7z x -ooriginal_META-INF/"$c"-META-INF -y $c "META-INF" &>/dev/null
+	load_dot
 	done
 }
 

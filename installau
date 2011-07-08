@@ -2,8 +2,8 @@
 
 # Installation Script
 # Author: Tommy Nguyen [tommytoamtoe]
-# Version: a-0.89
-# Date: June 15, 2011
+# Version: b-0.89
+# Date: July 08, 2011
 # Contact: tommytomatoe@gmail.com
 
 # Setting Loop Variable
@@ -222,6 +222,7 @@ clean_in ()
 	cp -v $c/pngout $b/
 	cp -v $c/smali $b/
 	cp -v $c/smali.jar $b/
+	cp -v $c/testsign.jar $b/
 	cp -v $c/zipalign $b/
 	ins_sed
 }

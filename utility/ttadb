@@ -1,9 +1,9 @@
 #! /bin/bash
 
 # Android Debug Script Script
-# Author: Tommy Nguyen [tommytoamtoe]
+# Author: Tommy Nguyen [tommytomatoe]
 # Version: b-0.89
-# Date: July 05, 2011
+# Date: July 08, 2011
 # Contact: tommytomatoe@gmail.com
 
 ##FUNCTIONS
@@ -346,6 +346,7 @@ echo "|                          ||                          |"
 echo "|--------------------------||--------------------------|"
 echo "|--------------------------||--------------------------|"
 echo "|--------------------------||--------------------------|"
+echo "     I. Info on Android Debug Commands"
 echo "     E. Go to Express Menu (use with 'mod-here-solo')"
 echo "     q. Go Back to Main Menu                "
 echo "                   ------------------     "
@@ -365,6 +366,7 @@ case "$num" in
  10)  adb_stop;;
  11)  adb_sta;;
  12)  adb_inst;;
+ i|I) open $HOME/android-utility/resources/clean/adb.pdf;;
  e|E) express_adb;;
   q) clear; exit;;
  *) echo; echo "Please enter valid option"; enter;

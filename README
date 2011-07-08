@@ -2,8 +2,14 @@
 # README
 # Author: Tommy Nguyen [tommytoamtoe]
 # Version: b-0.89
-# Date: July 05, 2011
+# Date: July 08, 2011
 # Contact: tommytomatoe@gmail.com
+
+### Update. July 08, 2011
+>more preparation
+>added zipalign script
+>added sign apk/update.zip scripts
+>updated apktool decode mechanism, now includes META-INF extractions
 
 ### Update. July 05, 2011
 > preparing for initial release

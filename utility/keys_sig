@@ -1,0 +1,179 @@
+#! /bin/bash
+
+# Keytool Script
+# Author: Tommy Nguyen [tommytomatoe]
+# Version: b-0.89
+# Date: July 08, 2011
+# Contact: tommytomatoe@gmail.com
+
+# Functions
+
+#enterKey
+enterKey()
+{	echo "### Press [enter] to continue, any other key to quit";
+	read -s -n 1 key
+	if [[ $key = "" ]]; then 
+  		echo 
+	else
+  		echo
+  		echo "Installation aborted";
+		enter
+		apktool_s
+	fi
+}
+
+#enter
+enter()
+{	echo
+	echo "Please press [enter] to continue";
+	read -s -n 1 key
+	if [[ $key = "" ]]; then 
+  		echo
+		clear
+	fi
+}
+
+#enter
+enterA()
+{	echo
+	echo "Please press [enter] when ready";
+	read -s -n 1 key
+	if [[ $key = "" ]]; then 
+  		echo
+	fi
+}
+
+#load
+load_dot ()
+{	echo -n "."
+	sleep .1
+	echo -n "."
+	sleep .1
+	echo -n "."
+	sleep .1
+	echo -n "."
+	sleep .1
+	echo -n "."
+	sleep .1
+	echo "."
+}
+
+#quit
+quit()
+{	echo
+	echo "Thank you for choosing Android Utility"
+	echo "brought to you by tommytomatoe :-)"
+	echo
+	echo "Please Don't Drink and Drive"
+	echo
+	exit
+}
+
+blah ()
+{	keytool -genkey -v -keystore $KEYSTORE -alias $ALIAS -keyalg RSA -keysize 2048 -validity 10000
+}
+
+balhblah ()
+{	jarsigner -verbose -keystore $KEYSTORE -signedjar signed-$a $a $ALIAS
+}
+
+#create keys
+key_create ()
+{	echo -n "Please enter a name for your keystore (ie. testProject.keystore): "
+	echo
+	read KEYSTORE
+	echo -n "Please enter an alias for your keystore (ie. testProject): "
+	read ALIAS
+	cd $w
+	blah
+	enter	
+}
+
+#Sign apk
+sign_it ()
+{	cd $x
+	echo "Android-Utility will sign this apk: "
+	echo
+	ls -1 *.apk
+	echo
+	cd $w
+	echo "Android-Utility found these keystores: "
+	echo	
+	ls -1 *.keystore
+	echo
+	echo -n "Please enter name of your desired keystore: "
+	read KEYSTORE
+	echo -n "Please enter alias of your desired keystore: "
+	read ALIAS
+	cd $x
+	for a in *.apk ; do
+	jarsigner -verbose -keystore $w/$KEYSTORE $a $ALIAS	
+	done
+	enter
+}
+
+#verify
+verify_sig ()
+{	cd $x
+	echo "Android-Utility will verify this apk: "
+	echo
+	ls -1 *.apk
+	enter
+	for a in *.apk ; do
+	jarsigner -verify -verbose $a
+	done
+	enter
+}
+
+#make directories
+makedir ()
+{	d=`date +%b%e_%H%M%S`
+	echo "Checking status of $w..."
+	if [[ -s $w ]] ; then	
+		echo
+		echo "Keystore folder exists"
+		echo "Continuing..."
+	else
+		echo "Making new working-folder"
+		mkdir $w
+	fi
+}
+
+#keytool manager
+keys_menu ()
+{	clear
+	w=$HOME/android-utility/keystore
+	x=$HOME/android-utility/working-folder/mod-here-solo
+	makedir
+	clear
+	echo "Welcome to Android Utility Keystore Manager"
+	echo
+	echo "|  Keystore Manager                |"
+	echo "|----------------------------------|"
+	echo "|  1.  Create a Private Key        |"
+	echo "|  2.  List existing Private Keys  |" 
+	echo "|  3.  Sign Apk with Private Key   |"
+	echo "|  4.  Verify signed Apk           |"
+	echo "|----------------------------------|"
+	echo
+	echo "|  Optional Flavors                |"
+	echo "|----------------------------------|"
+	echo "|  q.  Go Back to Main Menu        |"
+	echo "|----------------------------------|"
+	echo
+	printf %s "  Please Select Feature: "
+	read num
+	case $num in
+	1) clear; key_create;;
+	2) echo; echo "Your keystores:"; echo; cd $w; ls *.keystore; enter;;
+	3) clear; sign_it;;
+	4) clear; verify_sig;;
+ 	q) clear; exit;;
+ 	*) echo; echo "$num is not a valid option"; enter;
+	esac
+}
+
+while :
+do
+	keys_menu
+done

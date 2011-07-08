@@ -3,7 +3,7 @@
 # Android Utility
 # Author: Tommy Nguyen [tommytoamtoe]
 # Version: b-0.89
-# Date: July 05, 2011
+# Date: July 08, 2011
 # Contact: tommytomatoe@gmail.com
 
 #introduction
@@ -548,13 +548,13 @@ echo "|         BASIC TOOLS           ||         AWESOME SAUCE         |"
 echo "|-------------------------------||-------------------------------|"
 echo "| 1.  adb tools                 || 5.  apk Re-Engineering        |"
 echo "| 2.  keystore manager          || 6.  smali and baksmali        |"
-echo "| 3.  zipalign                  || 7.  PNG optimize              |"
-echo "| 4.                            || 8.  draw9patch utilities      |"
+echo "| 3.  sign apk and update.zip   || 7.  PNG optimize              |"
+echo "| 4.  zipalign                  || 8.  draw9patch utilities      |"
 echo "|-------------------------------||                               |"
 echo "|-------------------------------||                               |"
 echo "|             SETUP             ||                               |"
 echo "|-------------------------------||                               |"
-echo "| x.  Run Installation Guide    ||                               |"
+echo "| x.  Run Installation Guide    || e. Extras                     |"
 echo "|-------------------------------||                               |"
 echo "|-------------------------------||-------------------------------|"
 echo "| q.  Quit                      ||-------------------------------|"
@@ -563,13 +563,14 @@ printf %s "Select an Option: "
 read num
 case $num in
  1) clear; ttadb;;
- 2) ff;;
- 3) ff;;
- 4) ff;;
+ 2) keys_sig;;
+ 3) zasign;;
+ 4) zipped_up;;
  5) apk_tool;;
  6) ff;;
  7) ff;;
  8) 9patch;;
+ e|E) extras;;
  x) installau;;
  q) quit;;
  *) echo; echo "$num is not a valid option"; enter;
