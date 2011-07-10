@@ -1,9 +1,9 @@
 #! /bin/bash
 
-# Installation Script
+# Installation Script LINUX
 # Author: Tommy Nguyen [tommytoamtoe]
 # Version: b-0.89
-# Date: July 08, 2011
+# Date: July 10, 2011
 # Contact: tommytomatoe@gmail.com
 
 # Setting Loop Variable
@@ -12,13 +12,14 @@ APPLE=$1
 
 # Functions
 
-# .bash_profile
+# au.sh
 bpro ()
-{	b=.bash_profile
+{	b=au.sh
+	c=$HOME/android-utility/resources/clean
 	clear
-	echo "Checking status of .bash_profile..."
+	echo "Checking status of PATH..."
 	load_dot
-	if [[ -s $HOME/$b ]] ; then
+	if [[ -s /etc/profile.d/$b ]] ; then
 		echo
 		echo "$b exists, would you like to: [default=3]"
 		echo 
@@ -37,34 +38,37 @@ bpro ()
 }
 
 bpro1 ()
-{	b=.bash_profile
-	cp -v $HOME/$b $HOME/$b.bak
+{	b=au.sh
+	sudo cp -v /etc/profile.d/$b /ect/profile.d/$b.bak
 	echo
 	echo "Removing $b"
-	sudo rm $HOME/$b
+	sudo rm /etc/profile.d/$b
 	echo
 	echo "Creating new $b"
-	touch $HOME/$b
-	( echo; echo "export PATH=\${PATH}:\$HOME/bin:\$HOME/android-utility:\$HOME/android-utility/utility:\$HOME/android-sdk/platform-tools/:\$HOME/android-sdk/tools" ) >>$b
-	source $HOME/$b
+	sudo cp $c/$b /etc/profile.d/$b
+	sudo chmod 755 /etc/profile.d/$b
+	source /etc/profile.d/$b
 	enter
 }
 
 bpro2 ()
-{	b=.bash_profile
-	cp -v $HOME/$b $HOME/$b.bak
+{	b=au.sh
+	sudo cp -v /etc/profile.d/$b /etc/profile.d/$b.bak
 	echo
 	echo "Appending Information to $b"
-	( echo; echo "export PATH=\${PATH}:\$HOME/bin:\$HOME/android-utility:\$HOME/android-utility/utility:\$HOME/android-sdk/platform-tools/:\$HOME/android-sdk/tools" ) >>$b
-	source $HOME/$b
+	sudo cp $c/$b /etc/profile.d/$b
+	sudo chmod 755 /etc/profile.d/$b
+	source /etc/profile.d/$b
 	enter
 }
 
 bpro3 ()
-{	echo
+{	b=au.sh
+	echo
 	echo "$b does not exist. Preparing to create $b"
-	echo "export PATH=\${PATH}:\$HOME/bin:\$HOME/android-utility:\$HOME/android-utility/utility:\$HOME/android-sdk/platform-tools/:\$HOME/android-sdk/tools" >>$b
-	source $HOME/$b
+	sudo cp $c/$b /etc/profile.d/$b
+	sudo chmod 755 /etc/profile.d/$b
+	source /etc/profile.d/$b
 	enter
 }
 
@@ -360,7 +364,7 @@ inst ()
 {	date +%b%e_%H%M%S
 	clear
 echo "     -----------------------     "
-echo "|    Android Utility v a0.89    |"
+echo "|    Android Utility v-b0.89    |"
 echo "|      Installaltion Guide      |"
 echo "|-------------------------------|"
 echo "|-------------------------------|"
@@ -370,7 +374,7 @@ echo "| 2.  Install new apktool       |"
 echo "| 3.  Install new aapt          |"
 echo "| 4.  Install new add-ons       |"
 echo "| 5.  Install Working Folder    |"
-echo "| 6.  Install GNU sed           |"
+echo "|                               |"
 echo "|-------------------------------|"
 echo "| x.  Run Android Utility       |"
 echo "|-------------------------------|"
