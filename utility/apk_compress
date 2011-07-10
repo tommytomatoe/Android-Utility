@@ -67,7 +67,7 @@ COMP=5
 d=$HOME/android-utility/working-folder/mod-here-multi
 e=$d/original_apps
 cd $d
-ECHO "Welcome to Apk Compression Manager"
+echo "Welcome to Apk Compression Manager"
 echo
 echo "Compression Level set to $COMP"
 echo "[0 = no compression | 9 = high compression]"

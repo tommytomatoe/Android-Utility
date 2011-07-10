@@ -114,7 +114,7 @@ read num
 case $num in
  1) clear; zip_it; zipped_up;;
  2) clear; check_it; zipped_up;;
- 3) open $HOME/android-utility/resources/clean/zipalign.pdf; enter; zipped_up;; 
+ 3) cat $HOME/android-utility/resources/clean/zipalign.txt | more; enter; zipped_up;; 
  q) clear; exit;;
  *) echo; echo "Not a Valid Option" ; echo; enter; zipped_up;;
 esac

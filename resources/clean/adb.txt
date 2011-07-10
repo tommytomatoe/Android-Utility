@@ -1,0 +1,75 @@
+### Android Debug Bridge :more information from: 
+http://developer.android.com/guide/developing/tools/adb.html
+
+[Press ENTER to continue reading, or Control+C to Quit]
+
+Android Debug Bridge (adb) is a versatile command line tool that
+lets you communicate with an emulator instance or connected
+Android-powered device. It is a client-server program that includes
+three components:
+-	A client, which runs on your development machine. You can 
+	invoke a client from a shell by issuing an adb command. Other
+	Android tools such as the ADT plugin and DDMS also create
+	adb clients.
+-	A server, which runs as a background process on your
+	development machine. The server manages communication
+	between the client and the adb daemon running on an emulator
+	or device.
+-	A daemon, which runs as a background process on each
+	emulator or device instance.
+
+### Issuing adb Commands
+
+You can issue adb commands from a command line on your development machine or from a script. The usage is:
+
+	adb [-d|-e|-s <serialNumber>] <command>
+
+### Commands
+
+adb devices     
+	-    Prints a list of all attached emulator/device instances.
+
+adb help        
+	-    Prints a list of supported adb commands.
+
+adb version     
+	-    Prints the adb version number.
+
+adb logcat      
+	-    Prints log data to the screen.
+
+adb bugreport   
+	-    Prints dumpsys, dumpstate, and logcat data to the screen, for
+                     the purposes of bug reporting.
+
+adb jdwp        
+	-    Prints a list of available JDWP processes on a given device.
+
+adb install <path-to-apk>
+        -    Pushes an Android application (specified as a full path to 
+		     an .apk file) to the data file of an emulator/device.
+
+adb pull <remote> <local>
+	-    Copies a specified file from an emulator/device instance to your 
+		     development computer.
+
+adb push <local> <remote>
+	-    Copies a specified file from your development computer to an 
+		     emulator/device instance.
+
+adb start-server
+	-    Checks whether the adb server process is running and starts it, 
+		     if not.
+
+adb kill-server
+	-    Terminates the adb server process.
+
+adb shell
+	-    Starts a remote shell in the target emulator/device instance.
+
+adb shell stop
+	-    Stops execution of an emulator/device instance.
+
+adb shell start 
+	-    Starts (restarts) an emulator/device instance.
+
