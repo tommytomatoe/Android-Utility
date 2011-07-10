@@ -3,7 +3,7 @@
 # Android Utility
 # Author: Tommy Nguyen [tommytoamtoe]
 # Version: b-0.89
-# Date: July 08, 2011
+# Date: July 10, 2011
 # Contact: tommytomatoe@gmail.com
 
 #introduction
@@ -550,7 +550,7 @@ echo "| 1.  adb tools                 || 6.  apk Re-Engineering        |"
 echo "| 2.  keystore manager          || 7.  smali and baksmali        |"
 echo "| 3.  sign apk and update.zip   || 8.  PNG optimize              |"
 echo "| 4.  zipalign                  || 9.  draw9patch utilities      |"
-echo "| 5.  install SDK               ||                               |"
+echo "| 5.  install SDK               ||10.  apk compression method    |"
 echo "|                               ||-------------------------------|"
 echo "|                               ||             SETUP             |"
 echo "|                               ||-------------------------------|"
@@ -571,6 +571,7 @@ case $num in
  7) ff;;
  8) ff;;
  9) 9patch;;
+10) apk_compress;;
  e|E) extras;;
  x) installau;;
  q) quit;;
