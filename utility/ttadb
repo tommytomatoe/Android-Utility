@@ -366,7 +366,7 @@ case "$num" in
  10)  adb_stop;;
  11)  adb_sta;;
  12)  adb_inst;;
- i|I) open $HOME/android-utility/resources/clean/adb.pdf;;
+ i|I) cat $HOME/android-utility/resources/clean/adb.txt | more;;
  e|E) express_adb;;
   q) clear; exit;;
  *) echo; echo "Please enter valid option"; enter;
