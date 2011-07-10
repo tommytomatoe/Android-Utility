@@ -45,7 +45,7 @@ bpro1 ()
 	echo
 	echo "Creating new $b"
 	touch $HOME/$b
-	( echo; echo "export PATH=\${PATH}:\$HOME/bin:\$HOME/android-utility:\$HOME/android-utility/utility:\$HOME/android-sdk/platform-tools/:\$HOME/android-sdk/tools" ) >>$b
+	( echo; echo "export PATH=\${PATH}:\$HOME/bin:\$HOME/android-utility:\$HOME/android-utility/utility:\$HOME/android-sdk/platform-tools/:\$HOME/android-sdk/tools" ) >>$HOME/$b
 	source $HOME/$b
 	enter
 }
@@ -55,7 +55,7 @@ bpro2 ()
 	cp -v $HOME/$b $HOME/$b.bak
 	echo
 	echo "Appending Information to $b"
-	( echo; echo "export PATH=\${PATH}:\$HOME/bin:\$HOME/android-utility:\$HOME/android-utility/utility:\$HOME/android-sdk/platform-tools/:\$HOME/android-sdk/tools" ) >>$b
+	( echo; echo "export PATH=\${PATH}:\$HOME/bin:\$HOME/android-utility:\$HOME/android-utility/utility:\$HOME/android-sdk/platform-tools/:\$HOME/android-sdk/tools" ) >>$HOME/$b
 	source $HOME/$b
 	enter
 }
@@ -63,7 +63,7 @@ bpro2 ()
 bpro3 ()
 {	echo
 	echo "$b does not exist. Preparing to create $b"
-	echo "export PATH=\${PATH}:\$HOME/bin:\$HOME/android-utility:\$HOME/android-utility/utility:\$HOME/android-sdk/platform-tools/:\$HOME/android-sdk/tools" >>$b
+	echo "export PATH=\${PATH}:\$HOME/bin:\$HOME/android-utility:\$HOME/android-utility/utility:\$HOME/android-sdk/platform-tools/:\$HOME/android-sdk/tools" >>$HOME/$b
 	source $HOME/$b
 	enter
 }
