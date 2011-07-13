@@ -284,7 +284,7 @@ adb_inst()
 	echo
 	echo "These files are available in $d:"
 	echo
-	ls -t -1 $d
+	ls -t -1 $d | grep -- .apk
 	echo
 	printf %s "[adb install] which file? [ie. DataApp.apk] = "
 	read INS

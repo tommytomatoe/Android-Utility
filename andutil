@@ -2,7 +2,7 @@
 
 # Android Utility
 # Author: Tommy Nguyen [tommytoamtoe]
-# Version: b-0.89
+# Version: 1.0.0
 # Date: July 10, 2011
 # Contact: tommytomatoe@gmail.com
 
@@ -35,7 +35,8 @@ credits ()
 	echo "Brut.all - apktool.jar and sound advice"
 	sleep .5
 	echo "JesusFreke - baksmali.jar and smali.jar"
-	echo "Stericson - testsign.jar"
+	sleep .5
+	echo "Stericson/JF - testsign.jar"
 	sleep .5
 	echo "Google - AOSP"
 	sleep .5
@@ -49,10 +50,15 @@ credits ()
 	sleep .5
 	echo "dsixda - sound advice"
 	sleep .5
+	echo "Amon_RA - sound advice"
+	sleep .5
 	echo "Igor Pavlov - 7zip"
 	sleep .5
 	echo "Ardfry Imaging, LLC. - pngout"
 	sleep .5
+	echo "Xclusive Rydah and Chingy - testing and ideas"
+	sleep .5
+	echo
 	echo -n T
 	sleep .1
 	echo -n o
@@ -372,23 +378,23 @@ android ()
 {
 echo "   Android Utility by tommytomatoe"
 echo "      ----------------------     "
-echo "   Blue Waffle Magic Pack v b-0.89"
+echo "   Blue Waffle Magic Pack v 1.0.0"
 echo "|-------------------------------||-------------------------------|"
 echo "|-------------------------------||-------------------------------|"
-echo "|         BASIC TOOLS           ||         AWESOME SAUCE         |"
+echo "|         BASIC TOOLS           ||         ADVANCE TOOLS         |"
 echo "|-------------------------------||-------------------------------|"
 echo "| 1.  adb tools                 || 6.  apk Re-Engineering        |"
 echo "| 2.  keystore manager          || 7.  smali and baksmali        |"
 echo "| 3.  sign apk and update.zip   || 8.  PNG optimize              |"
 echo "| 4.  zipalign                  || 9.  draw9patch utilities      |"
-echo "| 5.  install SDK               ||10.  apk compression method    |"
-echo "|                               ||-------------------------------|"
-echo "|                               ||             SETUP             |"
-echo "|                               ||-------------------------------|"
-echo "|                               || e.  Extras                    |"
-echo "|                               || x.  Run Installation Guide    |"
+echo "| 5.  CREDITS                   ||10.  apk compression method    |"
+echo "|                               ||                               |"
+echo "|----------------------------------------------------------------|"
+echo "|                          SETUP TOOLS                           |"
+echo "|----------------------------------------------------------------|"
+echo "| x.  Run Installation Guide    || e.  Extras                    |"
+echo "| i.  Install Android SDK       || q.  Quit                      |"
 echo "|-------------------------------||-------------------------------|"
-echo "| q.  Quit                      ||-------------------------------|"
 echo "|-------------------------------||-------------------------------|"
 printf %s "Select an Option: "
 read num
@@ -397,13 +403,14 @@ case $num in
  2) keys_sig;;
  3) zasign;;
  4) zipped_up;;
- 5) ff;;
+ 5) credits;;
  6) apk_tool;;
  7) ff;;
  8) ff;;
  9) 9patch;;
 10) apk_compress;;
  e|E) extras;;
+ i|I) ff;;
  x) installau;;
  q) quit;;
  *) echo; echo "$num is not a valid option"; enter;

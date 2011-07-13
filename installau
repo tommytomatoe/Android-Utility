@@ -2,7 +2,7 @@
 
 # Installation Script
 # Author: Tommy Nguyen [tommytoamtoe]
-# Version: b-0.89
+# Version: 1.0.0
 # Date: July 08, 2011
 # Contact: tommytomatoe@gmail.com
 
@@ -171,6 +171,7 @@ makedirB ()
 	mkdir $w/mod-here-solo
 	mkdir $w/mod-here-multi
 	mkdir $w/framework-here
+	mkdir $HOME/android-utility/log
 	mkdir $w/ninepatch
 	mkdir $w/ninepatch/SOURCE
 	mkdir $w/ninepatch/decompiled
@@ -359,24 +360,25 @@ ins_sed ()
 inst () 
 {	date +%b%e_%H%M%S
 	clear
-echo "     -----------------------     "
-echo "|    Android Utility v a0.89    |"
-echo "|      Installaltion Guide      |"
-echo "|-------------------------------|"
-echo "|-------------------------------|"
-echo "| 1.  First Time Install        |"
-echo "|-------------------------------|"
-echo "| 2.  Install new apktool       |"
-echo "| 3.  Install new aapt          |"
-echo "| 4.  Install new add-ons       |"
-echo "| 5.  Install Working Folder    |"
-echo "| 6.  Install GNU sed           |"
-echo "|-------------------------------|"
-echo "| x.  Run Android Utility       |"
-echo "|-------------------------------|"
-echo "|-------------------------------|"
-echo "| q.  Quit Installation Guide   |"
-echo "     -----------------------     "
+echo
+echo "         -----------------------      "
+echo "|         Android Utility v 1.0.0       |"
+echo "|     Installation Guide - Mac OS X     |"
+echo "|---------------------------------------|"
+echo "|---------------------------------------|"
+echo "| 1.  First Time Install                |"
+echo "|---------------------------------------|"
+echo "| 2.  Install new apktool               |"
+echo "| 3.  Install new aapt                  |"
+echo "| 4.  Install new add-ons               |"
+echo "| 5.  Install Working Folder            |"
+echo "| 6.  Install GNU sed                   |"
+echo "|---------------------------------------|"
+echo "| x.  Run Android Utility               |"
+echo "|---------------------------------------|"
+echo "|---------------------------------------|"
+echo "| q.  Quit Installation Guide           |"
+echo "         -----------------------     "
 printf %s "  Please Select Install: "
 read num
 case $num in

@@ -2,7 +2,7 @@
 
 # Apktool Decode Script
 # Author: Tommy Nguyen [tommytomatoe]
-# Version: b-0.89
+# Version: b-0.91
 # Date: July 08, 2011
 # Contact: tommytomatoe@gmail.com
 
@@ -11,6 +11,7 @@ clear
 APPLE=$1
 
 # Functions
+LOG=false
 
 #enterKey
 enterKey()
@@ -137,12 +138,17 @@ decode_m ()
 		echo
 		echo "  1. Yes"
 		echo "  2. No"
+		echo
 		read ans
 		case $ans in
 			1) extract_miM;;
 			2) echo;;
 			*) extract_miM;;
 		esac
+		if [[ "LOG" -eq "true" ]] ; then
+			echo
+			echo "Please check decode_log for apks with errors"
+		fi
 	else
 		echo
 		clear
@@ -159,18 +165,27 @@ do_it_s ()
 	echo "Decoding $b to ../mod-here-solo/${b/.apk}:"
 	echo 
 	apktool d -f $b
+	if [[ "$?" -ne "0" ]] ; then
+		echo "On `date +%b%e_%H%M%S`, $b was not Decoded Properly" >> $HOME/android-utility/log/decode_log
+		LOG=true
+	fi
 	echo
 	done
 	echo "Would you like to extract original META-INF? [default=Yes]"
 	echo
 	echo "  1. Yes"
 	echo "  2. No"
+	echo
 	read ans
 	case $ans in
 		1) extract_mi;;
 		2) echo;;
 		*) extract_mi;;
 	esac
+	if [[ "LOG" -eq "true" ]] ; then
+		echo
+		echo "Please check decode_log for apks with errors"
+	fi
 }
 
 extract_mi ()
@@ -204,9 +219,13 @@ extract_miM ()
 do_it_m ()
 {	for b in *.apk
 	do
-	echo "Decoding $b to ../mod-here-multi/${b/.apk}:"
+	echo "Decoding $b to ../mod-here-multi/Projects/${b/.apk}:"
 	echo 
-	apktool d -f $b
+	apktool d -f $b $HOME/android-utility/working-folder/mod-here-multi/Projects/${b/.apk}
+	if [[ "$?" -ne "0" ]] ; then
+		echo "On `date +%b\ %e\ %H:%M:%S`, $b was not Decoded Properly" >> $HOME/android-utility/log/decode_log
+	LOG=true
+	fi	
 	echo
 	done
 }

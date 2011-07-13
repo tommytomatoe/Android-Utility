@@ -1,9 +1,16 @@
 ### Welcome to Android Utility
 # README
 # Author: Tommy Nguyen [tommytoamtoe]
-# Version: b-0.89
-# Date: July 08, 2011
+# Version: b-1.0.0
+# Date: July 13, 2011
 # Contact: tommytomatoe@gmail.com
+
+### Update. July 13, 2011
+>version b-1.0.0
+>redid decompile and rebuild scripts
+>added error logging to decode and rebuild
+>added filter to adb script
+>changed main menu layout
 
 ### Update. July 08, 2011
 >more preparation
