@@ -169,6 +169,7 @@ ins_aapt ()
 	echo "  1.  aapt sdk  8 - Froyo Development"
 	echo "  2.  aapt sdk  9 - Gingerbread Development"
 	echo "  3.  aapt sdk 10 - Honeycomb Development"
+	echo "  3.  aapt sdk 11 - Honeycomb Development"
 	echo
 	echo "  x.  Keep current version"
 	echo
@@ -179,6 +180,7 @@ ins_aapt ()
 	 1) echo; sudo cp -v $c/aapt-8 $u/aapt; aapt_vv;;
 	 2) echo; sudo cp -v $c/aapt-9 $u/aapt; aapt_vv;;
 	 3) echo; sudo cp -v $c/aapt-10 $u/aapt; aapt_vv;;
+	 4) echo; sudo cp -v $c/aapt-11 $u/aapt; aapt_vv;;
 	 x) echo; echo "Current version has not been changed";;
 	 *) echo; echo "$sel is not a valid option"; echo; echo "Current version has not been changed";;	
 	esac
