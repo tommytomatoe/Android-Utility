@@ -346,8 +346,9 @@ echo "|                          ||                          |"
 echo "|--------------------------||--------------------------|"
 echo "|--------------------------||--------------------------|"
 echo "|--------------------------||--------------------------|"
-echo "     I. Info on Android Debug Commands"
+echo "     A. Run if \"no permissions\" message occurs"
 echo "     E. Go to Express Menu (use with 'mod-here-solo')"
+echo "     I. Info on Android Debug Commands"
 echo "     q. Go Back to Main Menu                "
 echo "                   ------------------     "
 echo
@@ -366,6 +367,7 @@ case "$num" in
  10)  adb_stop;;
  11)  adb_sta;;
  12)  adb_inst;;
+ a|A) adb kill-server; sudo adb start-server;;
  i|I) cat $HOME/android-utility/resources/clean/adb.txt | more;;
  e|E) express_adb;;
   q) clear; exit;;

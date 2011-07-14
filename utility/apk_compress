@@ -1,0 +1,110 @@
+#! /bin/bash
+
+# Apk Compression Script
+# Author: Tommy Nguyen [tommytomatoe]
+# Version: b-0.89
+# Date: July 10, 2011
+# Contact: tommytomatoe@gmail.com
+
+# Functions
+
+#enter
+enter()
+{	echo
+	echo -n "Please press [enter] when ready ";
+	read -s -n 1 key
+	if [[ $key = "" ]]; then 
+  		echo &>/dev/null
+	fi
+}
+
+#load
+load_dot ()
+{	for r in . . . . . .
+	do
+	echo -n $r
+	sleep .1
+	done
+	echo "."
+}
+
+#quit
+quit()
+{	echo
+	echo "Thank you for choosing Android Utility"
+	echo "brought to you by tommytomatoe :-)"
+	echo
+	echo "Please Don't Drink and Drive"
+	sleep .25
+	clear
+	exit
+}
+
+decomp_it ()
+{
+cd $e	
+for F in *.apk ; do
+echo "Decompressing $F"
+cd $e
+$HOME/bin/7z x -y -o"${F/.apk}" $F &>/dev/null
+cd $e/${F/.apk}
+zip -"$COMP"r $d/decompressed_apps/$F *
+rm -r $d/original_apps/${F/.apk}
+echo "$F Decompressed"
+done
+}
+
+method ()
+{
+$HOME/bin/7z x -y -o"${a/.apk}" $a &>/dev/null
+cd $d/original_apps/"${a/.apk}"
+zip -"$COMP"r $d/decompressed_apps/$a *
+rm -r $e/${F/.apk}
+}
+
+clear
+COMP=5
+d=$HOME/android-utility/working-folder/mod-here-multi
+e=$d/original_apps
+cd $d
+echo "Welcome to Apk Compression Manager"
+echo
+echo "Compression Level set to $COMP"
+echo "[0 = no compression | 9 = high compression]"
+echo
+echo -n "Please set compression level [default=5 ; 0 -> 9]: "
+read COMP
+if [[ $COMP == "" ]] ; then
+	COMP=5
+fi
+echo
+echo "Compression Level set to $COMP"
+echo
+if [[ -s $e ]] ; then
+	echo &>/dev/null
+else
+	mkdir $e
+fi
+echo "Please Place apks in $d/original_apps"
+open $d
+enter
+if [[ -s $d/decompressed_apps ]] ; then
+	rm -r $d/decompressed_apps &>/dev/null
+	mkdir $d/decompressed_apps
+else
+	mkdir $d/decompressed_apps
+fi
+echo
+echo "Preparing to decompress Apks with Compression Level $COMP"
+echo
+decomp_it
+echo
+echo -n "Remove Original Apks? [Y/n]: "
+read yes
+case $yes in 
+	y|Y) rm -r $e;;
+	n|N) echo "Original apps saved in "original_apps"";;
+	*) rm -r $e;;	
+esac
+quit
+

@@ -177,13 +177,13 @@ clean_in ()
 	u=/usr/local/bin
 	echo "Adding resources to $u and /usr/bin"
 	sudo cp -v $c/aapt-9 $u/aapt
+	sudo cp -v $c/adb $u/adb
 	sudo cp -v $c/apktool $u/
 	sudo cp -v $c/apktool-1.4.1.jar $u/apktool.jar
 	echo "Adding resources to $b"
 	load_dot
 	cp -v $c/7z $b/
 	cp -v $c/7z.so $b/	
-	cp -v $c/adb $b/adb
 	cp -v $c/baksmali $b/
 	cp -v $c/baksmali.jar $b/
 	cp -v $c/decode9patchPng.jar $b/

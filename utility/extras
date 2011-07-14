@@ -65,7 +65,7 @@ check_u ()
 	echo "Thank you. Pressing ENTER will take you to the repository."
 	echo
 	enter
-	open https://github.com/tommytomatoe/Android-Utility
+	firefox https://github.com/tommytomatoe/Android-Utility
 }
 
 #contacts
@@ -88,7 +88,7 @@ water ()
 	echo "I should state that I am not trying to exert my opinions or beliefs onto you. This is optional Thank you."
 	echo
 	enter
-	open http://www.charitywater.org/
+	firefox http://www.charitywater.org/
 }
 
 #donate
@@ -102,7 +102,7 @@ donate ()
 	echo "PayPal Donation: smiletothesky1970@yahoo.com"
 	echo
 	enter
-	open http://bit.ly/r6qjP2
+	firefox http://bit.ly/r6qjP2
 }
 
 clear

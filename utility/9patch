@@ -131,7 +131,7 @@ read num
 case $num in
  1) clear; compile_it; 9patch;;
  2) clear; decompile_it; 9patch;;
- 3) open http://code.google.com/p/android-apktool/wiki/9PatchImages; echo; enter; 9patch;;
+ 3) firefox http://code.google.com/p/android-apktool/wiki/9PatchImages; echo; enter; 9patch;;
  4) clear; $HOME/bin/draw9patch; 9patch;;
  q) clear; exit;;
  *) echo; echo "Not a Valid Option" ; echo; enter; 9patch;;
