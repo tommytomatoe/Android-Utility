@@ -1,9 +1,9 @@
 #! /bin/bash
 
-# Android Utility
+# Android Utility Linux
 # Author: Tommy Nguyen [tommytoamtoe]
-# Version: b-0.89
-# Date: July 08, 2011
+# Version: 1.0.0
+# Date: July 10, 2011
 # Contact: tommytomatoe@gmail.com
 
 #introduction
@@ -29,76 +29,113 @@ enter()
 #credits
 credits ()
 {	clear
+	echo "   ### Thanks and Credits ###"
+	echo
+	sleep .5
+	echo "Brut.all - apktool.jar and sound advice"
+	sleep .5
+	echo "JesusFreke - baksmali.jar and smali.jar"
+	sleep .5
+	echo "Stericson/JF - testsign.jar"
+	sleep .5
+	echo "Google - AOSP"
+	sleep .5
+	echo "aamikam - sound advice"
+	sleep .5
+	echo "themikmik.com - Awesome sauce"
+	sleep .1
+	echo "xda developers - Roots" 
+	sleep .5
+	echo "JsChiSurf - sound advice"
+	sleep .5
+	echo "dsixda - sound advice"
+	sleep .5
+	echo "Amon_RA - sound advice"
+	sleep .5
+	echo "Igor Pavlov - 7zip"
+	sleep .5
+	echo "Ardfry Imaging, LLC. - pngout"
+	sleep .5
+	echo "Xclusive Rydah and Chingy - testing and ideas"
+	sleep .5
+	echo
 	echo -n T
 	sleep .1
-	echo -n h
+	echo -n o
 	sleep .1
-	echo -n a
+	echo -n m
 	sleep .1
-	echo -n n
+	echo -n m
 	sleep .1
-	echo -n k 
-	sleep .1	
-	sleep .1
-	echo -n " " 
 	echo -n y
 	sleep .1
-	echo -n o
+	echo -n " " 
 	sleep .1
-	echo -n u
-	sleep .1
-	echo -n  " "
-	sleep .1
-	echo -n f
-	sleep .1
-	echo -n o
-	sleep .1
-	echo -n r
-	sleep .1
-	echo -n  " "
-	sleep .1
-	echo -n u
-	sleep .1
-	echo -n s
-	sleep .1
-	echo -n i
-	sleep .1
-	echo -n n
+	echo -n N
 	sleep .1
 	echo -n g
 	sleep .1
-	echo -n  " "
-	sleep .1
-	echo -n A
-	sleep .1
-	echo -n n
-	sleep .1
-	echo -n d
-	sleep .1
-	echo -n r
-	sleep .1
-	echo -n o
-	sleep .1
-	echo -n i
-	sleep .1
-	echo -n d
-	sleep .1
-	echo -n " "  
-	sleep .1
-	echo -n U
-	sleep .1
-	echo -n t
-	sleep .1
-	echo -n i
-	sleep .1
-	echo -n l
-	sleep .1
-	echo -n i
-	sleep .1
-	echo -n t
+	echo -n u
 	sleep .1
 	echo -n y
 	sleep .1
+	echo -n e
+	sleep .1
+	echo -n n
+	sleep .1
+	echo -n " " 
+	sleep .1
+	echo -n -
+	sleep .1
+	echo -n " " 
+	sleep .1
+	for l in A n d r o i d ; do
+	echo -n $l
+	sleep .1
+	done
+	echo -n " "
+	sleep .2
+	for l in U t i l i t y ; do
+	echo -n $l
+	sleep .1
+	done
+	echo
+	echo
+	for l in T h a n k ; do
+	echo -n $l
+	sleep .1
+	done
+	sleep .1	
+	sleep .1
+	echo -n " " 
+	for l in y o u ; do
+	echo -n $l
+	sleep .1
+	done
+	echo -n  " "
+	sleep .1
+	for l in f o r ; do
+	echo -n $l
+	sleep .1
+	done
+	echo -n  " "
+	sleep .1
+	for l in u s i n g ; do
+	echo -n $l
+	sleep .1
+	done
+	echo -n  " "
+	sleep .1
+	for l in A n d r o i d ; do
+	echo -n $l
+	sleep .1
+	done
+	echo -n " "
+	sleep .2
+	for l in U t i l i t y ; do
+	echo -n $l
+	sleep .1
+	done
 	echo "."
 	echo
 	sleep .5
@@ -157,152 +194,46 @@ credits ()
 	sleep .1
 	sleep .1
 	echo -n " "
-	echo -n h
+	for l in h o p e ; do
+	echo -n $l
 	sleep .1
-	echo -n o
-	sleep .1
-	echo -n p
-	sleep .1
-	echo -n e
-	sleep .1
+	done
 	echo -n  
 	sleep .1
 	echo -n " "
 	sleep .1
-	echo -n t
+	for l in t h i s ; do
+	echo -n $l
 	sleep .1
-	echo -n h
-	sleep .1
-	echo -n e
-	sleep .1
-	echo -n s
-	sleep .1
-	echo -n e
-	sleep .1
+	done
 	echo -n  
 	sleep .1
 	echo -n " "
 	sleep .1
-	echo -n g
+	for l in g o a l ; do
+	echo -n $l
 	sleep .1
-	echo -n o
-	sleep .1
-	echo -n a
-	sleep .1
-	echo -n l
-	sleep .1
-	echo -n s
-	sleep .1
+	done
 	echo -n  
 	sleep .1
 	echo -n " "
 	sleep .1
-	echo -n a
+	for l in w a s ; do
+	echo -n $l
 	sleep .1
-	echo -n r
-	sleep .1
-	echo -n e
-	sleep .1
+	done
 	echo -n  
 	sleep .1
 	echo -n " "
 	sleep .1
-	echo -n m
+	for l in m e t ; do
+	echo -n $l
 	sleep .1
-	echo -n e
-	sleep .1
-	echo -n t
-	sleep .1
+	done
 	echo "."
 	echo
 	sleep .5
-	echo "   ### Thanks and Credits ###"
-	echo
-	sleep .5
-	echo "Brut.all - apktool.jar and sound advice"
-	sleep .5
-	echo "JesusFreke - baksmali.jar and smali.jar"
-	sleep .5
-	echo "Google - AOSP"
-	sleep .5
-	echo "aamikam - sound advice"
-	sleep .5
-	echo "themikmik.com - Awesome sauce"
-	sleep .1
-	echo "xda developers - Roots" 
-	sleep .5
-	echo "JsChiSurf - sound advice"
-	sleep .5
-	echo "dsixda - sound advice"
-	sleep .5
-	echo "Igor Pavlov - 7zip"
-	sleep .5
-	echo "Ardfry Imaging, LLC. - pngout"
-	sleep .5
-	echo -n T
-	sleep .1
-	echo -n o
-	sleep .1
-	echo -n m
-	sleep .1
-	echo -n m
-	sleep .1
-	echo -n y
-	sleep .1
-	echo -n " " 
-	sleep .1
-	echo -n N
-	sleep .1
-	echo -n g
-	sleep .1
-	echo -n u
-	sleep .1
-	echo -n y
-	sleep .1
-	echo -n e
-	sleep .1
-	echo -n n
-	sleep .1
-	echo -n " " 
-	sleep .1
-	echo -n -
-	sleep .1
-	echo -n " " 
-	sleep .1
-	echo -n A
-	sleep .1
-	echo -n n
-	sleep .1
-	echo -n d
-	sleep .1
-	echo -n r
-	sleep .1
-	echo -n o
-	sleep .1
-	echo -n i
-	sleep .1
-	echo -n d
-	sleep .1
-	echo -n  
-	sleep .1
-	echo -n " "
-	sleep .1
-	echo -n U
-	sleep .1
-	echo -n t
-	sleep .1
-	echo -n i
-	sleep .1
-	echo -n l
-	sleep .1
-	echo -n i
-	sleep .1
-	echo -n t
-	sleep .1
-	echo y
-	sleep .1
-	echo
-	echo "You will only see this message once."
+	echo "ALERT: You will only see this message once."
 	enter
 }
 	
@@ -333,169 +264,81 @@ ff ()
 welcome ()
 {	clear
 echo
-echo -n "W"
+for l in W e l c o m e ; do
+echo -n $l
 sleep .1
-echo -n "e"
-sleep .1
-echo -n "l"
-sleep .1
-echo -n "c"
-sleep .1
-echo -n "o"
-sleep .1
-echo -n "m"
-sleep .1
-echo -n "e"
-sleep .1
+done
 echo -n " "
 sleep .1
-echo -n "t"
+for l in t o ; do
+echo -n $l
 sleep .1
-echo -n "o"
-sleep .1
+done
 echo -n " "
 sleep .2
-echo -n "A"
+for l in A n d r o i d ; do
+echo -n $l
 sleep .1
-echo -n "n"
-sleep .1
-echo -n "d"
-sleep .1
-echo -n "r"
-sleep .1
-echo -n "o"
-sleep .1
-echo -n "i"
-sleep .2
-echo -n "d"
-sleep .1
+done
 echo -n " "
+sleep .2
+for l in U t i l i t y ; do
+echo -n $l
 sleep .1
-echo -n "U"
-sleep .1
-echo -n "t"
-sleep .1
-echo -n "i"
-sleep .1
-echo -n "l"
-sleep .1
-echo -n "i"
-sleep .1
-echo -n "t"
-sleep .1
-echo -n "y"
+done
 sleep .1
 echo ","
 sleep .2
 echo 
 sleep .1
-echo -n "b"
+for l in b r o u g h t ; do
+echo -n $l
 sleep .1
-echo -n "r"
-sleep .25
-echo -n "o"
-sleep .1
-echo -n "u"
-sleep .1
-echo -n "g"
-sleep .1
-echo -n "h"
-sleep .1
-echo -n "t"
-sleep .1
+done
 echo -n " "
 sleep .2
-echo -n "t"
+for l in t o ; do
+echo -n $l
 sleep .1
-echo -n "o"
-sleep .1
+done
 echo -n " "
 sleep .1
-echo -n "y"
+for l in y o u ; do
+echo -n $l
 sleep .1
-echo -n "o"
-sleep .1
-echo -n "u"
-sleep .1
+done
 echo -n " "
 sleep .1
-echo -n "b"
+for l in b y ; do
+echo -n $l
 sleep .1
-echo -n "y"
+done
 sleep .1
 echo ":"
 sleep .1
 echo
-echo -n "t"
-sleep .2
-echo -n "o"
+for l in t o m m y t o m a t o e ; do
+echo -n $l
 sleep .1
-echo -n "m"
-sleep .2
-echo -n "m"
-sleep .1
-echo -n "y"
-sleep .1
-echo -n "t"
-sleep .1
-echo -n "o"
-sleep .1
-echo -n "m"
-sleep .2
-echo -n "a"
-sleep .1
-echo -n "t"
-sleep .1
-echo -n "o"
-sleep .1
-echo "e"
+done
 echo
-echo -n "e"
-sleep .2
-echo -n "n"
+echo
+for l in e n j o y ; do
+echo -n $l
 sleep .1
-echo -n "j"
-sleep .2
-echo -n "o"
-sleep .1
-echo -n "y"
-sleep .1
+done
 echo -n " "
 sleep .1
-echo -n "t"
+for l in t h e ; do
+echo -n $l
 sleep .1
-echo -n "h"
-sleep .2
-echo -n "e"
-sleep .1
+done
 echo -n " "
 sleep .1
-echo -n "p"
+for l in p o s s i b i l i t i e s ; do
+echo -n $l
 sleep .1
-echo -n "o"
-sleep .2
-echo -n "s"
-sleep .1
-echo -n "s"
-sleep .2
-echo -n "i"
-sleep .1
-echo -n "b"
-sleep .1
-echo -n "i"
-sleep .1
-echo -n "l"
-sleep .1
-echo -n "i"
-sleep .2
-echo -n "t"
-sleep .1
-echo -n "i"
-sleep .1
-echo -n "e"
-sleep .1
-echo -n "s"
-sleep .1
+done
 echo "."
 echo
 sleep .25
@@ -503,16 +346,10 @@ sleep .25
 
 #load
 load_dot ()
-{	echo -n "."
+{	for DOT in . . . . . . . ; do
+	echo -n "$DOT"
 	sleep .15
-	echo -n "."
-	sleep .15
-	echo -n "."
-	sleep .15
-	echo -n "."
-	sleep .15
-	echo -n "."
-	sleep .15
+	done
 	echo "."
 }
 
@@ -541,24 +378,24 @@ android ()
 {
 echo "   Android Utility by tommytomatoe"
 echo "      ----------------------     "
-echo "   Blue Waffle Magic Pack v b-0.89"
+echo "   Blue Waffle Magic Pack v 1.0.0"
 echo "|-------------------------------||-------------------------------|"
 echo "|-------------------------------||-------------------------------|"
-echo "|         BASIC TOOLS           ||         AWESOME SAUCE         |"
+echo "|         BASIC TOOLS           ||         ADVANCE TOOLS         |"
 echo "|-------------------------------||-------------------------------|"
-echo "| 1.  adb tools                 || 5.  apk Re-Engineering        |"
-echo "| 2.  keystore manager          || 6.  smali and baksmali        |"
-echo "| 3.  sign apk and update.zip   || 7.  PNG optimize              |"
-echo "| 4.  zipalign                  || 8.  draw9patch utilities      |"
-echo "|-------------------------------||                               |"
-echo "|-------------------------------||                               |"
-echo "|             SETUP             ||                               |"
-echo "|-------------------------------||                               |"
-echo "| x.  Run Installation Guide    || e. Extras                     |"
-echo "|-------------------------------||                               |"
+echo "| 1.  adb tools                 || 6.  apk Re-Engineering        |"
+echo "| 2.  keystore manager          || 7.  smali and baksmali        |"
+echo "| 3.  sign apk and update.zip   || 8.  PNG optimize              |"
+echo "| 4.  zipalign                  || 9.  draw9patch utilities      |"
+echo "| 5.  CREDITS                   ||10.  apk compression method    |"
+echo "|                               ||                               |"
+echo "|----------------------------------------------------------------|"
+echo "|                          SETUP TOOLS                           |"
+echo "|----------------------------------------------------------------|"
+echo "| x.  Run Installation Guide    || e.  Extras                    |"
+echo "| i.  Install Android SDK       || q.  Quit                      |"
 echo "|-------------------------------||-------------------------------|"
-echo "| q.  Quit                      ||-------------------------------|"
-echo "      ----------------------     "
+echo "|-------------------------------||-------------------------------|"
 printf %s "Select an Option: "
 read num
 case $num in
@@ -566,11 +403,14 @@ case $num in
  2) keys_sig;;
  3) zasign;;
  4) zipped_up;;
- 5) apk_tool;;
- 6) ff;;
+ 5) credits;;
+ 6) apk_tool;;
  7) ff;;
- 8) 9patch;;
+ 8) ff;;
+ 9) 9patch;;
+10) apk_compress;;
  e|E) extras;;
+ i|I) ff;;
  x) installau;;
  q) quit;;
  *) echo; echo "$num is not a valid option"; enter;
@@ -590,3 +430,4 @@ while :
 do
 	android
 done
+
