@@ -376,6 +376,10 @@ fi
 
 android () 
 {
+which andutil $>/dev/null
+if [[ "$?" -ne "0" ]] ; then
+	source /etc/profile.d/au.sh
+fi
 echo "   Android Utility by tommytomatoe"
 echo "      ----------------------     "
 echo "   Blue Waffle Magic Pack v 1.0.0"
