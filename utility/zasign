@@ -1,6 +1,6 @@
 #! /bin/bash
 
-# Apk and Update.zip Script
+# Apk and Update.zip Script Linux
 # Author: Tommy Nguyen [tommytomatoe]
 # Version: b-0.89
 # Date: July 08, 2011
@@ -73,6 +73,8 @@ quit()
 #test sign
 test_sign ()
 {	cd $x
+	echo "Please place apk inside `basename $x`"
+	enter
 	echo "Android-Utility will sign this apk with test keys: "
 	echo
 	ls -1 *.apk
@@ -90,6 +92,8 @@ test_sign ()
 #test sign batch
 test_sign_b ()
 {	cd $y
+	echo "Please place apk inside `basename $y`"
+	enter
 	echo "Please place apks in $y"
 	enter
 	echo "Android-Utility will sign these apks with test keys: "
@@ -108,6 +112,8 @@ test_sign_b ()
 
 test_sign_z ()
 {	cd $x
+	echo "Please place apk inside `basename $x`"
+	enter
 	echo "Android-Utility will sign this update.zip with test keys: "
 	echo
 	ls -1 *.zip
@@ -125,6 +131,8 @@ test_sign_z ()
 #Sign apk
 sign_it ()
 {	cd $x
+	echo "Please place apk inside `basename $x`"
+	enter
 	echo "Android-Utility will sign this apk: "
 	echo
 	ls -1 *.apk

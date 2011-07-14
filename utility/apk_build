@@ -1,9 +1,246 @@
 #! /bin/bash
 
-# Apktool Build Script
+# Apktool Build Script Linux
 # Author: Tommy Nguyen [tommytomatoe]
-# Version: b-0.89
+# Version: b-0.91
 # Date: July 08, 2011
+# Contact: tommytomatoe@gmail.com
+
+# Setting Loop Variable
+clear
+APPLE=$1
+LOG=false
+
+# Functions
+
+#enterKey
+enterKey()
+{	echo "### Press [enter] to continue, any other key to quit";
+	read -s -n 1 key
+	if [[ $key = "" ]]; then 
+  		echo 
+	else
+  		echo
+  		echo "Installation aborted";
+		enter
+		apk_tool
+	fi
+}
+
+#enter
+enter()
+{	echo
+	echo "Please press [enter] to continue";
+	read -s -n 1 key
+	if [[ $key = "" ]]; then 
+  		echo
+		clear
+	fi
+}
+
+#enter
+enterA()
+{	echo
+	echo "Please press [enter] when ready";
+	read -s -n 1 key
+	if [[ $key = "" ]]; then 
+  		echo
+	fi
+}
+
+#load
+load_dot ()
+{	echo -n "."
+	sleep .1
+	echo -n "."
+	sleep .1
+	echo -n "."
+	sleep .1
+	echo -n "."
+	sleep .1
+	echo -n "."
+	sleep .1
+	echo "."
+}
+
+#quit
+quit()
+{	echo
+	echo "Thank you for choosing Android Utility"
+	echo "brought to you by tommytomatoe :-)"
+	echo
+	echo "Please Don't Drink and Drive"
+	echo
+	exit
+}
+
+#select
+selection ()
+{	echo
+	echo "You've selcted [$COM]"
+	echo
+}
+
+#Build
+build ()
+{	COM="apktool b[uild]"
+	d=$HOME/android-utility/working-folder/mod-here-solo
+	clear
+	a=`ls -R $d | grep apktool.yml`
+	if [[ "$?" == "0" ]] ; then
+		echo -n "Android Utility found this project: "
+		ls $d | grep -v .apk | grep -vE '(.apk|original_META)'
+		echo
+		echo "Would you like to build it? [default=Yes]"
+		echo
+		echo "  1. Yes"
+		echo "  2. No"
+		echo
+		cd $d
+		read -s -n 1 ans
+		case $ans in 
+		1) do_it_s;;
+		2) enter;;
+		*) do_it_s;;
+		esac
+	else
+		clear
+		echo "Android Utility did not find a valid project"
+		enter
+	fi
+	enter
+}
+
+#decode Multi
+build_m ()
+{	COM="apktool d[ecode]"
+	d=$HOME/android-utility/working-folder/mod-here-multi
+	clear
+	a=`ls -R $d | grep apktool.yml`
+	if [[ "$?" == "0" ]] ; then
+		echo "Android Utility found these Projects: "
+		echo
+		ls $d/Projects | grep -vE '(.apk|original|decompressed|new)'
+		echo
+		cd $d
+		echo -n "Would you like to build all the projects? [Y/n] "
+		read -n 1 YES
+		case $YES in
+			y|Y) do_it_m;;
+			n|N) one_time;;
+			*) do_it_m;;
+		esac
+	else
+		echo
+		clear
+		echo "Android Utility did not find a valid project"
+		enter
+	fi
+	enter
+}
+
+#do it
+do_it_s ()
+{	for b in `ls $d | grep -vE '(.apk|original_META|new_app)'`
+	do
+	echo "Building $b "
+	echo 
+	apktool b -f $b
+	if [[ "$?" -ne "0" ]] ; then
+		echo "On `date +%b%e_%H%M%S`, $b was not built Properly" >> $HOME/android-utility/log/build_log
+		LOG=true
+	fi
+	if [[ "LOG" -eq "true" ]] ; then
+		echo
+		echo "Please check build_log for apk with errors"
+		echo
+	fi
+	done
+}
+
+#do it
+do_it_m ()
+{	echo
+	d=$HOME/android-utility/working-folder/mod-here-multi
+	# creating directories
+	if [[ -s new_apps_unsigned ]] ; then
+		echo &>/dev/null
+	else
+		mkdir new_apps_unsigned
+	fi
+	if [[ -s original_apps ]] ; then
+		echo &>/dev/null
+	else
+		mkdir original_apps
+	fi
+	
+	# actual building process
+	cd $d/Projects
+	for b in `ls | grep -vE '(.apk|original|decompressed|new_apps)'`
+	do
+		echo "Building $b "
+		echo 
+		apktool b -f $b
+		if [[ "$?" -ne "0" ]] ; then
+		echo "On `date +%b%e_%H%M%S`, $b was not built Properly" >> $HOME/android-utility/log/build_log
+		LOG=true
+		fi
+		echo
+	done
+
+	# moving apks
+	cd $d
+	for c in *.apk
+	do 
+		mv -v $c original_apps/
+	done
+	cd $d/Projects
+	for c in `ls | grep -vE '(.apk|original|decompressed|new_apps)'`
+	do	
+		cp -v $c/dist/*.apk ../new_apps_unsigned/
+	done
+		if [[ "LOG" -eq "true" ]] ; then
+		echo
+		echo "Please check build_log for apk with errors"
+		fi
+}
+
+one_time ()
+{		echo	
+		echo
+		echo -n "Please type the name of the project you would like to build: "
+		read ans
+		echo
+		b=`apktool b $ans`
+		if [[ "$?" == "0" ]] ; then
+			apktool b $ans
+		else
+			echo
+			echo "Please enter a valid project name"
+			enter
+		fi
+
+	# moving apks
+	cd $HOME/android-utility/working-folder/mod-here-multi
+	for c in *.apk
+	do 
+		mv -v $c original_apps/
+	done
+	for c in `ls $d/Projects | grep -vE '(.apk|original|decompressed|new_apps)'`
+	do	
+		cp -v $c/dist/*.apk new_apps_unsigned/
+	done
+}
+
+
+
+
+if [[ "$1" == "" ]] ; then
+	build
+elif [[ "$1" == "-m" ]] ; then
+	build_m
+fi
+
 # Contact: tommytomatoe@gmail.com
 
 # Setting Loop Variable

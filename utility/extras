@@ -2,7 +2,7 @@
 
 # Extras Script
 # Author: Tommy Nguyen [tommytomatoe]
-# Version: b-0.89
+# Version: b-1.0.0
 # Date: July 08, 2011
 # Contact: tommytomatoe@gmail.com
 
@@ -106,7 +106,7 @@ donate ()
 }
 
 clear
-VERS=b-0.89
+VERS=b-1.0.0
 echo "|--------------------------------|"
 echo "|             Extras             |"
 echo "|--------------------------------|"
