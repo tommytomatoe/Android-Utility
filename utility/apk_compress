@@ -2,8 +2,8 @@
 
 # Apk Compression Script
 # Author: Tommy Nguyen [tommytomatoe]
-# Version: b-0.89
-# Date: July 10, 2011
+# Version: 1.0.1
+# Date: July 14, 2011
 # Contact: tommytomatoe@gmail.com
 
 # Functions
@@ -49,9 +49,21 @@ cd $e
 $HOME/bin/7z x -y -o"${F/.apk}" $F &>/dev/null
 cd $e/${F/.apk}
 zip -"$COMP"r $d/decompressed_apps/$F *
+if [[ "$?" -ne "0" ]] ; then
+	echo "On `date +%b%e_%H%M%S`, $F was not decompressed Properly" >> $HOME/android-utility/log/compress_log
+	echo "Please check compress_log"
+	LOG=TRUE	
+else
+	echo "$F Decompressed"
+fi
 rm -r $d/original_apps/${F/.apk}
-echo "$F Decompressed"
 done
+if "$LOG" = "true" ; then
+	echo
+	echo "Please check compress_log for apk with errors"
+else
+	echo &>/dev/null
+fi
 }
 
 method ()
@@ -64,6 +76,7 @@ rm -r $e/${F/.apk}
 
 clear
 COMP=5
+LOG=FALSE
 d=$HOME/android-utility/working-folder/mod-here-multi
 e=$d/original_apps
 cd $d
@@ -86,6 +99,11 @@ else
 	mkdir $e
 fi
 echo "Please Place apks in $d/original_apps"
+	if [[ -s original_apps ]] ; then
+		echo &>/dev/null
+	else
+		mkdir original_apps
+	fi
 open $d
 enter
 if [[ -s $d/decompressed_apps ]] ; then

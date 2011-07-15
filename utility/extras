@@ -2,8 +2,8 @@
 
 # Extras Script
 # Author: Tommy Nguyen [tommytomatoe]
-# Version: b-1.0.0
-# Date: July 08, 2011
+# Version: b-1.0.1
+# Date: July 14, 2011
 # Contact: tommytomatoe@gmail.com
 
 ##FUNCTIONS
@@ -58,7 +58,7 @@ check_u ()
 	echo
 	load_dot
 	echo
-	echo "Your current Version is $VERS."
+	echo "Your currently have $VERS."
 	echo "This is an archaic way to do this. So please bear with me."
 	echo
 	echo "Just compare your version number with the latest in the github repo README."
@@ -105,8 +105,219 @@ donate ()
 	open http://bit.ly/r6qjP2
 }
 
+#credits
+credits ()
+{	clear
+	echo "   ### Thanks and Credits ###"
+	echo
+	sleep .5
+	echo "Brut.all - apktool.jar and sound advice"
+	sleep .5
+	echo "JesusFreke - baksmali.jar and smali.jar"
+	sleep .5
+	echo "Stericson/JF - testsign.jar"
+	sleep .5
+	echo "Google - AOSP"
+	sleep .5
+	echo "aamikam - sound advice"
+	sleep .5
+	echo "themikmik.com - Awesome sauce"
+	sleep .1
+	echo "xda developers - Roots" 
+	sleep .5
+	echo "JsChiSurf - sound advice"
+	sleep .5
+	echo "dsixda - sound advice"
+	sleep .5
+	echo "Amon_RA - sound advice"
+	sleep .5
+	echo "Igor Pavlov - 7zip"
+	sleep .5
+	echo "Ardfry Imaging, LLC. - pngout"
+	sleep .5
+	echo "Xclusive Rydah and Chingy - testing and ideas"
+	sleep .5
+	echo
+	echo -n T
+	sleep .1
+	echo -n o
+	sleep .1
+	echo -n m
+	sleep .1
+	echo -n m
+	sleep .1
+	echo -n y
+	sleep .1
+	echo -n " " 
+	sleep .1
+	echo -n N
+	sleep .1
+	echo -n g
+	sleep .1
+	echo -n u
+	sleep .1
+	echo -n y
+	sleep .1
+	echo -n e
+	sleep .1
+	echo -n n
+	sleep .1
+	echo -n " " 
+	sleep .1
+	echo -n -
+	sleep .1
+	echo -n " " 
+	sleep .1
+	for l in A n d r o i d ; do
+	echo -n $l
+	sleep .1
+	done
+	echo -n " "
+	sleep .2
+	for l in U t i l i t y ; do
+	echo -n $l
+	sleep .1
+	done
+	echo
+	echo
+	for l in T h a n k ; do
+	echo -n $l
+	sleep .1
+	done
+	sleep .1	
+	sleep .1
+	echo -n " " 
+	for l in y o u ; do
+	echo -n $l
+	sleep .1
+	done
+	echo -n  " "
+	sleep .1
+	for l in f o r ; do
+	echo -n $l
+	sleep .1
+	done
+	echo -n  " "
+	sleep .1
+	for l in u s i n g ; do
+	echo -n $l
+	sleep .1
+	done
+	echo -n  " "
+	sleep .1
+	for l in A n d r o i d ; do
+	echo -n $l
+	sleep .1
+	done
+	echo -n " "
+	sleep .2
+	for l in U t i l i t y ; do
+	echo -n $l
+	sleep .1
+	done
+	echo "."
+	echo
+	sleep .5
+	echo -n "The"
+	sleep .1
+	echo -n " " 
+	sleep .1
+	echo -n goal 
+	sleep .1
+	echo -n " "
+	sleep .1
+	echo -n of 
+	sleep .1
+	echo -n " "
+	sleep .1
+	echo -n this 
+	sleep .1
+	echo -n " "
+	sleep .1
+	echo -n project 
+	sleep .1
+	echo -n " "
+	sleep .1
+	echo -n is 
+	sleep .1
+	echo -n " "
+	sleep .1
+	echo -n to 
+	sleep .1
+	echo -n " "
+	sleep .1
+	echo -n assist
+	sleep .1
+	echo -n " "
+	sleep .1
+	echo -n you,
+	sleep .1
+	echo -n " "
+	sleep .1
+	echo -n $USER, 
+	sleep .1
+	echo -n " "
+	sleep .1
+	echo -n in 
+	sleep .1
+	echo -n " "
+	sleep .1
+	echo -n android 
+	sleep .1
+	echo -n " "
+	sleep .1
+	echo development.
+	echo
+	sleep .5
+	echo -n I 
+	sleep .1
+	sleep .1
+	echo -n " "
+	for l in h o p e ; do
+	echo -n $l
+	sleep .1
+	done
+	echo -n  
+	sleep .1
+	echo -n " "
+	sleep .1
+	for l in t h i s ; do
+	echo -n $l
+	sleep .1
+	done
+	echo -n  
+	sleep .1
+	echo -n " "
+	sleep .1
+	for l in g o a l ; do
+	echo -n $l
+	sleep .1
+	done
+	echo -n  
+	sleep .1
+	echo -n " "
+	sleep .1
+	for l in w a s ; do
+	echo -n $l
+	sleep .1
+	done
+	echo -n  
+	sleep .1
+	echo -n " "
+	sleep .1
+	for l in m e t ; do
+	echo -n $l
+	sleep .1
+	done
+	echo "."
+	echo
+	sleep .5
+	echo "ALERT: You will only see this message once."
+	enter
+}
+
 clear
-VERS=b-1.0.0
+VERS=`sed -n 1p $HOME/android-utility/README`
 echo "|--------------------------------|"
 echo "|             Extras             |"
 echo "|--------------------------------|"
@@ -119,6 +330,8 @@ echo "|  3.  Donate to Charity Water   |"
 echo "|--------------------------------|"
 echo "|  4.  Donate to project AU      |"
 echo "|--------------------------------|"
+echo "|  5.  Credits                   |"
+echo "|--------------------------------|"
 echo "|--------------------------------|"
 echo "   q. Go Back to Main Menu      "
 echo
@@ -129,6 +342,7 @@ case $num in
  2) clear; contact_t; extras;;
  3) clear; water; extras;;
  4) clear; donate; extras;;
+ 5) clear; credits; extras;;
  q) clear; exit;;
  *) echo; echo "Not a Valid Option" ; echo; enter; zipped_up;;
 esac

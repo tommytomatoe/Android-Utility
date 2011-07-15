@@ -1,0 +1,78 @@
+#! /bin/bash
+
+# Apk Optimization
+# Author: Tommy Nguyen [tommytomatoe]
+# Version: 1.0.1
+# Date: July 14, 2011
+# Contact: tommytomatoe@gmail.com
+
+
+
+##functions
+#enter
+enter()
+{	echo
+	echo "Please press [enter] to continue";
+	read -s -n 1 key
+	if [[ $key = "" ]]; then 
+  		echo
+  		clear
+	fi
+}
+
+
+#future features
+ff ()
+{	clear
+	echo "Feature coming in a future release. Stay tuned."
+	enter
+}
+
+
+
+#load
+load_dot ()
+{	for DOT in . . . . . . . ; do
+	echo -n "$DOT"
+	sleep .15
+	done
+	echo "."
+}
+
+
+
+
+apk_opt_script () 
+{
+clear
+echo "Welcome to AU APK Optimization Tools"
+echo
+echo "|-------------------------------|"
+echo "|-------------------------------|"
+echo "| 1.  Apk Decompression         |"
+echo "| 2.  Resources Decompression   |"
+echo "| 3.  PNG Optimization          |"
+echo "| 4.  zipalign                  |"
+echo "| 5.  Language Removal          |"
+echo "|                               |"
+echo "|-------------------------------|"
+echo "| q.  Go to main menu           |"
+echo "|-------------------------------|"
+echo "|-------------------------------|"
+printf %s " Select an Option: "
+read num
+case $num in
+ 1) apk_compress;;
+ 2) res_compress;;
+ 3) ff;;
+ 4) zipped_up;;
+ 5) ff;;
+ q) clear; exit;;
+ *) echo; echo "$num is not a valid option"; enter;
+esac
+}
+
+while :
+do
+	apk_opt_script
+done

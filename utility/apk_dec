@@ -145,7 +145,7 @@ decode_m ()
 			2) echo;;
 			*) extract_miM;;
 		esac
-		if [[ "LOG" -eq "true" ]] ; then
+		if "$LOG" = "true" ; then
 			echo
 			echo "Please check decode_log for apks with errors"
 		fi
@@ -182,7 +182,7 @@ do_it_s ()
 		2) echo;;
 		*) extract_mi;;
 	esac
-	if [[ "LOG" -eq "true" ]] ; then
+	if "$LOG" = "true" ; then
 		echo
 		echo "Please check decode_log for apks with errors"
 	fi

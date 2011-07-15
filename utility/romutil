@@ -1,0 +1,80 @@
+#! /bin/bash
+
+# Rom Utility
+# Author: Tommy Nguyen [tommytomatoe]
+# Version: 1.0.1
+# Date: July 14, 2011
+# Contact: tommytomatoe@gmail.com
+
+
+
+##functions
+#enter
+enter()
+{	echo
+	echo "Please press [enter] to continue";
+	read -s -n 1 key
+	if [[ $key = "" ]]; then 
+  		echo
+  		clear
+	fi
+}
+
+
+#future features
+ff ()
+{	clear
+	echo "Feature coming in a future release. Stay tuned."
+	enter
+}
+
+
+
+#load
+load_dot ()
+{	for DOT in . . . . . . . ; do
+	echo -n "$DOT"
+	sleep .15
+	done
+	echo "."
+}
+
+
+
+
+romutil_script () 
+{
+clear
+echo "At the present, ROM Utility is not available for use. Please utilize dsixda's Kitchen for all of it's rich features. Sorry for the inconvenience."
+echo
+echo "Welcome to AU ROM Utility"
+echo
+echo "|-------------------------------|"
+echo "|-------------------------------|"
+echo "| 1.  Deodex                    |"
+echo "| 2.  Dex Optimize [Odex]       |"
+echo "| 3.  Signature Categorize      |"
+echo "| 4.  Font Changer              |"
+echo "| 5.  Boot.img Tool             |"
+echo "| 6.  More Later                |"
+echo "|-------------------------------|"
+echo "| q.  Go to main menu           |"
+echo "|-------------------------------|"
+echo "|-------------------------------|"
+printf %s " Select an Option: "
+read num
+case $num in
+ 1) ff;;
+ 2) ff;;
+ 3) ff;;
+ 4) ff;;
+ 5) ff;;
+ q) clear; exit;;
+ *) echo; echo "$num is not a valid option"; enter;
+esac
+}
+
+while :
+do
+	romutil_script
+done

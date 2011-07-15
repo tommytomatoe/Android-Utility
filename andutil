@@ -1,9 +1,9 @@
 #! /bin/bash
 
 # Android Utility
-# Author: Tommy Nguyen [tommytoamtoe]
-# Version: 1.0.0
-# Date: July 10, 2011
+# Author: Tommy Nguyen [tommytomatoe]
+# Version: 1.0.1
+# Date: July 14, 2011
 # Contact: tommytomatoe@gmail.com
 
 #introduction
@@ -378,16 +378,16 @@ android ()
 {
 echo "   Android Utility by tommytomatoe"
 echo "      ----------------------     "
-echo "   Blue Waffle Magic Pack v 1.0.0"
+echo "   Blue Waffle Magic Pack v 1.0.1"
 echo "|-------------------------------||-------------------------------|"
 echo "|-------------------------------||-------------------------------|"
 echo "|         BASIC TOOLS           ||         ADVANCE TOOLS         |"
 echo "|-------------------------------||-------------------------------|"
 echo "| 1.  adb tools                 || 6.  apk Re-Engineering        |"
-echo "| 2.  keystore manager          || 7.  smali and baksmali        |"
-echo "| 3.  sign apk and update.zip   || 8.  PNG optimize              |"
+echo "| 2.  keystore manager          || 7.  apk Optimization          |"
+echo "| 3.  sign apk and update.zip   || 8.  smali and baksmali        |"
 echo "| 4.  zipalign                  || 9.  draw9patch utilities      |"
-echo "| 5.  CREDITS                   ||10.  apk compression method    |"
+echo "| 5.  change-log creator        ||10.  AU ROM Utility            |"
 echo "|                               ||                               |"
 echo "|----------------------------------------------------------------|"
 echo "|                          SETUP TOOLS                           |"
@@ -396,19 +396,19 @@ echo "| x.  Run Installation Guide    || e.  Extras                    |"
 echo "| i.  Install Android SDK       || q.  Quit                      |"
 echo "|-------------------------------||-------------------------------|"
 echo "|-------------------------------||-------------------------------|"
-printf %s "Select an Option: "
+printf %s " Select an Option: "
 read num
 case $num in
  1) clear; ttadb;;
  2) keys_sig;;
  3) zasign;;
  4) zipped_up;;
- 5) credits;;
+ 5) change_log;;
  6) apk_tool;;
- 7) ff;;
+ 7) apk_opt;;
  8) ff;;
  9) 9patch;;
-10) apk_compress;;
+10) romutil;;
  e|E) extras;;
  i|I) ff;;
  x) installau;;

@@ -1,0 +1,177 @@
+#! /bin/bash
+
+# Change Log Creator
+# Author: Tommy Nguyen [tommytomatoe]
+# Idea: Xclusive Rydah
+# Version: 1.0.1
+# Date: July 14, 2011
+# Contact: tommytomatoe@gmail.com
+
+
+
+##functions
+#enter
+enter()
+{	echo
+	echo "Please press [enter] to continue";
+	read -s -n 1 key
+	if [[ $key = "" ]]; then 
+  		echo
+  		clear
+	fi
+}
+
+
+#future features
+ff ()
+{	clear
+	echo "Feature coming in a future release. Stay tuned."
+	enter
+}
+
+
+
+#load
+load_dot ()
+{	for DOT in . . . . . . . ; do
+	echo -n "$DOT"
+	sleep .15
+	done
+	echo "."
+}
+
+
+new_log ()
+{
+echo -n "Please type a name for your log 
+(ie. changelog, Rosie.txt, change-log.txt): "
+read CHANGE
+echo
+echo "Your new change-log will be called: $CHANGE"
+touch $w/log/$CHANGE
+load_dot
+echo "$CHANGE has been created in android-utility/log"
+echo
+echo "Please type corresponding answers to prompts, followed by [enter] key"
+echo
+prompted
+}
+
+prompted ()
+{
+echo -n "Title for change-log [ie. Rosie Project Changes]: "
+read TITLE
+echo
+echo -n "Author of project [ie. John Smith]: "
+read AUTHOR
+echo
+echo -n "Version number for project [ie. v1.0.2]: "
+read NUM
+echo
+echo -n "Date [ie. July 14, 2011]: "
+read DAT
+echo
+echo "Is the following information correct? [Y/n]"
+echo
+echo "# $TITLE
+# Author: $AUTHOR
+# Version: $NUM
+# Date: $DAT"
+echo
+read -s -n 1 yes
+case $yes in
+	y|Y) do_log;;
+	n|N) prompted;;
+	*) do_log;;
+esac
+enter
+}
+
+do_log ()
+{
+echo "# $TITLE
+# Author: $AUTHOR
+# Version: $NUM
+# Date: $DAT" >> $w/log/$CHANGE
+echo "
+### Update. `date +"%B %d, %Y"`
+" >> $w/log/$CHANGE
+add_change1
+}
+
+add_change1 ()
+{
+echo "Please type a change to add to your change log:"
+echo
+echo -n "> "
+read ADD
+echo $ADD >> $w/log/$CHANGE
+add_change2
+}
+
+add_change2 ()
+{
+echo
+echo "1. Add more changes [default]"
+echo "2. Be done"
+read -s -n 1 Q
+case $Q in
+	1) echo; add_change1;;
+	2) open -e $w/log/$CHANGE; exit;;
+	*) echo; add_change1;;
+esac
+
+}
+
+edit_log ()
+{
+cd $x
+echo "Here are your current logs:"
+echo
+ls | grep -vE '(build_log|decode_log)'
+echo
+echo -n "Type name of log you would like to edit: "
+read CHANGE
+echo
+echo "Your current Log:"
+sleep .5
+echo
+cat $w/log/$CHANGE | more
+echo
+echo "
+### Update. `date +"%B %d, %Y"`
+" >> $w/log/$CHANGE
+add_change1
+enter
+}
+
+w=$HOME/android-utility/
+x=$w/log/$CHANGE
+clear
+echo "------------------------------"
+echo "This is the Change-Log Creator"
+echo "------------------------------------------------------------------------"
+echo "a tool for devs to create a simple Change-log for their current project."
+echo "------------------------------------------------------------------------"
+echo "Props go to Xclusive Rydah for the idea"
+echo "---------------------------------------"
+echo
+echo "|-------------------------------|"
+echo "|-------------------------------|"
+echo "|                               |"
+echo "| 1.  Create New Change-Log     |"
+echo "| 2.  Modify Existing Log       |"
+echo "|                               |"
+echo "|-------------------------------|"
+echo "| q.  Go to main menu           |"
+echo "|-------------------------------|"
+echo "|-------------------------------|"
+printf %s " Select an Option: "
+read num
+case $num in
+ 1) clear; new_log; change_log;;
+ 2) clear; edit_log;;
+ q) clear; exit;;
+ *) echo; echo "$num is not a valid option"; enter;
+esac
+
