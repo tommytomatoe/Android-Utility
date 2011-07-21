@@ -1,9 +1,9 @@
 #! /bin/bash
 
-# Apk Compression Script
+# Apk Compression Script Linux
 # Author: Tommy Nguyen [tommytomatoe]
-# Version: b-0.89
-# Date: July 10, 2011
+# Version: 1.0.1
+# Date: July 20, 2011
 # Contact: tommytomatoe@gmail.com
 
 # Functions
@@ -46,17 +46,29 @@ cd $e
 for F in *.apk ; do
 echo "Decompressing $F"
 cd $e
-$HOME/bin/7z x -y -o"${F/.apk}" $F &>/dev/null
+unzip -o $F -d "${F/.apk}" &>/dev/null
 cd $e/${F/.apk}
 zip -"$COMP"r $d/decompressed_apps/$F *
+if [[ "$?" -ne "0" ]] ; then
+	echo "On `date +%b%e_%H%M%S`, $F was not decompressed Properly" >> $HOME/android-utility/log/compress_log
+	echo "Please check compress_log"
+	LOG=TRUE	
+else
+	echo "$F Decompressed"
+fi
 rm -r $d/original_apps/${F/.apk}
-echo "$F Decompressed"
 done
+if [[ "$LOG" = "true" ]] ; then
+	echo
+	echo "Please check compress_log for apk with errors"
+else
+	echo &>/dev/null
+fi
 }
 
 method ()
 {
-$HOME/bin/7z x -y -o"${a/.apk}" $a &>/dev/null
+unzip -o $F -d "${F/.apk}" &>/dev/null
 cd $d/original_apps/"${a/.apk}"
 zip -"$COMP"r $d/decompressed_apps/$a *
 rm -r $e/${F/.apk}
@@ -64,6 +76,7 @@ rm -r $e/${F/.apk}
 
 clear
 COMP=5
+LOG=FALSE
 d=$HOME/android-utility/working-folder/mod-here-multi
 e=$d/original_apps
 cd $d
@@ -86,7 +99,12 @@ else
 	mkdir $e
 fi
 echo "Please Place apks in $d/original_apps"
-open $d
+	if [[ -s original_apps ]] ; then
+		echo &>/dev/null
+	else
+		mkdir original_apps
+	fi
+nautilus $d
 enter
 if [[ -s $d/decompressed_apps ]] ; then
 	rm -r $d/decompressed_apps &>/dev/null

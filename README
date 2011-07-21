@@ -1,16 +1,27 @@
+Version: 1.0.1
+
 ### Welcome to Android Utility
 # README
-# Author: Tommy Nguyen [tommytoamtoe]
-# Version: b-1.0.0
+# Author: Tommy Nguyen [tommytomatoe]
 # Date: July 14, 2011
 # Contact: tommytomatoe@gmail.com
 
-### Update. July 10, 2011
->Linux Version released Version b-1.0.0
+### Update. July 14, 2011 
+>version 1.0.1
+>updated sign script
+>updated main menu
+>added ROM Utility
+>added apk Optimization
+>added change-log creator
+>fixed error logging for decompiling and recompile process
+>added resources.arsc decompression
 
-### Update. July 10, 2011
->created branch [linux-au]
->preparing for launch
+### Update. July 13, 2011
+>version b-1.0.0
+>redid decompile and rebuild scripts
+>added error logging to decode and rebuild
+>added filter to adb script
+>changed main menu layout
 
 ### Update. July 08, 2011
 >more preparation

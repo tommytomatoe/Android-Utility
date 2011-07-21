@@ -2,8 +2,8 @@
 
 # Apk and Update.zip Script Linux
 # Author: Tommy Nguyen [tommytomatoe]
-# Version: b-0.89
-# Date: July 08, 2011
+# Version: 1.0.1
+# Date: July 14, 2011
 # Contact: tommytomatoe@gmail.com
 
 # Functions
@@ -93,8 +93,6 @@ test_sign ()
 test_sign_b ()
 {	cd $y
 	echo "Please place apk inside `basename $y`"
-	enter
-	echo "Please place apks in $y"
 	enter
 	echo "Android-Utility will sign these apks with test keys: "
 	echo

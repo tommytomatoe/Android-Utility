@@ -1,0 +1,88 @@
+#! /bin/bash
+
+# Resources Compression Script
+# Author: Tommy Nguyen [tommytomatoe]
+# Version: 1.0.1
+# Date: July 14, 2011
+# Contact: tommytomatoe@gmail.com
+
+# Functions
+
+#enter
+enter()
+{	echo
+	echo -n "Please press [enter] when ready ";
+	read -s -n 1 key
+	if [[ $key = "" ]]; then 
+  		echo &>/dev/null
+	fi
+}
+
+#load
+load_dot ()
+{	for r in . . . . . .
+	do
+	echo -n $r
+	sleep .1
+	done
+	echo "."
+}
+
+#quit
+quit()
+{	echo
+	echo "Thank you for choosing Android Utility"
+	echo "brought to you by tommytomatoe :-)"
+	echo
+	echo "Please Don't Drink and Drive"
+	sleep .25
+	clear
+	exit
+}
+
+res_it ()
+{
+cd $e	
+LOG=FALSE
+for F in *.apk ; do
+echo "Decompressing resources.arsc in $F"
+cd $e
+unzip -o $F resources.arsc &>/dev/null
+zip -0m $F resources.arsc
+if [[ "$?" -ne "0" ]] ; then
+	echo "On `date +%b%e_%H%M%S`, $F was not decompressed Properly" >> $HOME/android-utility/log/res_log
+	echo "Please check res_log"
+	LOG=TRUE	
+else
+	echo "$F Decompressed"
+fi
+done
+if [[ "$LOG" = "true" ]] ; then
+	echo
+	echo "Please check res_log for apk with errors"
+fi
+}
+
+clear
+d=$HOME/android-utility/working-folder/mod-here-multi
+e=$d/original_apps
+cd $d
+echo "Welcome to Resources.arsc Compression Manager"
+echo
+echo "Please Place apks in $d/original_apps"
+	if [[ -s original_apps ]] ; then
+		echo &>/dev/null
+	else
+		mkdir original_apps
+	fi
+nautilus $d
+enter
+echo
+echo "Preparing to decompress resources.arsc"
+echo
+res_it
+echo
+echo "Apks in original_apps have their resources.arsc decompressed for less stress on RAM"
+enter
+quit
+

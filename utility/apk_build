@@ -150,7 +150,7 @@ do_it_s ()
 		echo "On `date +%b%e_%H%M%S`, $b was not built Properly" >> $HOME/android-utility/log/build_log
 		LOG=true
 	fi
-	if [[ "LOG" -eq "true" ]] ; then
+	if [[ "$LOG" = "true" ]] ; then
 		echo
 		echo "Please check build_log for apk with errors"
 		echo
@@ -199,7 +199,7 @@ do_it_m ()
 	do	
 		cp -v $c/dist/*.apk ../new_apps_unsigned/
 	done
-		if [[ "LOG" -eq "true" ]] ; then
+		if [[ "$LOG" = "true" ]] ; then
 		echo
 		echo "Please check build_log for apk with errors"
 		fi

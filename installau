@@ -2,7 +2,7 @@
 
 # Installation Script Linux
 # Author: Tommy Nguyen [tommytoamtoe]
-# Version: 1.0.0
+# Version: 1.0.1
 # Date: July 14, 2011
 # Contact: tommytomatoe@gmail.com
 
@@ -301,7 +301,8 @@ ins_addon ()
 	selection
 	enterKey
 	clear
-	echo "Option coming in a future release. Stay tuned."
+	cd $HOME/android-utility/update
+	update_script
 	enter
 	}
 	

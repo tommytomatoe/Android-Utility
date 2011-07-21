@@ -1,9 +1,9 @@
 #! /bin/bash
 
-# Draw9Patch Script
+# Draw9Patch Script Linux
 # Author: Tommy Nguyen [tommytomatoe]
-# Version: b-0.89
-# Date: July 08, 2011
+# Version: 1.0.1
+# Date: July 20, 2011
 # Contact: tommytomatoe@gmail.com
 
 ##FUNCTIONS
@@ -73,7 +73,7 @@ compile_it ()
       package=\"com.blank\"
 />" > AndroidManifest.xml
 	aapt p -F out.apk -M AndroidManifest.xml -S res -f
-	$HOME/bin/7z e -r -o$q -y $n/out.apk *.9.png &>/dev/null
+	unzip -jo $n/out.apk *.9.png -d $q/ &>/dev/null
 	rm AndroidManifest.xml
 	rm -r res
 	rm out.apk
