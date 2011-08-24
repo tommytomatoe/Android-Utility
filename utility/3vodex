@@ -1,0 +1,177 @@
+#!/bin/bash
+# tommytomatoe customs
+# Please use with care and read all instructions. 
+
+#enter
+enter()
+{	echo
+	echo "Please press [enter] to continue";
+	read -s -n 1 key
+	if [[ $key = "" ]]; then 
+  		echo
+  		clear
+	fi
+}
+
+enter2()
+{	echo
+	echo "Please press [enter] to continue";
+	read -s -n 1 key
+	if [[ $key = "" ]]; then 
+  		echo
+	fi
+}
+
+enter3()
+{	echo
+	echo "Please press [enter] to continue";
+	read -s -n 1 key
+	if [[ $key = "" ]]; then 
+  		exit
+	fi
+}
+
+7z_inst ()
+{
+sudo apt-get install p7zip
+}
+
+check_sys ()
+{
+for A in "aapt" "adb" ; do
+	which $A
+	if ! [[ $? = 0 ]] ; then
+		echo "$A is in not in your PATH"
+		echo "Please be SURE to read Entire OP"
+		echo "Thank you. Try Again."
+		echo "For help, consult themikmik.com"
+		enter3
+	fi
+done
+}
+
+run_first ()
+{
+clear
+echo "Preparing to initialize Odex Process"
+echo 
+echo "Running adb commands"
+adb devices
+adb remount
+if ! [[ $? = 0 ]] ; then
+	echo "ERROR ERROR ERROR"
+	echo "error: device not found"
+	exit 1
+fi
+echo "Pushing necessary files to Device"
+adb push $HOME/android-utility/utility/odex/odex /system/bin/odex
+adb push $HOME/android-utility/utility/odex/dexopt-wrapper /system/bin/dexopt-wrapper
+echo "Fixing permissions with chmod"
+adb shell /system/bin/chmod 755 /system/bin/odex
+adb shell /system/bin/chmod 755 /system/bin/dexopt-wrapper
+enter
+}
+
+BEGIN ()
+{
+clear
+echo 
+echo "Please follow these instructions carefully."
+echo "Due to the limitations with adb shell,"
+echo "we are unable to start a script via \"adb shell \$script\""
+echo
+echo "If you see the "\$" symbol, please attain root and try again."
+echo
+echo "Once you see the "#" symbol, type in this line:"
+echo
+echo "     /system/bin/odex"
+enter2
+adb shell
+if ! [[ $? = 0 ]] ; then
+	echo "ERROR ERROR ERROR"
+	echo "error: device not found"
+	exit 1
+fi
+}
+
+pull_files ()
+{
+clear
+cd $HOME/android-utility/working-folder
+if ! [[ -s odex ]] ; then
+	mkdir odex
+	mkdir odex/framework
+	mkdir odex/app
+	mkdir odex/data-app
+fi
+echo "Would you like to pull from "sdcard" or from "/system/\?""
+echo "ps. if using SDCARD please be sure to have already"
+echo "copied files to SDCARD in step b"
+echo
+echo "1. SDCARD"
+echo "2. SYSTEM"
+echo
+echo -n "Choice "
+read Cho
+case $Cho in
+1) adb pull sdcard/framework/ $HOME/android-utility/working-folder/odex/framework ; adb pull sdcard/app/ $HOME/android-utility/working-folder/odex/app ; adb pull sdcard/data-app/ $HOME/android-utility/working-folder/odex/data-app ; echo "Your files will be in working-folder/odex";;
+2) adb pull system/framework/ $HOME/android-utility/working-folder/odex/framework ; adb pull system/app/ $HOME/android-utility/working-folder/odex/app ; adb pull data/app/ $HOME/android-utility/working-folder/odex/data-app ; echo "Your files will be in working-folder/odex";;
+*) echo "$C is not an option" ;;
+esac
+}
+
+main ()
+{	clear
+	check_sys
+	clear
+	echo
+	echo "               ***"	
+	echo
+	echo "Welcome to the 3VO Odex Utility"
+	echo
+	echo "Instructions [Please Read all before starting]:"
+	echo
+	echo "1.  Press [t] key to RUN FIRST"
+	echo "2.  Press [a] key to begin"
+	echo "3.  Press [b] key to pull files"
+	echo "4a. Press [c] key to remove classes.dex with 7z"
+	echo "4b. Press [d] key to remove classes.dex with aapt -aamikam"
+	enter
+	echo "   Please Choose Option"
+	echo
+	echo "   t. RUN FIRST - Prepare Device for Odex"
+	echo
+	echo "   a. begin the Odex Process"
+	echo "   b. pull files from device"
+	echo "   c. dexrm (Auto Dex Removal with 7z)"
+	echo "   d. dexrm2 (Auto Dex Removal with aapt)"
+	echo "   q. quit program"
+	echo ""
+	echo "   brought to you by"
+	echo "   tommytomatoe"
+	echo ""
+	echo "   enjoy the possibilities..." 
+	echo
+	echo "               ***"
+	echo
+		printf %s "Choose an Option: "
+	read num
+	case $num in
+	t|T) run_first;;
+	a|A) BEGIN;;
+	b|B) pull_files; enter;;
+	c|C) dexrm;;
+	d|D) dexrm2;;
+	q|Q) echo; echo "Goodbye. Thank you for using, $USER."; echo; exit;
+	esac
+}
+
+while :
+do
+main
+done
+
+
+       	
+
+  

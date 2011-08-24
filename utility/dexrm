@@ -1,0 +1,219 @@
+#!/bin/bash
+# tommytomatoe customs
+# Please use with care and read all instructions. 
+
+#enter
+enter()
+{	echo
+	echo "Please press [enter] to continue";
+	read -s -n 1 key
+	if [[ $key = "" ]]; then 
+  		echo
+  		clear
+	fi
+}
+
+enter2()
+{	echo
+	echo "Please press [enter] to continue";
+	read -s -n 1 key
+	if [[ $key = "" ]]; then 
+  		echo
+	fi
+}
+
+remove_dex_framework()
+{ echo
+  echo "Making Directories"
+  rm -r $HOME/Dex/0-Original-FW
+  rm -r $HOME/Dex/0-Minus-Dex-FW
+  rm -r $HOME/Dex/0-FW-odex
+  mkdir $HOME/Dex/0-Minus-Dex-FW
+  mkdir $HOME/Dex/0-Original-FW
+  mkdir $HOME/Dex/0-FW-odex
+echo ""	
+echo "Setting Variables"
+a=$HOME/Dex/framework/
+b=$HOME/Dex/0-Original-FW/
+c=$HOME/Dex/0-Minus-Dex-FW/  
+d=$HOME/Dex/0-FW-odex/
+echo ""	
+cd $a
+for j in *jar
+	do 
+		cp $j $HOME/Dex/0-Original-FW/$j
+	done
+for o in *odex
+	do
+		cp $o $HOME/Dex/0-FW-odex/$o	
+	done	
+cd $HOME
+cd $b
+for j in *jar
+	do 
+		echo "Renaming $j -> ${j/.jar/}.zip"
+		cp $j $HOME/Dex/0-Minus-Dex-FW/${j/.jar/}.zip
+	done
+cd $HOME
+cd $c
+for z in *.zip
+	do 
+		echo "Deleting dex"
+		7z d $z classes.dex
+	done
+for z in *zip
+	do
+		echo "Renaming $z to ${z/.zip/}.jar"
+		mv $z $HOME/Dex/0-Minus-Dex-FW/${z/.zip/}.jar
+	done
+enter
+}
+
+remove_dex_app()
+{ echo
+  echo "Making Directories"
+  rm -r $HOME/Dex/0-Original-APP
+  rm -r $HOME/Dex/0-Minus-Dex-APP
+  rm -r $HOME/Dex/0-App-odex
+  mkdir $HOME/Dex/0-Minus-Dex-APP
+  mkdir $HOME/Dex/0-Original-APP
+  mkdir $HOME/Dex/0-App-odex
+echo ""	
+echo "Setting Variables"
+a=$HOME/Dex/app/
+b=$HOME/Dex/0-Original-APP/
+c=$HOME/Dex/0-Minus-Dex-APP/  
+d=$HOME/Dex/0-App-odex/
+echo ""	
+cd $a
+for a in *apk
+	do 
+		cp $a $HOME/Dex/0-Original-APP/$a
+	done
+for o in *odex
+	do
+		cp $o $HOME/Dex/0-App-odex/$o
+	done
+cd $HOME
+cd $b
+for a in *apk
+	do 
+		echo "Renaming $a -> ${a/.apk/}.zip"
+		cp $a $HOME/Dex/0-Minus-Dex-APP/${a/.apk/}.zip
+	done
+cd $HOME
+cd $c
+for z in *.zip
+	do 
+		echo "Deleting dex"
+		7z d $z classes.dex
+	done
+for z in *zip
+	do
+		echo "Renaming $z to ${z/.zip/}.apk"
+		mv $z $HOME/Dex/0-Minus-Dex-APP/${z/.zip/}.apk
+	done
+enter
+}
+
+makedir ()
+{	clear
+	w=$HOME/Dex
+	if [[ -s $w ]] ; then
+		echo
+		echo "Dex Folder exists, would you like to start over? [Y/n] [default=N]"
+		read -s -n 1 ans
+		case $ans in 
+		y|Y) echo; makedirA; echo "Dex Folder replaced "; enter;;
+		*) echo; echo "Dex Folder remained unchanged"; enter;;
+		esac
+	else
+		makedirA
+	fi
+	z=$HOME/bin
+	if [[ -s $z ]] ; then
+		echo
+		echo "$z exists, would you like to start over? [Y/n] [default=N]"
+		read -s -n 1 ans
+		case $ans in 
+		y|Y) echo; mkdir $z; echo "$z replaced "; enter;;
+		*) echo; echo "$z remained unchanged"; enter;;
+		esac
+	else
+		mkdir $z
+	fi
+}	
+
+makedirA ()
+{	y=$HOME/Dex/
+	echo 
+	echo "Creating New Dex Directory"
+	enter
+	mkdir $y
+	mkdir $y/app
+	mkdir $y/framework
+	echo 
+	clear
+}
+
+7z_inst ()
+{
+sudo apt-get install p7zip
+}
+	
+
+tt_dex_rm ()
+{	clear
+	echo
+	echo "               ***"	
+	echo
+	echo "Welcome to the Auto Dex-Removal Utility"
+	echo "Version 0.0.1"
+	echo
+	echo "Instructions [Please Read all before starting]:"
+	echo
+	echo "1. Press [t] key to RUN FIRST"
+	echo "2. Place apps and framework files in"
+	echo "   in $HOME/Dex/"
+	echo "3. Choose Options a, b, or c"
+	enter	
+	echo "1. Press [t] key to RUN FIRST"
+	echo "2. Place apps and framework files in"
+	echo "   in $HOME/Dex/"
+	echo "3. Choose Options a, b, or c"
+	echo
+	echo "   Please Choose Option"
+	echo
+	echo "   t. RUN FIRST"
+	echo "   a. dexrm A for framework"
+	echo "   b. dexrm F for app"
+	echo "   c. dexrm E for all in one"
+	echo "   q. quit program"
+	echo ""
+	echo "   brought to you by"
+	echo "   tommytomatoe"
+	echo ""
+	echo "   enjoy the possibilities..." 
+	echo
+	echo "               ***"
+	echo
+		printf %s "Choose an Option: "
+	read num
+	case $num in
+	t|T) makedir; 7z_inst;;
+	a|A) remove_dex_framework;;
+	b|B) remove_dex_app;;
+	c|C) remove_dex_framework; remove_dex_app;;
+	q|Q) echo; echo "Goodbye. Thank you for using, $USER."; echo; exit;
+	esac
+}
+
+while :
+do
+tt_dex_rm
+done
+
+
+       	
+
+  

@@ -1,9 +1,9 @@
 #! /bin/bash
 
 # Installation Script Linux
-# Author: Tommy Nguyen [tommytoamtoe]
-# Version: 1.0.1
-# Date: July 14, 2011
+# Author: Tommy Nguyen [tommytomatoe]
+# Version: 1.0.2
+# Date: August 24, 2011
 # Contact: tommytomatoe@gmail.com
 
 # Setting Loop Variable
@@ -173,17 +173,18 @@ selection ()
 
 clean_in ()
 {	c=$HOME/android-utility/resources/clean
+	p=$HOME/android-utility/resources/png
 	b=$HOME/bin
 	u=/usr/local/bin
 	echo "Adding resources to $u and /usr/bin"
 	sudo cp -v $c/aapt-9 $u/aapt
-	sudo cp -v $c/adb $u/adb
 	sudo cp -v $c/apktool $u/
 	sudo cp -v $c/apktool-1.4.1.jar $u/apktool.jar
 	echo "Adding resources to $b"
 	load_dot
 	cp -v $c/7z $b/
 	cp -v $c/7z.so $b/	
+	cp -v $c/adb $b/adb
 	cp -v $c/baksmali $b/
 	cp -v $c/baksmali.jar $b/
 	cp -v $c/decode9patchPng.jar $b/
@@ -195,6 +196,10 @@ clean_in ()
 	cp -v $c/smali.jar $b/
 	cp -v $c/testsign.jar $b/
 	cp -v $c/zipalign $b/
+	cp -v $p/advpng $b/
+	cp -v $p/optipng $b/
+	cp -v $p/pngcrush $b/
+	cp -v $p/pngout $b
 }
 
 
@@ -218,6 +223,8 @@ first_time ()
 	load_dot
 	sudo chmod 755 /usr/local/bin/*
 	sudo chmod 755 $HOME/bin/*
+	sudo chmod 755 $HOME/android-utility/utility/*
+	sudo chmod 755 $HOME/android-utility/utility/dex/*		
 	source /etc/profile.d/au.sh
 	echo "All Done. Now, enjoy android-utility"
 	enter
@@ -239,6 +246,9 @@ ins_apktool ()
 	echo "  1.  apktool 1.3.1"
 	echo "  2.  apktool 1.3.2"
 	echo "  3.  apktool 1.4.1"
+	echo "  4.  apktool 1.4.2 - compiled from source [8.22.2011]"
+	echo
+	echo "  5.  apktool 1.3.2 experimental - fixed "-v4" and xml"
 	echo
 	echo "  x.  Keep current version"
 	echo
@@ -246,8 +256,10 @@ ins_apktool ()
 	read sel
 	case $sel in
 	 1) echo; sudo cp -v $c/apktool1.3.1/apktool.jar $u/; atool_v;;
-	 2) echo; sudo cp -v -v $c/apktool1.3.2/apktool.jar $u/; atool_v;;
-	 3) echo; sudo cp -v -v $c/apktool1.4.1/apktool.jar $u/; atool_v;;
+	 2) echo; sudo cp -v $c/apktool1.3.2/apktool.jar $u/; atool_v;;
+	 3) echo; sudo cp -v $c/apktool1.4.1/apktool.jar $u/; atool_v;;
+	 4) echo; sudp cp -v $c/apktool1.4.2/apktool.jar $u/; atool_v;;
+	 5) echo; sudo cp -v $c/apktool1.3.2mod/apktool.jar $u/; atool_v;;
 	 x) echo; echo "Current version has not been changed";;
 	 *) echo; echo "$sel is not a valid option"; echo;;	
 	esac
@@ -311,7 +323,7 @@ inst ()
 	clear
 echo
 echo "         -----------------------      "
-echo "|        Android Utility v 1.0.0        |"
+echo "|        Android Utility v 1.0.2        |"
 echo "|      Installation Guide - Linux       |"
 echo "|---------------------------------------|"
 echo "|---------------------------------------|"

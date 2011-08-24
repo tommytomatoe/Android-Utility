@@ -2,8 +2,8 @@
 
 # Apktool Script Linux
 # Author: Tommy Nguyen [tommytomatoe]
-# Version: b-0.89
-# Date: July 08, 2011
+# Version: 1.0.2
+# Date: August 22, 2011
 # Contact: tommytomatoe@gmail.com
 
 # Setting Loop Variable
@@ -114,6 +114,22 @@ a_if ()
 	else
 		echo ..
 	fi
+	c=twframework-res.apk
+	if [[ -f $c ]] ; then
+		echo -n "Installing $c."
+		load_dot
+		apktool if $c
+	else
+		echo ..
+	fi
+	d=SemcGenericUxpRes.apk
+	if [[ -f $d ]] ; then
+		echo -n "Installing $d."
+		load_dot
+		apktool if $d
+	else
+		echo ..
+	fi
 	enter
 }
 
@@ -134,6 +150,9 @@ ins_apktool ()
 	echo "  1.  apktool 1.3.1"
 	echo "  2.  apktool 1.3.2"
 	echo "  3.  apktool 1.4.1"
+	echo "  4.  apktool 1.4.2 - compiled from source [8.22.2011]"
+	echo
+	echo "  5.  apktool 1.3.2 experimental - fixed "-v4" and xml"
 	echo
 	echo "  x.  Keep current version"
 	echo
@@ -141,8 +160,10 @@ ins_apktool ()
 	read sel
 	case $sel in
 	 1) echo; sudo cp -v $c/apktool1.3.1/apktool.jar $u/; atool_v;;
-	 2) echo; sudo cp -v -v $c/apktool1.3.2/apktool.jar $u/; atool_v;;
-	 3) echo; sudo cp -v -v $c/apktool1.4.1/apktool.jar $u/; atool_v;;
+	 2) echo; sudo cp -v $c/apktool1.3.2/apktool.jar $u/; atool_v;;
+	 3) echo; sudo cp -v $c/apktool1.4.1/apktool.jar $u/; atool_v;;
+	 4) echo; sudp cp -v $c/apktool1.4.2/apktool.jar $u/; atool_v;;
+	 5) echo; sudo cp -v $c/apktool1.3.2mod/apktool.jar $u/; atool_v;;
 	 x) echo; echo "Current version has not been changed";;
 	 *) echo; echo "$sel is not a valid option"; echo;;	
 	esac

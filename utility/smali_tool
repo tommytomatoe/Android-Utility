@@ -1,0 +1,283 @@
+#! /bin/bash
+
+# Smali Script
+# Author: Tommy Nguyen [tommytomatoe]
+# Version: 1.0.2
+# Date: August 22, 2011
+# Contact: tommytomatoe@gmail.com
+
+# Setting Loop Variable
+clear
+APPLE=$1
+
+# Functions
+
+#enterKey
+enterKey()
+{	echo "### Press [enter] to continue, any other key to quit";
+	read -s -n 1 key
+	if [[ $key = "" ]]; then 
+  		echo 
+	else
+  		echo
+  		echo "Installation aborted";
+		enter
+		apktool_s
+	fi
+}
+
+#enter
+enter()
+{	echo
+	echo "Please press [enter] to continue";
+	read -s -n 1 key
+	if [[ $key = "" ]]; then 
+  		echo
+		clear
+	fi
+}
+
+#enter
+enterA()
+{	echo
+	echo "Please press [enter] when ready";
+	read -s -n 1 key
+	if [[ $key = "" ]]; then 
+  		echo
+	fi
+}
+
+#load
+load_dot ()
+{	for DOT in . . . . . . . ; do
+	echo -n "$DOT"
+	sleep .15
+	done
+	echo "."
+}
+
+jar_do ()
+{	clear
+	echo "Please place .jar files in working-folder/mod-here-multi/"
+	enter
+	cd $w
+	for j in *.jar ; do
+		echo "AU is baksmaling $j -> $w/${j/.jar}-out"
+		java -jar $HOME/bin/baksmali.jar $j -o $w/${j/.jar}-out
+		echo
+	done
+	enter
+}
+
+jar_re ()
+{	clear
+	cd $w
+		if ! [[ -s 0compiled-classes ]] ; then
+			mkdir 0compiled-classes
+		fi
+		if ! [[ -s 0original-jars ]] ; then
+			mkdir 0original-jars
+		fi
+	for j in *.jar ; do
+		echo "AU is smaling $j"
+		java -Xmx512M -jar $HOME/bin/smali.jar ${j/.jar}-out -o classes.dex 
+		cp $j 0original-jars/
+		echo "adding classes.dex to $j"
+		aapt r -v $j classes.dex
+		aapt add -v $j classes.dex
+		mv -v classes.dex 0compiled-classes/${j/.jar}-classes.dex
+		echo
+	done
+		echo
+		echo "Updated .jars have replaced original files"
+		echo "Original .jars can be found in ../0original-jars"
+	enter
+}
+
+dex_do ()
+{	clear
+	echo "Please place .apk or classes.dex files in working-folder/mod-here-multi/"
+	enterA
+	cd $w
+	if ls *.apk >&/dev/null ; then
+		echo "AU found these apks:"
+		echo
+		ls -1 *.apk
+		enterA
+		for a in *.apk ; do
+			echo "AU is baksmaling $a -> $w/${a/.apk}-out"
+			java -jar $HOME/bin/baksmali.jar $a -o $w/${a/.apk}-out
+			echo
+		done
+	else
+		echo "There are no .apks."
+	fi
+	clear
+	if ls *.dex >&/dev/null ; then
+		echo "AU found:"
+		echo
+		ls -1 *.dex
+		enterA
+		for a in *.dex ; do
+			echo "AU is baksmaling $a -> $w/${a/.apk}-out"
+			java -jar $HOME/bin/baksmali.jar $a -o $w/${a/.dex}-out
+			echo
+		done
+	else
+		echo "There are no classes.dex files."
+	fi
+	enter
+}
+
+dex_re ()
+{	clear
+	cd $w
+		if ! [[ -s 0compiled-classes ]] ; then
+			mkdir 0compiled-classes
+		fi
+		if ! [[ -s 0original-apks ]] ; then
+			mkdir 0original-apks
+		fi
+	if ls *.apk >&/dev/null ; then
+		for a in *.apk ; do
+			echo "AU is smaling $a"
+			java -Xmx512M -jar $HOME/bin/smali.jar ${a/.apk}-out -o classes.dex 
+			cp $a 0original-apks/
+			echo "adding classes.dex to $a"
+			aapt r -v $a classes.dex
+			aapt add -v $a classes.dex
+			mv -v classes.dex 0compiled-classes/${a/.apk}-classes.dex
+			echo
+		done
+		echo
+		echo "Updated .apks have replaced original files"
+		echo "Original .apks can be found in ../0original-apks"
+	else
+		echo "Nothing to do here"
+	fi
+	enter
+}
+
+dex2jar ()
+{	clear
+	echo "Please place .apk or classes.dex files in working-folder/mod-here-multi/"
+	enterA
+	cd $w
+	d=$HOME/android-utility/utility/dex
+	if ! [[ -s 0dex2jar ]] ; then
+			mkdir 0dex2jar
+		fi
+	if ls *.apk >&/dev/null ; then
+		echo "AU found these apks:"
+		echo
+		ls -1 *.apk
+		enterA
+		for a in *.apk ; do
+			echo "AU is reverse coding $a -> $w/0dex2jar/${a/.apk}_dex2jar.jar"
+			$d/dex2jar.sh $a 
+			mv ${a/.apk}_dex2jar.jar 0dex2jar/${a/.apk}_dex2jar.jar
+			echo
+		done
+	else
+		echo "There are no .apks."
+	fi
+	clear
+	if ls *.dex >&/dev/null ; then
+		echo "AU found:"
+		echo
+		ls -1 *.dex
+		enterA
+		for a in *.dex ; do
+			echo "AU is reverse coding $a -> $w/0dex2jar/${a/.dex}_dex2jar.jar"
+			$d/dex2jar.sh $a 
+			mv ${a/.dex}_dex2jar.jar 0dex2jar/${a/.dex}_dex2jar.jar
+			echo
+		done
+	else
+		echo "There are no classes.dex files."
+	fi
+	enter
+	echo "These are available for viewing and modifying:"
+	cd $w/0dex2jar
+	ls -l *jar.jar
+	enter
+}
+
+jd_dex ()
+{	clear
+	echo "These are available for viewing and modifying:"
+	echo
+	cd $w/0dex2jar
+	ls -1 *jar.jar
+	echo
+	echo "[ Examples: "
+	echo "     Type 'Rosie' for 'Rosie_dex2jar.jar' "
+	echo "     Type 'Angrybirds_1.4.2' for 'Angrybirds_1.4.2_dex2jar.jar' ]"
+	echo
+	echo -n "User Input: "
+	read JD
+	$a/utility/dex/jd-gui "$JD"_dex2jar.jar
+	if ! [[ $? = 0 ]] ; then
+		echo
+		echo "Please try again. Follow the Example Syntax."
+		enter
+	fi
+}
+
+#quit
+quit()
+
+{	echo	
+	echo "Thank you for choosing Android Utility"
+	echo "brought to you by tommytomatoe :-)"
+	echo
+	echo "Please Don't Drink and Drive"
+	echo
+	exit
+}
+
+
+#dex 
+smali_s ()
+{	w=$HOME/android-utility/working-folder/mod-here-multi
+	a=$HOME/android-utility
+	echo "Welcome to AU Dalvik Dex Code Manager"
+	echo
+	echo "Inventory:"
+	echo "|### baksmali.jar 1.2.6 "
+	echo "|### smali.jar 1.2.6"
+	echo "|### dex2jar 0.0.9.0 compiled on 8.22.2011 "
+	echo
+	echo
+	echo "|  Dex Utility                          |"
+	echo "|---------------------------------------|"
+	echo "|  1.  Decompile .jar file              |"
+	echo "|  2.  Recompile .jar file              |"
+	echo "|                                       |"
+	echo "|  3.  Decompile classes.dex/.apk file  | " 
+	echo "|  4.  Recompile classes.dex/.apk file  |"
+	echo "|                                       |"
+	echo "|  5.  Translate .dex to Java .class    | "
+	echo "|  6.  View or Modify Java class code   | "
+	echo "|---------------------------------------|"
+	echo "   q. Quit to Main Menu"
+	echo
+	echo
+	printf %s "  Please Select Feature: "
+	read num
+	case $num in
+	1) jar_do;;
+	2) jar_re;;
+	3) dex_do;;
+	4) dex_re;;
+	5) dex2jar;;
+	6) jd_dex;;
+ 	q) clear; exit;;
+ 	*) echo; echo "$num is not a valid option"; enter;
+	esac
+}
+
+while [ "$APPLE" = "" ]
+do
+	smali_s
+done

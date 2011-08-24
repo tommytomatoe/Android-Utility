@@ -1,8 +1,12 @@
 adb - Android SDK 12
 aapt - Android SDK 8, 9, 10, 11
 zipalign - Android SDK 12
-apktool.jar - 1.3.2, 1.3.2, 1.4.1
+apktool.jar - 1.3.2, 1.3.2, 1.4.1, 1.4.2
 baksmali.jar - 1.2.6
 smali.jar - 1.2.6
 7-zip - 9.13 [beta]
 GNUsed - version 4.2.1
+pngout - version 07.22.2011
+pngcrush - version 1.7.16
+optipng - version 0.6.5
+advpng - version 1.15

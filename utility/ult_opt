@@ -1,0 +1,71 @@
+#! /bin/bash
+
+# Ultimate Optimization
+# Author: Tommy Nguyen [tommytomatoe]
+# Version: 1.0.2
+# Date: August 23, 2011
+# Contact: tommytomatoe@gmail.com
+
+
+
+##functions
+#enter
+enter()
+{	echo
+	echo "Please press [enter] to continue";
+	read -s -n 1 key
+	if [[ $key = "" ]]; then 
+  		echo
+  		clear
+	fi
+}
+
+
+#future features
+ff ()
+{	clear
+	echo "Feature coming in a future release. Stay tuned."
+	enter
+}
+
+
+
+#load
+load_dot ()
+{	for DOT in . . . . . . . ; do
+	echo -n "$DOT"
+	sleep .15
+	done
+	echo "."
+}
+
+d=$HOME/android-utility/working-folder/mod-here-multi
+clear
+echo "You've chosen to Ultimately Optimize your apk[s]"
+echo
+echo "This process will do the following optimizations:"
+echo 
+echo "     1. Decompress apk"
+echo "     2. Decompress resources.arsc"
+echo "     3. Use pngout to optimize pngs"
+echo "     4. Zipalign"
+echo "     5. Language Removal [Coming in a future release]"
+enter
+echo -n "Would you like to decompress apks? [Y/n] "
+read ANS
+case $ANS in 
+	y|Y) apk_compress;;
+	n|N) echo "AU will not decompress apks";;
+	*) apk_compress;;	
+esac	
+echo
+rm -v -rf $d/original_apps/*
+mv -v $d/decompressed_apps/* $d/original_apps/
+echo
+echo -n "Would you like to decompress resources.arsc? [Y/n] "
+read ANS
+case $ANS in 
+	y|Y) res_compress;;
+	n|N) echo "AU will not decompress resources.arsc";;
+	*) res_compress;;	
+esac   

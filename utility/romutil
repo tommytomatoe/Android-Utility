@@ -2,8 +2,8 @@
 
 # Rom Utility Linux
 # Author: Tommy Nguyen [tommytomatoe]
-# Version: 1.0.1
-# Date: July 14, 2011
+# Version: 1.0.2
+# Date: August 23, 2011
 # Contact: tommytomatoe@gmail.com
 
 
@@ -39,13 +39,22 @@ load_dot ()
 	echo "."
 }
 
+odex_script ()
+{	clear
+	echo "Please be aware that this option has only"
+	echo "been tested on the HTC EVO 3D Shooter"
+	echo
+	echo "Might be compatible with other Sense 3.0 Gingerbread Roms and Devices"
+	echo "Please use with caution..."
+	enter
+	3vodex
+}
 
 
 
 romutil_script () 
 {
 clear
-echo "At the present, ROM Utility is not available for use. Please utilize dsixda's Kitchen for all of it's rich features. Sorry for the inconvenience."
 echo
 echo "Welcome to AU ROM Utility"
 echo
@@ -65,7 +74,7 @@ printf %s " Select an Option: "
 read num
 case $num in
  1) ff;;
- 2) ff;;
+ 2) odex_script;;
  3) ff;;
  4) ff;;
  5) ff;;
