@@ -2,8 +2,8 @@
 
 # Apk Compression Script
 # Author: Tommy Nguyen [tommytomatoe]
-# Version: 1.0.1
-# Date: July 14, 2011
+# Version: 1.0.2
+# Date: August 23, 2011
 # Contact: tommytomatoe@gmail.com
 
 # Functions
@@ -46,7 +46,7 @@ cd $e
 for F in *.apk ; do
 echo "Decompressing $F"
 cd $e
-$HOME/bin/7z x -y -o"${F/.apk}" $F &>/dev/null
+unzip -o $F -d "${F/.apk}" &>/dev/null
 cd $e/${F/.apk}
 zip -"$COMP"r $d/decompressed_apps/$F *
 if [[ "$?" -ne "0" ]] ; then

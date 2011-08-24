@@ -2,8 +2,8 @@
 
 # Resources Compression Script
 # Author: Tommy Nguyen [tommytomatoe]
-# Version: 1.0.1
-# Date: July 14, 2011
+# Version: 1.0.2
+# Date: August 23, 2011
 # Contact: tommytomatoe@gmail.com
 
 # Functions
@@ -47,7 +47,7 @@ LOG=FALSE
 for F in *.apk ; do
 echo "Decompressing resources.arsc in $F"
 cd $e
-$HOME/bin/7z x -y $F resources.arsc &>/dev/null
+unzip -o $F resources.arsc &>/dev/null
 zip -0m $F resources.arsc
 if [[ "$?" -ne "0" ]] ; then
 	echo "On `date +%b%e_%H%M%S`, $F was not decompressed Properly" >> $HOME/android-utility/log/res_log
@@ -77,7 +77,6 @@ echo "Please Place apks in $d/original_apps"
 	else
 		mkdir original_apps
 	fi
-open $d
 enter
 echo
 echo "Preparing to decompress resources.arsc"

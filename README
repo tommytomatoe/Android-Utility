@@ -1,10 +1,21 @@
-Version: 1.0.1
+Version: 1.0.2
 
 ### Welcome to Android Utility
 # README
 # Author: Tommy Nguyen [tommytomatoe]
-# Date: July 14, 2011
+# Date: August 22, 2011
 # Contact: tommytomatoe@gmail.com
+
+### Update. August 22, 2011
+>version 1.0.2
+>updated main menu
+>updated apktool (1.4.2 and 1.3.2-mod)
+>added png Optimization
+>updated installation guide
+>added support for touchwhix and sony
+>added 3vodex script capabilities
+>removed 7z in apk_compress and res_compress
+>updated installau
 
 ### Update. July 14, 2011 
 >version 1.0.1
@@ -53,6 +64,11 @@ Version: 1.0.1
 > brut.all for apktool.jar and decode9patchPng.jar
 > jesusfreke for smali and baksmali
 > PNGOUT.EXE used with permission of Ardfry Imaging, LLC.
+> pngcrush - Copyright (C) 1998-2002,2006-2011 Glenn Randers-Pehrson
+> advpng - Andrea Mazzoleni
+> optipng - Copyright (C) 2001-2011 Cosmin Truta
+> dex2jar - pxb1...@gmail.com
+> JD-GUI - Copyright © 2008-2011 Emmanuel Dupuy
 > Igor Pavlov for 7zip
 > Google
 > Android
