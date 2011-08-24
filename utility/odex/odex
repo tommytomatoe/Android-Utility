@@ -1,0 +1,138 @@
+#!/system/bin/sh
+
+# tommytomatoe customs
+# Reproduction of this script is not encouraged.
+# Please respect the wish of the author. 
+# For permissions and requests, please contact the author.
+# tommytomatoe@gmail.com
+
+clear
+
+#enter
+enter()
+{	echo
+	echo "Please press [enter] to continue";
+	read -s -n 1 key
+	if [[ $key = "" ]]; then 
+  		echo
+  		clear
+	fi
+}
+
+odex_core_sense_gb()
+{	echo "Deleting existing .odex files";
+	rm /system/framework/*.odex;
+	echo "tommytomatoe odex: initiating dexopt-wrapper on core framework files"
+	dexopt-wrapper /system/framework/core.jar /system/framework/core.odex
+	dexopt-wrapper /system/framework/bouncycastle.jar /system/framework/bouncycastle.odex
+	dexopt-wrapper /system/framework/ext.jar /system/framework/ext.odex
+	dexopt-wrapper /system/framework/framework.jar /system/framework/framework.odex
+	dexopt-wrapper /system/framework/android.policy.jar /system/framework/android.policy.odex
+	dexopt-wrapper /system/framework/services.jar /system/framework/services.odex
+	dexopt-wrapper /system/framework/core-junit.jar /system/framework/core-junit.odex
+	dexopt-wrapper /system/framework/com.htc.commonctrl.jar /system/framework/com.htc.commonctrl.odex
+	dexopt-wrapper /system/framework/com.htc.framework.jar /system/framework/com.htc.framework.odex
+	dexopt-wrapper /system/framework/com.htc.android.pimlib.jar /system/framework/com.htc.android.pimlib.odex
+	dexopt-wrapper /system/framework/com.htc.android.easopen.jar /system/framework/com.htc.android.easopen.odex
+	dexopt-wrapper /system/framework/com.scalado.util.ScaladoUtil.jar /system/framework/com.scalado.util.ScaladoUtil.odex
+	dexopt-wrapper /system/framework/com.orange.authentication.simcard.jar /system/framework/com.orange.authentication.simcard.odex
+	dexopt-wrapper /system/framework/android.supl.jar /system/framework/android.supl.odex
+}
+
+odex_framework()
+{	echo "tommytomatoe odex: initiating 	dexopt-wrapper on framework files";
+	for i in /system/framework/*
+		do
+			odex=`echo $i | sed -e 's/.jar/.odex/g'`
+			echo "tt odex: dexopt-wrapper $i $odex"
+			dexopt-wrapper $i $odex
+		done
+}
+
+odex_system()
+{	echo "removing existing odex files";
+	rm system/app/*odex;
+echo "tommytomatoe odex: initiating 	dexopt-wrapper on system apps";
+	for i in /system/app/*.apk
+	do
+	odex=`echo $i | sed -e 's/.apk/.odex/g'`
+	echo "dexopt-wrapper $i $odex"
+	dexopt-wrapper $i $odex
+	done
+}
+
+odex_data()
+{	echo "removing existing odex files";
+	rm data/app/*odex
+echo "tommytomatoe odex: initiating 	dexopt-wrapper on data apps";
+	for i in /data/app/*.apk
+		do
+			odex=`echo $i | sed -e 's/.apk/.odex/g'`
+			echo "tt odex: dexopt-wrapper $i $odex"
+			dexopt-wrapper $i $odex
+		done
+
+echo "tommytomatoe odex: initiating  dex-wrapper on data app-private";
+	for i in /data/app-private/*.apk
+		do
+			odex=`echo $i | sed -e 's/.apk/.odex/g'`
+			echo "tt odex: dexopt-wrapper $i $odex"
+			dexopt-wrapper $i $odex
+		done
+}
+
+# tommytomatoe customs.
+echo "brought to you by tommytomatoe customs"
+echo ""
+echo "PLEASE READ ENTIRE SCRIPT BEFORE PROCEEDING"
+echo ""
+
+# Wipe dalvik-cache
+echo "Wiping data/dalvik-cache";
+rm /data/dalvik-cache/*;
+echo ""
+
+main_script ()
+{
+echo "3vo ODEX version 0.0.1 - Barebones Edition"
+echo
+echo "-Backup of Current System is recommended-"
+echo "-This is Experimental-"
+echo "-Proceed with Caution-"
+echo
+echo "Execute these in order:"
+echo
+echo "1. ODEX CORE FRAMEWORK"
+echo "2. ODEX SYSTEM/FRAMEWORK"
+echo "3. ODEX SYSTEM/APP"
+echo
+echo "This Step is Optional:"
+echo
+echo "99. ODEX DATA/APP"
+echo
+echo "FOR USE AFTER THE ODEX"
+echo
+echo "a. COPY SYSTEM/FRAMEWORK to SDCARD/FRAMEWORK"
+echo "b. COPY SYSTEM/APP to SDCARD/APP"
+echo "c. COPY DATA/APP to SDCARD/DATA-APP"
+echo
+echo -n "Please enter OPTION: "
+read OPTION
+case $OPTION in
+1) odex_core_sense_gb ; enter;;
+2) odex_framework ; enter;;
+3) odex_system ; enter;;
+99) odex_data ; enter;;
+a) cp /system/framework /sdcard/framework/ ; enter;;
+b) cp /system/app /sdcard/app/ ; enter;;
+c) cp /data/app/ /sdcard/data-app ; enter;;
+q) exit ;;
+*) echo "$OPTION is not an OPTION" ;;
+esac
+
+}
+
+while : 
+do
+main_script
+done

@@ -1,0 +1,234 @@
+#! /bin/bash
+
+# Png Optimization
+# Author: Tommy Nguyen [tommytomatoe]
+# Version: 1.0.2
+# Date: August 23, 2011
+# Contact: tommytomatoe@gmail.com
+
+
+
+##functions
+#enter
+enter()
+{	echo
+	echo "Please press [enter] to continue";
+	read -s -n 1 key
+	if [[ $key = "" ]]; then 
+  		echo
+  		clear
+	fi
+}
+
+
+#future features
+ff ()
+{	clear
+	echo "Feature coming in a future release. Stay tuned."
+	enter
+}
+
+
+
+#load
+load_dot ()
+{	for DOT in . . . . . . . ; do
+	echo -n "$DOT"
+	sleep .15
+	done
+	echo "."
+}
+
+png_out ()
+{	clear
+echo "Warning. Pngout has been known to render the png 'un-editible'"
+echo "Even so, it is arguably the best at optimizing pngs"
+echo "Proceed only after you've made backups of your png/apk"
+echo
+echo "Please place apks in ../working-folder/mod-here-multi"
+enter
+cd $w
+echo "These apks are about to optimized with PNGOUT."
+echo
+cd $w
+ls *.apk
+echo
+load_dot
+load_dot
+echo
+if ! [[ -s 0png-opt ]] ; then
+	mkdir 0png-opt
+fi
+for a in *.apk ; do
+	cd $w
+	echo "AU will optimize the pngs in $a with pngout"
+	unzip -o $a -d ${a/.apk}-png
+	cd ${a/.apk}-png
+	find . -iname "*.png" | while read PNG 
+		do 
+		if [ `echo "$PNG" | grep -c "\.9\.png$"` -eq 0 ] ; then 
+			pngout "$PNG"  
+		fi 
+		done
+	zip -r $w/0png-opt/$a *
+	rm -rf $w/${a/.apk}-png
+	echo
+done
+echo "New apks can be found in ../0png-opt"
+echo "New apks might need to be resigned if third-party app"
+enter
+}
+
+png_crush ()
+{	clear
+echo
+echo "Please place apks in ../working-folder/mod-here-multi"
+enter
+echo "These apks are about to optimized with pngcrush."
+echo
+cd $w
+ls *.apk
+echo
+load_dot
+load_dot
+echo
+if ! [[ -s 0png-opt ]] ; then
+	mkdir 0png-opt
+fi
+for a in *.apk ; do
+	cd $w
+	echo "AU will optimize the pngs in $a with pngcrush"
+	unzip -o $a -d ${a/.apk}-png
+	cd ${a/.apk}-png
+	find . -iname "*.png" | while read PNG 
+		do 
+		if [ `echo "$PNG" | grep -c "\.9\.png$"` -eq 0 ] ; then 
+			pngcrush "$PNG" "opt_png.png"
+			mv -f opt_png.png $PNG
+		fi 
+		done
+	zip -r $w/0png-opt/$a *
+	rm -rf $w/${a/.apk}-png
+	echo
+done
+echo "New apks can be found in ../0png-opt"
+echo "New apks might need to be resigned if third-party app"
+enter
+}
+
+opti_png ()
+{	clear
+echo
+echo "Please place apks in ../working-folder/mod-here-multi"
+enter
+echo "These apks are about to optimized with Optipng."
+echo
+cd $w
+ls *.apk
+echo
+load_dot
+load_dot
+echo
+if ! [[ -s 0png-opt ]] ; then
+	mkdir 0png-opt
+fi
+for a in *.apk ; do
+	cd $w
+	echo "AU will optimize the pngs in $a with optipng"
+	unzip -o $a -d ${a/.apk}-png
+	cd ${a/.apk}-png
+	find . -iname "*.png" | while read PNG 
+		do 
+		if [ `echo "$PNG" | grep -c "\.9\.png$"` -eq 0 ] ; then 
+			optipng "$PNG"  
+		fi 
+		done
+	zip -r $w/0png-opt/$a *
+	rm -rf $w/${a/.apk}-png
+	echo
+done
+echo "New apks can be found in ../0png-opt"
+echo "New apks might need to be resigned if third-party app"
+enter
+}
+
+adv_png ()
+{	clear
+echo
+echo "Please place apks in ../working-folder/mod-here-multi"
+enter
+echo "These apks are about to optimized with advpng."
+echo
+cd $w
+ls *.apk
+echo
+load_dot
+load_dot
+echo
+if ! [[ -s 0png-opt ]] ; then
+	mkdir 0png-opt
+fi
+for a in *.apk ; do
+	cd $w
+	echo "AU will optimize the pngs in $a with advpng"
+	unzip -o $a -d ${a/.apk}-png
+	cd ${a/.apk}-png
+	find . -iname "*.png" | while read PNG 
+		do 
+		if [ `echo "$PNG" | grep -c "\.9\.png$"` -eq 0 ] ; then 
+			advpng -z4 "$PNG"  
+		fi 
+		done
+	zip -r $w/0png-opt/$a *
+	rm -rf $w/${a/.apk}-png
+	echo
+done
+echo "New apks can be found in ../0png-opt"
+echo "New apks might need to be resigned if third-party app"
+enter
+}
+
+apk_opt_script () 
+{
+clear
+w=$HOME/android-utility/working-folder/mod-here-multi
+h=$HOME/android-utility
+echo "Welcome to AU PNG Optimization Tools"
+echo
+echo "Please be aware that this process could take some time"
+echo "New "optimized" pngs will be placed in 0png-out"
+echo "New apks might need to be resigned if third-party app"
+echo 
+echo "|---------------------------------------------|"
+echo "| 1.  pngout   - best, but SLOW! read Warning |"
+echo "|              - version 07.22.2011           |"
+echo "|                                             |"
+echo "| 2.  pngcrush - used by cyanogenmod          |"
+echo "|              - v1.7.16 [compiled 08.23.2011]|"
+echo "|                                             |"
+echo "| 3.  optipng  - fastest pngopt method        |"
+echo "|              - v0.6.5 [compiled 08.23.2011] |"
+echo "|                                             |"
+echo "| 4.  advpng   - opts with the 7-zip method   |"
+echo "|              - v1.15 [compiled 08.23.2011]  |"
+echo "|                                             |"
+echo "|---------------------------------------------|"
+echo "| q.  Go to main menu                         |"
+echo "|---------------------------------------------|"
+echo "|---------------------------------------------|"
+printf %s " Select a png opt tool: "
+read num
+case $num in
+ 1) png_out;;
+ 2) png_crush;;
+ 3) opti_png;;
+ 4) adv_png;;
+ q) clear; exit;;
+ *) echo; echo "$num is not a valid option"; enter;
+esac
+}
+
+while :
+do
+	apk_opt_script
+done
