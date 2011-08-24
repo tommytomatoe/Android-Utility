@@ -216,7 +216,7 @@ jd_dex ()
 	echo
 	echo -n "User Input: "
 	read JD
-	open -a $HOME/bin/JD-GUI.app "$JD"_dex2jar.jar
+	open -a $a/utility/dex/JD-GUI.app "$JD"_dex2jar.jar
 	if ! [[ $? = 0 ]] ; then
 		echo
 		echo "Please try again. Follow the Example Syntax."
