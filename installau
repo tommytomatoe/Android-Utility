@@ -229,7 +229,8 @@ clean_in ()
 	cp -v $p/advpng $b/
 	cp -v $p/optipng $b/
 	cp -v $p/pngcrush $b/
-	cp -v $p/pngout $b
+	cp -v $p/pngout $b/
+	cp -v $HOME/android-utility/utility/dex/JD-GUI.app $b/
 	ins_sed
 }
 
