@@ -162,7 +162,7 @@ ins_apktool ()
 	 1) echo; sudo cp -v $c/apktool1.3.1/apktool.jar $u/; atool_v;;
 	 2) echo; sudo cp -v $c/apktool1.3.2/apktool.jar $u/; atool_v;;
 	 3) echo; sudo cp -v $c/apktool1.4.1/apktool.jar $u/; atool_v;;
-	 4) echo; sudp cp -v $c/apktool1.4.2/apktool.jar $u/; atool_v;;
+	 4) echo; sudo cp -v $c/apktool1.4.2/apktool.jar $u/; atool_v;;
 	 5) echo; sudo cp -v $c/apktool1.3.2mod/apktool.jar $u/; atool_v;;
 	 x) echo; echo "Current version has not been changed";;
 	 *) echo; echo "$sel is not a valid option"; echo;;	
