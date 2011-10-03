@@ -401,14 +401,15 @@ odex_script ()
 kitchen_sink ()
 {	clear
 	echo "Preaparing to run dsixda's Android Kitchen"
+	echo
 	k=$HOME/android-utility/kitchen
 	if ! [[ -s $k ]] ; then
 		echo "Kitchen does not Exist, preparing to run git clone"
 		git clone git://github.com/dsixda/Android-Kitchen.git $k
 	else	
-		echo "Kitchen Exists"
+		echo -n "Kitchen Exists"
 	fi
-	enter
+	load_dot
 	cd $k
 	./menu
 }
