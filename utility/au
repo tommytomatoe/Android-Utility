@@ -2,8 +2,8 @@
 
 # Android Utility Linux
 # Author: Tommy Nguyen [tommytomatoe]
-# Version: 1.0.1
-# Date: July 20, 2011
+# Version: 1.0.3
+# Date: October 3, 2011
 # Contact: tommytomatoe@gmail.com
 
 #introduction
@@ -38,6 +38,8 @@ credits ()
 	sleep .5
 	echo "Stericson/JF - testsign.jar"
 	sleep .5
+	echo "Pendo - sound advice/answering questions/awesome sauce"
+	sleep .5
 	echo "Google - AOSP"
 	sleep .5
 	echo "aamikam - sound advice"
@@ -56,7 +58,19 @@ credits ()
 	sleep .5
 	echo "Ardfry Imaging, LLC. - pngout"
 	sleep .5
-	echo "Xclusive Rydah and Chingy - testing and ideas"
+	echo "Glenn Randers-Pehrson - pngcrush"
+	sleep .5
+	echo "Andrea Mazzoleni - advpng"
+	sleep .5
+	echo "Cosmin Truta - optipng"
+	sleep .5
+	echo "pxb1...@gmail.com - dex2jar"
+	sleep .5
+	echo "Emmanuel Dupuy - JD-GUI"
+	sleep .5
+	echo "misfit and leoisright - constant support"
+	sleep .5
+	echo "Xclusive Rydah, Chingy - testing and ideas"
 	sleep .5
 	echo
 	echo -n T
@@ -372,6 +386,32 @@ else
 	$w/installau -f
 fi
 }
+
+odex_script ()
+{	clear
+	echo "Please be aware that this option has only"
+	echo "been tested on the HTC EVO 3D Shooter"
+	echo
+	echo "Might be compatible with other Sense 3.0 Gingerbread Roms and Devices"
+	echo "Please use with caution..."
+	enter
+	3vodex
+}
+
+kitchen_sink ()
+{	clear
+	echo "Preaparing to run dsixda's Android Kitchen"
+	k=$HOME/android-utility/kitchen
+	if ! [[ -s $k ]] ; then
+		echo "Kitchen does not Exist, preparing to run git clone"
+		git clone git://github.com/dsixda/Android-Kitchen.git $k
+	else	
+		echo "Kitchen Exists"
+	fi
+	enter
+	cd $k
+	./menu
+}
  
 
 android () 
@@ -380,19 +420,20 @@ which andutil $>/dev/null
 if [[ "$?" -ne "0" ]] ; then
 	source /etc/profile.d/au.sh
 fi
-echo "   Android Utility by tommytomatoe"
-echo "      ----------------------     "
-echo "   Blue Waffle Magic Pack v 1.0.1"
+echo "  Android Utility by tommytomatoe. Version 1.0.3. Special Edition"
+echo
 echo "|-------------------------------||-------------------------------|"
 echo "|-------------------------------||-------------------------------|"
 echo "|         BASIC TOOLS           ||         ADVANCE TOOLS         |"
 echo "|-------------------------------||-------------------------------|"
 echo "| 1.  adb tools                 || 6.  apk Re-Engineering        |"
 echo "| 2.  keystore manager          || 7.  apk Optimization          |"
-echo "| 3.  sign apk and update.zip   || 8.  smali and baksmali        |"
+echo "| 3.  sign apk and update.zip   || 8.  dex code utility          |"
 echo "| 4.  zipalign                  || 9.  draw9patch utilities      |"
 echo "| 5.  change-log creator        ||10.  AU ROM Utility            |"
-echo "|                               ||                               |"
+echo "|                               ||11.  3vodex                    |"
+echo "|-------------------------------||-------------------------------|"
+echo "|                 K. Run dsixda's Android Kitchen                |"
 echo "|----------------------------------------------------------------|"
 echo "|                          SETUP TOOLS                           |"
 echo "|----------------------------------------------------------------|"
@@ -410,11 +451,13 @@ case $num in
  5) change_log;;
  6) apk_tool;;
  7) apk_opt;;
- 8) ff;;
+ 8) smali_tool;;
  9) 9patch;;
 10) romutil;;
+11) odex_script;;
  e|E) extras;;
  i|I) ff;;
+ k|K) kitchen_sink;;
  x) installau;;
  q) quit;;
  *) echo; echo "$num is not a valid option"; enter;

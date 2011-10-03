@@ -2,8 +2,8 @@
 
 # Android Utility Linux
 # Author: Tommy Nguyen [tommytomatoe]
-# Version: 1.0.2
-# Date: August 24, 2011
+# Version: 1.0.3
+# Date: October 3, 2011
 # Contact: tommytomatoe@gmail.com
 
 #introduction
@@ -68,7 +68,9 @@ credits ()
 	sleep .5
 	echo "Emmanuel Dupuy - JD-GUI"
 	sleep .5
-	echo "Xclusive Rydah, Chingy, misfit - testing and ideas"
+	echo "misfit and leoisright - constant support"
+	sleep .5
+	echo "Xclusive Rydah, Chingy - testing and ideas"
 	sleep .5
 	echo
 	echo -n T
@@ -395,6 +397,21 @@ odex_script ()
 	enter
 	3vodex
 }
+
+kitchen_sink ()
+{	clear
+	echo "Preaparing to run dsixda's Android Kitchen"
+	k=$HOME/android-utility/kitchen
+	if ! [[ -s $k ]] ; then
+		echo "Kitchen does not Exist, preparing to run git clone"
+		git clone git://github.com/dsixda/Android-Kitchen.git $k
+	else	
+		echo "Kitchen Exists"
+	fi
+	enter
+	cd $k
+	./menu
+}
  
 
 android () 
@@ -403,9 +420,8 @@ which andutil $>/dev/null
 if [[ "$?" -ne "0" ]] ; then
 	source /etc/profile.d/au.sh
 fi
-echo "   Android Utility by tommytomatoe"
-echo "      ----------------------     "
-echo "   Version 1.0.2"
+echo "  Android Utility by tommytomatoe. Version 1.0.3. Special Edition"
+echo
 echo "|-------------------------------||-------------------------------|"
 echo "|-------------------------------||-------------------------------|"
 echo "|         BASIC TOOLS           ||         ADVANCE TOOLS         |"
@@ -416,6 +432,8 @@ echo "| 3.  sign apk and update.zip   || 8.  dex code utility          |"
 echo "| 4.  zipalign                  || 9.  draw9patch utilities      |"
 echo "| 5.  change-log creator        ||10.  AU ROM Utility            |"
 echo "|                               ||11.  3vodex                    |"
+echo "|-------------------------------||-------------------------------|"
+echo "|                 K. Run dsixda's Android Kitchen                |"
 echo "|----------------------------------------------------------------|"
 echo "|                          SETUP TOOLS                           |"
 echo "|----------------------------------------------------------------|"
@@ -439,6 +457,7 @@ case $num in
 11) odex_script;;
  e|E) extras;;
  i|I) ff;;
+ k|K) kitchen_sink;;
  x) installau;;
  q) quit;;
  *) echo; echo "$num is not a valid option"; enter;
