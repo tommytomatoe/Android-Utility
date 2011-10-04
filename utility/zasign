@@ -2,8 +2,8 @@
 
 # Apk and Update.zip Script Linux
 # Author: Tommy Nguyen [tommytomatoe]
-# Version: 1.0.1
-# Date: July 14, 2011
+# Version: 1.0.3
+# Date: October 04, 2011
 # Contact: tommytomatoe@gmail.com
 
 # Functions
@@ -152,6 +152,39 @@ sign_it ()
 	enter
 }
 
+sign_it_sys ()
+{	if ! [[ -s $y/new_apps_unsigned ]] ; then
+		mkdir $y/new_apps_unsigned
+	fi
+	echo 
+	echo "This will auto-inject the original META-INF into the new apks"
+	echo	
+	echo "Please place unsigned apks inside mod-here-multi/new_apps_unsigned"
+	if ! [[ -s $y/original_META-INF ]] ; then
+		echo "You did not extract the META-INF during the decomple process."
+		enter
+		exit
+	fi
+	enter
+	if ! [[ -s $y/new_apps_Signed ]] ; then
+		echo 'Creating new folder "new_apps_Signed"'
+		mkdir $y/new_apps_Signed
+	fi 
+	cd $y/new_apps_unsigned
+	cp -f * $y/new_apps_Signed
+	cd $y/new_apps_unsigned/
+	for a in *.apk ; do
+		echo
+		echo "Preparing to auto-inject singature for $a"
+		cd $y/original_META-INF/$a-META-INF
+		zip $y/new_apps_Signed/$a META-INF/*
+		echo "done with $a"
+	done
+	enter
+ 
+}
+	
+
 
 #sign
 sign_menu ()
@@ -171,6 +204,8 @@ sign_menu ()
 	echo "|--------------------------------------|"
 	echo "|  4.  Sign UPDATE.zip with Test Keys  |"
 	echo "|--------------------------------------|"
+	echo "|  5.  Batch Sign SYSTEM APKs          |"
+	echo "|--------------------------------------|"
 	echo "|--------------------------------------|"
 	echo "|  q.  Go Back to Main Menu            |"
 	echo
@@ -181,6 +216,7 @@ sign_menu ()
 	2) clear; sign_it;;
 	3) clear; test_sign_b;;
 	4) clear; test_sign_z;;
+	5) clear; sign_it_sys;;
  	q) clear; exit;;
  	*) echo; echo "$num is not a valid option"; enter;
 	esac
