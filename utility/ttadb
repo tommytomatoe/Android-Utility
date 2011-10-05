@@ -323,42 +323,6 @@ enter_e()
 	fi
 }
 
-adb_cat ()
-{
-clear
-echo
-p=
-echo "[adb] logcat [<option>] ... [<filter-spec>] ..."
-echo
-echo "Every Android log message has a tag and a priority associated with it."
-echo
-echo "-----------------------------------------------------"
-echo "1|   V — Verbose (lowest priority)"
-echo "2|   D — Debug"
-echo "3|   I — Info"
-echo "4|   W — Warning"
-echo "5|   E — Error"
-echo "6|   F — Fatal"
-echo "7|   S — Silent (highest priority, on which nothing is ever printed)"
-echo "8|   default - show all"
-echo
-echo -n "Please select priority level: "
-read pri
-case "$pri" in
-  1)  p=V;;
-  2)  p=D;;
-  3)  p=I;;
-  4)  p=W;;
-  5)  p=E;;
-  6)  p=F;;
-  7)  p=S;;
-  8)  p="" ;;
-  *) echo; echo "Please enter valid option"; echo; enter_e; adb_cat;
-esac
-echo
-echo $p+B
-enter
-}
 
 #adb script
 adb_script() {
