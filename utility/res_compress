@@ -2,8 +2,8 @@
 
 # Resources Compression Script
 # Author: Tommy Nguyen [tommytomatoe]
-# Version: 1.0.2
-# Date: August 23, 2011
+# Version: 1.0.3
+# Date: October 05, 2011
 # Contact: tommytomatoe@gmail.com
 
 # Functions
@@ -28,7 +28,7 @@ load_dot ()
 	echo "."
 }
 
-#quit
+#quitEND SCRIPT
 quit()
 {	echo
 	echo "Thank you for choosing Android Utility"
@@ -61,6 +61,52 @@ if [[ "$LOG" = "true" ]] ; then
 	echo
 	echo "Please check res_log for apk with errors"
 fi
+
+if ! [[ -s $d/decompressed_res ]] ; then
+	mkdir $d/decompressed_res
+fi
+echo
+cd $e
+for i in *.apk ; do
+	cp -f $i $d/decompressed_res/
+	echo "$i is now in decompressed_res"	
+done
+echo
+load_dot
+echo
+echo -n "Would you like to auto-zipalign at this time? [Y/n] "
+read -s -n 1 ans
+case $ans in
+n|N) echo ; echo ; echo "Cancelling zipalignment" ;;
+*) echo ; zipo ;;
+esac
+}
+
+zipo ()
+{
+if [[ -s $d/temp ]] ; then
+	echo &>/dev/null
+else
+	mkdir $d/temp
+fi
+cd $d/decompressed_res
+echo
+echo "Preparing to zipalign `ls | grep -c .apk` apk files"
+echo
+load_dot
+echo
+for z in *.apk ; do
+	zipalign -fv 4 $z $d/temp/$z
+	mv -f $d/temp/$z $d/decompressed_res
+done
+rm -r $d/temp
+echo
+load_dot
+clear
+echo
+cd $d/decompressed_res
+echo "Successfully zipaligned `for F in *.apk ; do zipalign -cv 4 $F ; done | grep -c "Verification succesful"` apk files. Congrats!"
+echo "Failed to zipalign `for F in *.apk ; do zipalign -cv 4 $F ; done | grep -c "Verification FAILED"` apk files."
 }
 
 clear
@@ -81,7 +127,9 @@ echo "Preparing to decompress resources.arsc"
 echo
 res_it
 echo
-echo "Apks in original_apps have their resources.arsc decompressed for less stress on RAM"
+echo "Apks have their resources.arsc decompressed for less stress on RAM"
+echo
+echo "Find new apks in decompressed_res"
 enter
 quit
 

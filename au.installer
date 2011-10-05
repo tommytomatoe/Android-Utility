@@ -1,0 +1,122 @@
+#! /bin/bash
+
+# Android Utility Linux
+# Author: Tommy Nguyen [tommytomatoe]
+# Version: 1.0.3
+# Date: October 4, 2011
+# Contact: tommytomatoe@gmail.com
+
+enter()
+{	echo
+	echo "Please press [enter] to continue";
+	read -s -n 1 key
+	if [[ $key = "" ]]; then 
+  		echo
+  		clear
+	fi
+}
+
+load_dot ()
+{	for DOT in '> ' '> ' '> ' '> ' '> ' '> ' '> ' '> '; do
+	echo -n "$DOT"
+	sleep .15
+	done
+	echo
+}
+
+clear
+echo
+for l in W e l c o m e ; do
+echo -n $l
+sleep .1
+done
+echo -n " "
+sleep .1
+for l in t o ; do
+echo -n $l
+sleep .1
+done
+echo -n " "
+sleep .2
+for l in A n d r o i d ; do
+echo -n $l
+sleep .1
+done
+echo -n " "
+sleep .2
+for l in U t i l i t y ; do
+echo -n $l
+sleep .1
+done
+echo
+echo
+# testing for git
+which git &>/dev/null
+if ! [[ $? -eq 0 ]] ; then
+	echo "You don't have git. You need git. Installing git."
+	sudo apt-get install git-core git-gui git-doc git
+	echo
+    fi
+echo "Version 1.0.3. The Special Edition"
+echo
+load_dot
+echo
+echo "Checking for Current version of AU"
+echo
+load_dot
+echo
+A=$HOME/android-utility
+if [[ -s $A ]] ; then
+	echo -n "AU exists. Would you like to back up? [Y/n] "	
+	read -s -n 1 ans
+	case $ans in 
+	n|N) echo ; echo ; echo "Current AU will be permanently erased" ; rm -rf $A;;
+	*) echo ; echo ; echo "Moving android-utility to android-utility-BACKUP-`date +%I.%M.%S`" ; mv $A $HOME/android-utility-BACKUP-`date +%I.%M.%S` ;;
+	esac
+else
+	echo "AU does not exist. Preparing to install."
+fi
+echo
+load_dot
+echo
+echo "Installing AU with git clone"
+git clone git://github.com/tommytomatoe/Android-Utility.git -b linux-au $A
+echo
+if [[ -s $A ]] ; then
+	echo "AU installed Successfully!"
+else
+	echo "Error."
+fi
+echo 
+load_dot
+echo
+K=$A/kitchen
+if [[ -s $K ]] ; then
+	echo "Kitchen Exists"
+else
+	echo -n "dsixda's Android Kitchen does not exist, would you like to go ahead and install? [Y/n] "
+	read -s -n 1 ans
+	case $ans in
+	n|N) echo ; echo ; echo "Silly, you need to install the kitchen! I'm installing it anyways." ;;
+	*) echo ; echo ; echo "Preparing installation of dsixda's Android Kitchen." ;;
+	esac
+	echo
+	load_dot
+	echo
+	echo "Installing Kitchen with git clone"
+	git clone git://github.com/dsixda/Android-Kitchen.git $K
+	echo
+	echo "If you really don't want kitchen, delete it"
+fi
+echo
+load_dot
+echo
+echo "Thank you for using this install script."
+echo "Please restart your machine before using andutil."
+echo 'Note, you can now use the command "au" to start android-utility.'
+echo "Misfit and leoisright are officially commited to the credits as supporters."
+echo
+echo "Sincerely,"
+echo "Tommy Nguyen"
+enter
+

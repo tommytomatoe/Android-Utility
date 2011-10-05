@@ -64,6 +64,47 @@ if [[ "$LOG" = "true" ]] ; then
 else
 	echo &>/dev/null
 fi
+echo
+load_dot
+echo
+echo -n "Would you like to auto-zipalign at this time? [Y/n] "
+read -s -n 1 ans
+case $ans in
+n|N) echo ; echo ; echo "Cancelling zipalignment" ;;
+*) echo ; zipo ;;
+esac
+}
+
+
+zipo ()
+{
+if [[ -s $d/temp ]] ; then
+	echo &>/dev/null
+else
+	mkdir $d/temp
+fi
+cd $d/decompressed_apps
+echo
+echo "Preparing to zipalign `ls | grep -c .apk` apk files"
+echo
+load_dot
+echo
+for z in *.apk ; do
+	zipalign -fv 4 $z $d/temp/$z
+	mv -f $d/temp/$z $d/decompressed_apps
+done
+rm -r $d/temp
+echo
+load_dot
+clear
+echo
+cd $d/decompressed_apps
+echo "Successfully zipaligned `for F in *.apk ; do zipalign -cv 4 $F ; done | grep -c "Verification succesful"` apk files. Congrats!"
+echo "Failed to zipalign `for F in *.apk ; do zipalign -cv 4 $F ; done | grep -c "Verification FAILED"` apk files."
+echo
+echo "Apks are decompressed for less stress on RAM"
+echo
+echo "Find new apks in decompressed_apps"
 }
 
 method ()
@@ -104,7 +145,6 @@ echo "Please Place apks in $d/original_apps"
 	else
 		mkdir original_apps
 	fi
-nautilus $d
 enter
 if [[ -s $d/decompressed_apps ]] ; then
 	rm -r $d/decompressed_apps &>/dev/null

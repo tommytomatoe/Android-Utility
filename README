@@ -3,8 +3,12 @@ Version: 1.0.3
 ### Welcome to Android Utility
 # README
 # Author: Tommy Nguyen [tommytomatoe]
-# Date: October 4, 2011
+# Date: October 5, 2011
 # Contact: tommytomatoe@gmail.com
+
+### Update. Octover 04, 2011
+>updated res_compress
+>added auto-zipalign option
 
 ### Update. October 04, 2011
 >added system app sign option
