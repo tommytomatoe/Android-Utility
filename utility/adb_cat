@@ -1,0 +1,210 @@
+#! /bin/bash
+
+# Android Debug Logcat Linux
+# Author: Tommy Nguyen [tommytomatoe]
+# Version: 1.0.3
+# Date: October 05, 2011
+# Contact: tommytomatoe@gmail.com
+
+#enter
+enter()
+{	echo "Please press [enter] to continue";
+	read -s -n 1 key
+	if [[ $key = "" ]]; then 
+  		echo
+	fi
+}
+
+#load
+load()
+{	echo -n "   ."
+	sleep .125
+	echo -n ".."
+	sleep .125
+	echo -n ".."
+	sleep .125
+	echo ".."
+	sleep .125
+	echo -n "    ."
+	sleep .125
+	echo -n ".."
+	sleep .125
+	echo -n ".."
+	sleep .125
+	echo ".."
+	sleep .125
+	echo -n "     ."
+	sleep .125
+	echo -n ".."
+	sleep .125
+	echo -n ".."
+	sleep .125
+	echo ".."
+	sleep .125
+}
+
+tag_it ()
+{
+echo
+echo "-----------------------------------------------------"
+echo
+echo "Examples: dalvikvm ; ActivityManager"
+echo
+echo -n "Please enter tag: "
+read tag
+if [[ `echo $tag` == "" ]] ; then
+	tag=*
+fi
+}
+
+view_it ()
+{
+echo
+echo "-----------------------------------------------------"
+echo
+echo "  brief   — Display priority/tag and PID of originating process (the default format)."
+echo "  process — Display PID only."
+echo "  tag     — Display the priority/tag only."
+echo "  thread  — Display process:thread and priority/tag only."
+echo "  raw     — Display the raw log message, with no other metadata fields."
+echo "  time    — Display the date, invocation time, priority/tag, and PID of the originating process."
+echo "  long    — Display all metadata fields and separate messages with a blank lines."
+echo
+echo -n "Change logcat view fromat [default=brief]: "
+read format
+if [[ `echo $format` == "" ]] ; then
+	format=brief
+fi
+}
+
+buffer_it ()
+{
+echo
+echo "-----------------------------------------------------"
+echo
+echo "  radio  - View the buffer that contains radio/telephony messages."
+echo "  events - View the buffer containing events-related messages."
+echo "  main   - View the main log buffer (default)."
+echo
+echo -n "Change logcat buffer [dafault=main]: "
+read format
+if [[ `echo $buffer` == "" ]] ; then
+	buffer=main
+fi
+}
+
+do_it ()
+{
+clear
+echo "Preapring to logcat with these settings:"
+echo
+echo "-----------------------------------------------------"
+echo "|  Priority = $p"
+echo "|  Tag      = $tag"
+echo "|  Buffer   = $buffer"
+echo "|  Format   = $format"
+echo "|  Logfile  = $logfile"
+echo "-----------------------------------------------------"
+echo 
+echo "Press Ctrl+C to quit"
+load
+adb logcat $tag:$p -v $format -b $buffer | tee $HOME/$logfile
+} 
+
+adbcat ()
+{
+clear
+echo
+echo "Every Android log message has a tag and a priority associated with it."
+echo
+echo "-----------------------------------------------------"
+echo "1|   V — Verbose (lowest priority) default"
+echo "2|   D — Debug"
+echo "3|   I — Info"
+echo "4|   W — Warning"
+echo "5|   E — Error"
+echo "6|   F — Fatal"
+echo "7|   S — Silent (highest priority, on which nothing is ever printed)"
+echo
+echo -n "Please select priority level: "
+read pri
+case "$pri" in
+  1)  p=V;;
+  2)  p=D;;
+  3)  p=I;;
+  4)  p=W;;
+  5)  p=E;;
+  6)  p=F;;
+  7)  p=S;;
+  *) echo; echo "Please enter valid option"; echo; enter_e; adb_cat;
+esac
+echo
+if ! [[ `echo $p` == "" ]] ; then
+	echo "logcat will filter for logs with priority $p"
+else
+	echo "logcat will not filter logs based on priority"
+fi
+echo 
+echo "-----------------------------------------------------"
+echo
+echo -n "Would you like to filter a certain tag? [defualt=no] [N/y] "
+read -s -n 1 ans
+case $ans in
+y|Y) echo ; tag_it ;;
+*) echo ; echo ; echo "logcat will search for all tags" ;;
+esac
+clear
+echo
+echo "-----------------------------------------------------"
+echo
+echo "Would you like add other options like view format and buffer?"
+echo -n "[defualt=no] [N/y]: "
+read -s -n 1 ans
+case $ans in
+y|Y) echo ; view_it ; buffer_it;;
+*) echo ;;
+esac
+}
+
+script ()
+{
+clear
+echo
+p=V
+tag=*
+buffer=main
+format=brief
+logfile=android-utility/log/logcat-`date +%I.%M.%S`
+echo "[adb] logcat [<option>] ... [<filter-spec>] ..."
+echo
+echo "logcat currently has these default settings:"
+echo
+echo "-----------------------------------------------------"
+echo "|  Priority = $p"
+echo "|  Tag      = $tag"
+echo "|  Buffer   = $buffer"
+echo "|  Format   = $format"
+echo "|  Logfile  = $logfile"
+echo "-----------------------------------------------------"
+echo "   V=verbose   *=all tags"
+echo 
+echo "-----------------------------------------------------"
+echo "  1. adb logcat with these settings"
+echo "  2. Change these settings"
+echo "  q. Quit to menu"
+echo "-----------------------------------------------------"
+echo -n "Selection: "
+read ans
+case $ans in
+1) do_it ;;
+2) adbcat ; do_it;;
+q) exit;;
+*) echo ; echo ; echo "$ans is not a valid option" ; enter;;
+esac
+echo
+}
+
+while :
+do
+script
+done
