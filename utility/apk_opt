@@ -2,8 +2,8 @@
 
 # Apk Optimization Linux
 # Author: Tommy Nguyen [tommytomatoe]
-# Version: 1.0.2
-# Date: August 23, 2011
+# Version: 1.0.3
+# Date: October 04, 2011
 # Contact: tommytomatoe@gmail.com
 
 
@@ -54,6 +54,7 @@ echo "| 2.  Resources Decompression   |"
 echo "| 3.  PNG Optimization          |"
 echo "| 4.  zipalign                  |"
 echo "| 5.  Language Removal          |"
+echo "| 6.  System/app Auto-Opt       |"
 echo "|                               |"
 echo "| X.  Ultimate Optimization     |"
 echo "|                               |"
@@ -69,6 +70,7 @@ case $num in
  3) png_opt;;
  4) zipped_up;;
  5) ff;;
+ 6) auto_opt;;
  X) ff;;
  q) clear; exit;;
  *) echo; echo "$num is not a valid option"; enter;

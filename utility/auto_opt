@@ -1,0 +1,164 @@
+#! /bin/bash
+
+# System/app Optimization Linux
+# Author: Tommy Nguyen [tommytomatoe]
+# Version: 1.0.3
+# Date: October 04, 2011
+# Contact: tommytomatoe@gmail.com
+
+
+
+##functions
+#enter
+enter()
+{	echo
+	echo "Please press [enter] to continue";
+	read -s -n 1 key
+	if [[ $key = "" ]]; then 
+  		echo
+  		clear
+	fi
+}
+
+
+#future features
+ff ()
+{	clear
+	echo "Feature coming in a future release. Stay tuned."
+	enter
+}
+
+
+
+#load
+load_dot ()
+{	for DOT in . . . . . . . ; do
+	echo -n "$DOT"
+	sleep .15
+	done
+	echo "."
+}
+
+do_auto ()
+{
+if ! [[ -s $w/auto-opt ]] ; then
+	mkdir $w/auto-opt 
+fi
+clear
+echo "Your WORKING folder is `ls $k/ | grep WORKING`"
+cd $k/`ls $k/ | grep WORKING`/system/app
+echo
+echo "Preparing to move `ls | grep -c .apk` apk files."
+echo
+load_dot
+for i in *.apk ; do
+	echo "Moving $i to mod-here-multi/auto-opt"
+	cp -f $i $w/auto-opt
+done
+cd $w/auto-opt
+echo
+
+# resources decompression
+for F in *.apk ; do
+	echo "Decompressing resources.arsc in $F"
+	cd $w/auto-opt
+	unzip -o $F resources.arsc &>/dev/null
+	zip -0m $F resources.arsc
+done
+echo 
+load_dot
+echo
+# apk decompression
+COMP=5
+cd $w/auto-opt
+echo "Compression Level set to $COMP"
+echo "[0 = no compression | 9 = high compression]"
+echo
+echo -n "Please set compression level [default=5 ; 0 -> 9]: "
+read COMP
+if [[ $COMP == "" ]] ; then
+	COMP=5
+fi
+echo
+echo "Compression Level set to $COMP"
+echo
+if [[ -s $w/temp ]] ; then
+	echo &>/dev/null
+else
+	mkdir $w/temp
+fi
+echo
+echo "Preparing to decompress Apks with Compression Level $COMP"
+echo
+cd $w/auto-opt	
+for F in *.apk ; do
+	echo "Decompressing $F"
+	cd $w/auto-opt
+	unzip -o $F -d "${F/.apk}" &>/dev/null
+	cd $w/auto-opt/${F/.apk}
+	zip -"$COMP"r $w/temp/$F *
+	rm -r $w/auto-opt/${F/.apk}
+	echo "$F decompressed with $COMP compression"
+	mv -f $w/temp/$F $w/auto-opt
+done
+echo
+echo "`ls $w/auto-opt| grep -c .apk` apk files Opted. Preparing for zipalign."
+rm -r $w/temp/
+echo
+load_dot
+load_dot
+clear
+# zipalign
+if [[ -s $w/temp ]] ; then
+	echo &>/dev/null
+else
+	mkdir $w/temp
+fi
+cd $w/auto-opt
+for F in *.apk ; do
+	zipalign -fv 4 $F $w/temp/$F
+	mv -f $w/temp/$F $w/auto-opt
+done	
+echo
+cd $w/auto-opt
+echo "Successfully auto-opted `for F in *.apk ; do zipalign -cv 4 $F ; done | grep -c "Verification succesful"` apk files. Congrats!"
+rm -r $w/temp
+echo
+echo "Preparing to move files back to kitchen"
+echo
+load_dot
+load_dot
+echo
+cd $w/auto-opt
+for F in *.apk ; do
+	echo "Moving $F back to $k/`ls $k/ | grep WORKING`/system/app"
+	cp -fv $F $k/`ls $k/ | grep WORKING`/system/app/$F
+done
+echo
+echo "Wrapping up auto-opt"
+echo
+load_dot
+}
+
+
+a=$HOME/android-utility
+k=$a/kitchen
+w=$a/working-folder/mod-here-multi
+clear
+echo "This script inspired by my pal Misfit"
+echo
+echo "Please be sure to use the defualt WORKING folder naming method of kitchen"
+echo
+echo "For best results, only have one WORKING folder."
+echo
+load_dot
+echo
+echo "AU found this: `ls $k/ | grep WORKING`"
+echo
+echo -n "Continue? [Y/n] "
+read -s -n 1 ans
+case $ans in
+n|N) echo; echo; echo "Exiting" ;;
+*) echo; echo; echo "Preparing to auto-opt system/apps"; echo; load_dot; do_auto;;
+esac
+enter
