@@ -2,8 +2,8 @@
 
 # Apktool Build Script
 # Author: Tommy Nguyen [tommytomatoe]
-# Version: b-0.91
-# Date: July 08, 2011
+# Version: 1.0.3
+# Date: October 05, 2011
 # Contact: tommytomatoe@gmail.com
 
 # Setting Loop Variable
@@ -192,18 +192,100 @@ do_it_m ()
 	cd $d
 	for c in *.apk
 	do 
-		mv -v $c original_apps/
+		echo "Moving $c to original_apps"
+		mv -f $c original_apps/
 	done
 	cd $d/Projects
 	for c in `ls | grep -vE '(.apk|original|decompressed|new_apps)'`
 	do	
-		cp -v $c/dist/*.apk ../new_apps_unsigned/
+		echo "Moving $c to new_apps_unsigned"
+		cp $c/dist/*.apk ../new_apps_unsigned/
 	done
 		if [[ "$LOG" = "true" ]] ; then
 		echo
 		echo "Please check build_log for apk with errors"
 		fi
+	echo
+	load_dot
+	echo
+	echo -n "Would you like to auto-inject META-INF at this time? [Y/n] "
+	read -s -n 1 ans
+	case $ans in
+	n|N) echo ; echo ; echo "Cancelling META-INF injection" ;;
+	*) echo ; sign_it_sys;;
+	esac
+	echo
+	load_dot
+	echo
+	echo -n "Would you like to auto-zipalign at this time? [Y/n] "
+	read -s -n 1 ans
+	case $ans in
+	n|N) echo ; echo ; echo "Cancelling zipalignment" ;;
+	*) echo ; zipo ;;
+	esac
 }
+
+sign_it_sys ()
+{	if ! [[ -s $d/new_apps_unsigned ]] ; then
+		mkdir $d/new_apps_unsigned
+	fi
+	echo 
+	echo "This will auto-inject the original META-INF into the new apks"
+	echo	
+	echo "Please place unsigned apks inside mod-here-multi/new_apps_unsigned"
+	if ! [[ -s $d/original_META-INF ]] ; then
+		echo "You did not extract the META-INF during the decomple process."
+		enter
+		exit
+	fi
+	echo
+	load_dot
+	echo
+	if ! [[ -s $d/new_apps_Signed ]] ; then
+		echo 'Creating new folder "new_apps_Signed"'
+		mkdir $d/new_apps_Signed
+	fi 
+	cd $d/new_apps_unsigned
+	cp -f * $d/new_apps_Signed
+	cd $d/new_apps_unsigned/
+	for a in *.apk ; do
+		echo
+		echo "Preparing to auto-inject singature for $a"
+		cd $d/original_META-INF/$a-META-INF
+		zip $d/new_apps_Signed/$a META-INF/*
+		echo "done with $a"
+	done
+}
+
+zipo ()
+{
+if [[ -s $d/temp ]] ; then
+	echo &>/dev/null
+else
+	mkdir $d/temp
+fi
+cd $d/new_apps_Signed
+echo
+echo "Preparing to zipalign `ls | grep -c .apk` apk files"
+echo
+load_dot
+echo
+for z in *.apk ; do
+	zipalign -fv 4 $z $d/temp/$z
+	mv -f $d/temp/$z $d/new_apps_Signed
+done
+rm -r $d/temp
+echo
+load_dot
+clear
+echo
+cd $d/new_apps_Signed
+echo "Successfully zipaligned `for F in *.apk ; do zipalign -cv 4 $F ; done | grep -c "Verification succesful"` apk files. Congrats!"
+echo "Failed to zipalign `for F in *.apk ; do zipalign -cv 4 $F ; done | grep -c "Verification FAILED"` apk files."
+echo
+echo "Find new apks in new_apps_Signed"
+}
+
 
 one_time ()
 {		echo	

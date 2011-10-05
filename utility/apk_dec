@@ -2,8 +2,8 @@
 
 # Apktool Decode Script Linux
 # Author: Tommy Nguyen [tommytomatoe]
-# Version: 1.0.1
-# Date: July 20, 2011
+# Version: 1.0.3
+# Date: October 05, 2011
 # Contact: tommytomatoe@gmail.com
 
 # Setting Loop Variable
@@ -106,7 +106,6 @@ decode ()
 	else
 		clear
 		echo "Android Utility did not find a valid apk file"
-		enter
 	fi
 	enter
 }
@@ -153,7 +152,6 @@ decode_m ()
 		echo
 		clear
 		echo "Android Utility did not find a valid apk file"
-		enter
 	fi
 	enter
 }
