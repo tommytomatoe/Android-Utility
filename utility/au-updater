@@ -42,7 +42,7 @@ do_it ()
 	git reset --hard HEAD
 	git pull
 	echo
-	if ! [[ $current_au_version == $latest_au_version ]] ; then
+	if ! [[ `grep Version: $HOME/android-utility/README | sed 's:Version\:\ ::g'` == $latest_au_version ]] ; then
 		echo "Update failed."
 	else
 		echo "Congrats, you have the latest Android-Utility. It is version $current_au_version"
