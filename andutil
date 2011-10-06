@@ -466,7 +466,13 @@ esac
 }
 
 VERSION=`grep Version: $HOME/android-utility/README | sed 's:Version\:\ ::g'`
-au-updater
+
+if ! [[ -a $z/resources/.3 ]] ; then
+	echo "Auto-update is turned on - recommended"
+	echo "To turn off Auto-update, go to Extras"
+	echo
+	au-updater
+}
 z=$HOME/android-utility/
 if ! [[ -a $z/resources/.1 ]] ; then
 	touch $z/resources/.1

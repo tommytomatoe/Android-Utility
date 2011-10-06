@@ -2,8 +2,8 @@
 
 # Extras Script Linux
 # Author: Tommy Nguyen [tommytomatoe]
-# Version: 1.0.1
-# Date: July 20, 2011
+# Version: 1.0.6
+# Date: October 06, 2011
 # Contact: tommytomatoe@gmail.com
 
 ##FUNCTIONS
@@ -54,18 +54,27 @@ ff ()
 
 #updates
 check_u ()
-{	echo "You have chosen to check for Updates"
+{	if ! [[ -a $HOME/android-utility/resources/.3 ]] ; then
+	echo "Auto-update is turned on - recommended"
 	echo
-	load_dot
+	echo -n "Would you like to turn off? [default=no] [N/y] "	
+	read ans
+	case $ans in
+		y|Y) echo ; echo ; echo "Turning off Auto-update" ; touch $HOME/android-utility/resources/.3 ;;
+		*) echo ; echo ; echo "Good for you" ;;
+	esac	
+	fi
+
+	if [[ -a $HOME/android-utility/resources/.3 ]] ; then
+	echo "Auto-update is turned off - not recommended"
 	echo
-	echo "Your currently have $VERS."
-	echo "This is an archaic way to do this. So please bear with me."
-	echo
-	echo "Just compare your version number with the latest in the github repo README."
-	echo "Thank you. Pressing ENTER will take you to the repository."
-	echo
-	enter
-	firefox https://github.com/tommytomatoe/Android-Utility
+	echo -n "Would you like to turn on? [default=yes] [Y/ns] "	
+	read ans
+	case $ans in
+		n|N) echo ; echo ; echo "Oh poo." ;;
+		*) echo ; echo ; echo "Turning on Auto-update" ; rm $HOME/android-utility/resources/.3 ;;
+	esac	
+	fi
 }
 
 #contacts
@@ -322,7 +331,7 @@ echo "|--------------------------------|"
 echo "|             Extras             |"
 echo "|--------------------------------|"
 echo "|--------------------------------|"
-echo "|  1.  Check for Updates         |"
+echo "|  1.  Toggle Auto-update        |"
 echo "|--------------------------------|"
 echo "|  2.  contact tommytomatoe      |"
 echo "|--------------------------------|"

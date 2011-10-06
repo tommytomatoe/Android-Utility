@@ -55,7 +55,7 @@ do_it ()
 if ! [[ $current_au_version == $latest_au_version ]] ; then
 	echo "The latest version is $latest_au_version."
 	echo
-	echo -n "WOuld you to update? [Y/n] "
+	echo -n "Would you to update? [Y/n] "
 	read -s -n 1 upd
 	case $upd in
 	n|N) echo ; echo ; echo "Oh poo." ; enter ;;
