@@ -1,0 +1,48 @@
+#! /bin/bash
+
+# Android Utility Updater Linux
+# Author: Tommy Nguyen [tommytomatoe]
+# Version: 1.0.5
+# Date: October 6, 2011
+# Contact: tommytomatoe@gmail.com
+
+##functions
+#enter
+enter()
+{	echo
+	echo "Please press [enter] to continue";
+	read -s -n 1 key
+	if [[ $key = "" ]]; then 
+  		echo
+  		clear
+	fi
+}
+
+# Getting latest version
+echo "Checking for updates..."
+wget -q --no-check-certificate http://bit.ly/qx7N2w -O  $HOME/version.txt
+
+current_au_version=`grep Version: $HOME/android-utility/README | sed 's:Version\:\ ::g'`
+latest_au_version=`grep Version: $HOME/version.txt | sed 's:Version\:\ ::g'`
+
+echo
+echo "Your current AU version is $current_au_version"
+echo
+echo "The latest AU availble is Verison $latest_au_version"
+echo
+
+if [[ $current_au_version == $latest_au_version ]] ; then
+	echo "Congrats, you have the latest Android-Utility. It is Version $latest_au_version"
+fi
+
+if ! [[ $current_au_version == $latest_au_version ]] ; then
+	echo "The latest version is $latest_au_version."
+	echo
+	echo -n "WOuld you to update? [Y/n] "
+	read -s -n 1 upd
+	case $upd in
+	n|N) echo ; echo ; echo "Oh poo." ;;
+	*) echo ; echo ; echo "Preparing to update" ;;
+	esac
+fi
+rm $HOME/version.txt
