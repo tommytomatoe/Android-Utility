@@ -45,7 +45,7 @@ do_it ()
 	if ! [[ `grep Version: $HOME/android-utility/README | sed 's:Version\:\ ::g'` == $latest_au_version ]] ; then
 		echo "Update failed."
 	else
-		echo "Congrats, you have the latest Android-Utility. It is version $current_au_version"
+		echo "Congrats, you have the latest Android-Utility. It is version `grep Version: $HOME/android-utility/README | sed 's:Version\:\ ::g'`"
 	fi
 	enter
 }
