@@ -2,7 +2,7 @@
 
 # Android Utility Linux
 # Author: Tommy Nguyen [tommytomatoe]
-# Version: 1.0.5
+# Version: 1.0.8
 # Date: October 6, 2011
 # Contact: tommytomatoe@gmail.com
 
@@ -148,103 +148,8 @@ credits ()
 	sleep .2
 	for l in U t i l i t y ; do
 	echo -n $l
-	sleep .1
+	sleep .1	
 	done
-	echo "."
-	echo
-	sleep .5
-	echo -n "The"
-	sleep .1
-	echo -n " " 
-	sleep .1
-	echo -n goal 
-	sleep .1
-	echo -n " "
-	sleep .1
-	echo -n of 
-	sleep .1
-	echo -n " "
-	sleep .1
-	echo -n this 
-	sleep .1
-	echo -n " "
-	sleep .1
-	echo -n project 
-	sleep .1
-	echo -n " "
-	sleep .1
-	echo -n is 
-	sleep .1
-	echo -n " "
-	sleep .1
-	echo -n to 
-	sleep .1
-	echo -n " "
-	sleep .1
-	echo -n assist
-	sleep .1
-	echo -n " "
-	sleep .1
-	echo -n you,
-	sleep .1
-	echo -n " "
-	sleep .1
-	echo -n $USER, 
-	sleep .1
-	echo -n " "
-	sleep .1
-	echo -n in 
-	sleep .1
-	echo -n " "
-	sleep .1
-	echo -n android 
-	sleep .1
-	echo -n " "
-	sleep .1
-	echo development.
-	echo
-	sleep .5
-	echo -n I 
-	sleep .1
-	sleep .1
-	echo -n " "
-	for l in h o p e ; do
-	echo -n $l
-	sleep .1
-	done
-	echo -n  
-	sleep .1
-	echo -n " "
-	sleep .1
-	for l in t h i s ; do
-	echo -n $l
-	sleep .1
-	done
-	echo -n  
-	sleep .1
-	echo -n " "
-	sleep .1
-	for l in g o a l ; do
-	echo -n $l
-	sleep .1
-	done
-	echo -n  
-	sleep .1
-	echo -n " "
-	sleep .1
-	for l in w a s ; do
-	echo -n $l
-	sleep .1
-	done
-	echo -n  
-	sleep .1
-	echo -n " "
-	sleep .1
-	for l in m e t ; do
-	echo -n $l
-	sleep .1
-	done
-	echo "."
 	echo
 	sleep .5
 	echo "ALERT: You will only see this message once."
@@ -436,11 +341,10 @@ echo "|                               ||11.  3vodex                    |"
 echo "|-------------------------------||-------------------------------|"
 echo "|                 K. Run dsixda's Android Kitchen                |"
 echo "|----------------------------------------------------------------|"
-echo "|                          SETUP TOOLS                           |"
 echo "|----------------------------------------------------------------|"
 echo "| x.  Run Installation Guide    || e.  Extras                    |"
 echo "| i.  Install Android SDK       || q.  Quit                      |"
-echo "|-------------------------------||-------------------------------|"
+echo "| u.  Update Android-Utility    ||                               |"
 echo "|-------------------------------||-------------------------------|"
 printf %s " Select an Option: "
 read num
@@ -460,14 +364,21 @@ case $num in
  i|I) ff;;
  k|K) kitchen_sink;;
  x) installau;;
+ u|U) clear; au-updater; enter;;
  q) quit;;
  *) echo; echo "$num is not a valid option"; enter;
 esac
 }
 
 VERSION=`grep Version: $HOME/android-utility/README | sed 's:Version\:\ ::g'`
-au-updater
 z=$HOME/android-utility/
+if ! [[ -a $z/resources/.3 ]] ; then
+	echo "Auto-update is turned on - recommended"
+	echo "To turn off Auto-update, go to Extras"
+	echo
+	au-updater
+fi
+
 if ! [[ -a $z/resources/.1 ]] ; then
 	touch $z/resources/.1
 	welcome

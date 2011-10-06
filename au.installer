@@ -2,8 +2,8 @@
 
 # Android Utility Linux
 # Author: Tommy Nguyen [tommytomatoe]
-# Version: 1.0.3
-# Date: October 4, 2011
+# Version: 1.0.6
+# Date: October 6, 2011
 # Contact: tommytomatoe@gmail.com
 
 enter()
@@ -118,4 +118,3 @@ echo
 echo "Sincerely,"
 echo "Tommy Nguyen"
 enter
-
