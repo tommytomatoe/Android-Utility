@@ -2,8 +2,8 @@
 
 # Android Utility Linux
 # Author: Tommy Nguyen [tommytomatoe]
-# Version: 1.0.3
-# Date: October 3, 2011
+# Version: 1.0.5
+# Date: October 6, 2011
 # Contact: tommytomatoe@gmail.com
 
 #introduction
@@ -421,7 +421,7 @@ which andutil $>/dev/null
 if [[ "$?" -ne "0" ]] ; then
 	source /etc/profile.d/au.sh
 fi
-echo "  Android Utility by tommytomatoe. Version 1.0.3. Special Edition"
+echo "  Android Utility by tommytomatoe. Version $VERSION. Special Edition"
 echo
 echo "|-------------------------------||-------------------------------|"
 echo "|-------------------------------||-------------------------------|"
@@ -465,6 +465,8 @@ case $num in
 esac
 }
 
+VERSION=`grep Version: $HOME/android-utility/README | sed 's:Version\:\ ::g'`
+au-updater
 z=$HOME/android-utility/
 if ! [[ -a $z/resources/.1 ]] ; then
 	touch $z/resources/.1
