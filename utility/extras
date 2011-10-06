@@ -55,25 +55,23 @@ ff ()
 #updates
 check_u ()
 {	if ! [[ -a $HOME/android-utility/resources/.3 ]] ; then
-	echo "Auto-update is turned on - recommended"
-	echo
-	echo -n "Would you like to turn off? [default=no] [N/y] "	
-	read ans
-	case $ans in
-		y|Y) echo ; echo ; echo "Turning off Auto-update" ; touch $HOME/android-utility/resources/.3 ;;
-		*) echo ; echo ; echo "Good for you" ;;
-	esac	
-	fi
-
-	if [[ -a $HOME/android-utility/resources/.3 ]] ; then
-	echo "Auto-update is turned off - not recommended"
-	echo
-	echo -n "Would you like to turn on? [default=yes] [Y/ns] "	
-	read ans
-	case $ans in
-		n|N) echo ; echo ; echo "Oh poo." ;;
-		*) echo ; echo ; echo "Turning on Auto-update" ; rm $HOME/android-utility/resources/.3 ;;
-	esac	
+		echo "Auto-update is turned on - recommended"
+		echo
+		echo -n "Would you like to turn off? [default=no] [N/y] "	
+		read ans
+		case $ans in
+			y|Y) echo ; echo ; echo "Turning off Auto-update" ; touch $HOME/android-utility/resources/.3 ;;
+			*) echo ; echo ; echo "Good for you" ;;
+		esac	
+	else
+		echo "Auto-update is turned off - not recommended"
+		echo
+		echo -n "Would you like to turn on? [default=yes] [Y/n] "	
+		read ans
+		case $ans in
+			n|N) echo ; echo ; echo "Oh poo." ;;
+			*) echo ; echo ; echo "Turning on Auto-update" ; rm $HOME/android-utility/resources/.3 ;;
+		esac	
 	fi
 }
 

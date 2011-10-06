@@ -2,7 +2,7 @@
 
 # Android Utility Linux
 # Author: Tommy Nguyen [tommytomatoe]
-# Version: 1.0.5
+# Version: 1.0.8
 # Date: October 6, 2011
 # Contact: tommytomatoe@gmail.com
 
@@ -436,11 +436,10 @@ echo "|                               ||11.  3vodex                    |"
 echo "|-------------------------------||-------------------------------|"
 echo "|                 K. Run dsixda's Android Kitchen                |"
 echo "|----------------------------------------------------------------|"
-echo "|                          SETUP TOOLS                           |"
 echo "|----------------------------------------------------------------|"
 echo "| x.  Run Installation Guide    || e.  Extras                    |"
 echo "| i.  Install Android SDK       || q.  Quit                      |"
-echo "|-------------------------------||-------------------------------|"
+echo "| u.  Update Android-Utility    ||                               |"
 echo "|-------------------------------||-------------------------------|"
 printf %s " Select an Option: "
 read num
@@ -460,20 +459,21 @@ case $num in
  i|I) ff;;
  k|K) kitchen_sink;;
  x) installau;;
+ u|U) clear; au-updater; enter;;
  q) quit;;
  *) echo; echo "$num is not a valid option"; enter;
 esac
 }
 
 VERSION=`grep Version: $HOME/android-utility/README | sed 's:Version\:\ ::g'`
-
+z=$HOME/android-utility/
 if ! [[ -a $z/resources/.3 ]] ; then
 	echo "Auto-update is turned on - recommended"
 	echo "To turn off Auto-update, go to Extras"
 	echo
 	au-updater
+fi
 
-z=$HOME/android-utility/
 if ! [[ -a $z/resources/.1 ]] ; then
 	touch $z/resources/.1
 	welcome

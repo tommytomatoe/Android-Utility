@@ -2,7 +2,7 @@
 
 # Android Utility Updater Linux
 # Author: Tommy Nguyen [tommytomatoe]
-# Version: 1.0.5
+# Version: 1.0.8
 # Date: October 6, 2011
 # Contact: tommytomatoe@gmail.com
 
@@ -28,7 +28,7 @@ latest_au_version=`grep Version: $HOME/version.txt | sed 's:Version\:\ ::g'`
 echo
 echo "Your current AU version is $current_au_version"
 echo
-echo "The latest AU availble is Verison $latest_au_version"
+echo "The latest AU availble is $latest_au_version"
 echo
 
 if [[ $current_au_version == $latest_au_version ]] ; then
@@ -53,7 +53,7 @@ do_it ()
 	
 
 if ! [[ $current_au_version == $latest_au_version ]] ; then
-	echo "The latest version is $latest_au_version."
+	echo "There is an update available."
 	echo
 	echo -n "Would you to update? [Y/n] "
 	read -s -n 1 upd
