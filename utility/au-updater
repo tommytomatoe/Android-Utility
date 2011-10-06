@@ -39,10 +39,11 @@ do_it ()
 {
 	cd $HOME/android-utility
 	git checkout linux-au
+	git reset --hard HEAD
 	git pull
 	echo
 	if ! [[ $current_au_version == $latest_au_version ]] ; then
-		echo "U[date failed."
+		echo "Update failed."
 	else
 		echo "Congrats, you have the latest Android-Utility. It is version $current_au_version"
 	fi
