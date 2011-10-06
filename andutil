@@ -472,7 +472,7 @@ if ! [[ -a $z/resources/.3 ]] ; then
 	echo "To turn off Auto-update, go to Extras"
 	echo
 	au-updater
-}
+
 z=$HOME/android-utility/
 if ! [[ -a $z/resources/.1 ]] ; then
 	touch $z/resources/.1
