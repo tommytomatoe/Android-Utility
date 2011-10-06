@@ -32,8 +32,24 @@ echo "The latest AU availble is Verison $latest_au_version"
 echo
 
 if [[ $current_au_version == $latest_au_version ]] ; then
-	echo "Congrats, you have the latest Android-Utility. It is Version $latest_au_version"
+	echo "Congrats, you have the latest Android-Utility. It is version $latest_au_version"
 fi
+
+do_it ()
+{
+	cd $HOME/android-utility
+	git checkout linux-au
+	git pull
+	echo
+	if ! [[ $current_au_version == $latest_au_version ]] ; then
+		echo "U[date failed."
+	else
+		echo "Congrats, you have the latest Android-Utility. It is version $current_au_version"
+	fi
+	enter
+}
+	
+	
 
 if ! [[ $current_au_version == $latest_au_version ]] ; then
 	echo "The latest version is $latest_au_version."
@@ -41,8 +57,8 @@ if ! [[ $current_au_version == $latest_au_version ]] ; then
 	echo -n "WOuld you to update? [Y/n] "
 	read -s -n 1 upd
 	case $upd in
-	n|N) echo ; echo ; echo "Oh poo." ;;
-	*) echo ; echo ; echo "Preparing to update" ;;
+	n|N) echo ; echo ; echo "Oh poo." ; enter ;;
+	*) echo ; echo ; echo "Preparing to update" ; do_it ;;
 	esac
 fi
 rm $HOME/version.txt
