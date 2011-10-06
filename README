@@ -1,4 +1,4 @@
-Version: 1.0.8
+Version: 1.0.6
 
 ### Welcome to Android Utility
 # README
@@ -11,6 +11,7 @@ Version: 1.0.8
 >added adb logcat ultimate tool
 >added auto-update
 >Version 1.0.6
+>added update options
 
 ### Update. October 04, 2011
 >updated res_compress
