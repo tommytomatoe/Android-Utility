@@ -1,12 +1,16 @@
-Version: 1.0.3
+Version: 1.0.5
 
 ### Welcome to Android Utility
 # README
 # Author: Tommy Nguyen [tommytomatoe]
-# Date: October 5, 2011
+# Date: October 6, 2011
 # Contact: tommytomatoe@gmail.com
 
-### Update. Octover 04, 2011
+### Update. October 06, 2011
+>updated toVersion 1.0.5
+>added adb logcat ultimate tool
+
+### Update. October 04, 2011
 >updated res_compress
 >added auto-zipalign option
 
