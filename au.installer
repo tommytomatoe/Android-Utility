@@ -57,7 +57,6 @@ if ! [[ $? -eq 0 ]] ; then
 	sudo apt-get install git-core git-gui git-doc git
 	echo
     fi
-echo "Version 1.0.3. The Special Edition"
 echo
 load_dot
 echo
