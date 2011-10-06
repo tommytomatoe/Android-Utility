@@ -7,8 +7,10 @@ Version: 1.0.6
 # Contact: tommytomatoe@gmail.com
 
 ### Update. October 06, 2011
->updated toVersion 1.0.5
+>Version 1.0.5
 >added adb logcat ultimate tool
+>added auto-update
+>Version 1.0.6
 
 ### Update. October 04, 2011
 >updated res_compress
