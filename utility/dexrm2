@@ -98,6 +98,44 @@ for z in *.apk
 enter
 }
 
+remove_dex_data()
+{ echo
+  echo "Making Directories"
+  for fold in "$HOME/Dex/0-Original-DATA" "$HOME/Dex/0-Minus-Dex-DATA" "$HOME/Dex/0-DATA-odex" ; do
+	if [[ -d $fold ]] ; then
+	rm -r $fold
+	mkdir $fold
+	else
+	mkdir $fold
+	fi
+	done
+echo
+echo "Setting Variables"
+a=$HOME/Dex/data/
+b=$HOME/Dex/0-Original-DATA/
+c=$HOME/Dex/0-Minus-Dex-DATA/  
+d=$HOME/Dex/0-DATA-odex/
+echo ""	
+cd $a
+for a in *apk
+	do 
+		cp $a $HOME/Dex/0-Original-DATA/$a
+		cp $a $HOME/Dex/0-Minus-Dex-DATA/$a
+	done
+for o in *odex
+	do
+		cp $o $HOME/Dex/0-DATA-odex/$o
+	done
+cd $HOME
+cd $c
+for z in *.apk
+	do 
+		echo "Deleting dex from $z"
+		aapt r -v $z classes.dex
+	done
+enter
+}
+
 makedir ()
 {	clear
 	w=$HOME/Dex
@@ -133,6 +171,7 @@ makedirA ()
 	enter
 	mkdir $y
 	mkdir $y/app
+	mkdir $y/data
 	mkdir $y/framework
 	echo 
 	clear
@@ -161,9 +200,10 @@ tt_dex_rm ()
 	echo "   Please Choose Option"
 	echo
 	echo "   t. RUN FIRST"
-	echo "   a. dexrm A for framework"
-	echo "   b. dexrm F for app"
-	echo "   c. dexrm E for all in one"
+	echo "   a. dexrm for framework"
+	echo "   b. dexrm for app"
+	echo "   c. dexrm for all in one"
+	echo "   d. dexrm for data/app"
 	echo "   q. quit program"
 	echo ""
 	echo "   brought to you by"
@@ -180,6 +220,7 @@ tt_dex_rm ()
 	a|A) remove_dex_framework;;
 	b|B) remove_dex_app;;
 	c|C) remove_dex_framework; remove_dex_app;;
+	d|D) remove_dex_data;;
 	q|Q) echo; echo "Goodbye. Thank you for using, $USER."; echo; exit;
 	esac
 }

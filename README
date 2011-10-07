@@ -1,10 +1,16 @@
-Version: 1.0.6
+Version: 1.0.7
 
 ### Welcome to Android Utility
 # README
 # Author: Tommy Nguyen [tommytomatoe]
 # Date: October 6, 2011
 # Contact: tommytomatoe@gmail.com
+
+### Update. October 07, 2011
+>Version 1.0.7
+>added data/app odex
+>added png swap option
+>cleaning up scripts
 
 ### Update. October 06, 2011
 >Version 1.0.5
