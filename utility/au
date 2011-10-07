@@ -3,7 +3,7 @@
 # Android Utility Linux
 # Author: Tommy Nguyen [tommytomatoe]
 # Version: 1.0.8
-# Date: October 6, 2011
+# Date: October 7, 2011
 # Contact: tommytomatoe@gmail.com
 
 #introduction
@@ -332,12 +332,12 @@ echo "|-------------------------------||-------------------------------|"
 echo "|-------------------------------||-------------------------------|"
 echo "|         BASIC TOOLS           ||         ADVANCE TOOLS         |"
 echo "|-------------------------------||-------------------------------|"
-echo "| 1.  adb tools                 || 6.  apk Re-Engineering        |"
-echo "| 2.  keystore manager          || 7.  apk Optimization          |"
-echo "| 3.  sign apk and update.zip   || 8.  dex code utility          |"
-echo "| 4.  zipalign                  || 9.  draw9patch utilities      |"
-echo "| 5.  change-log creator        ||10.  AU ROM Utility            |"
-echo "|                               ||11.  3vodex                    |"
+echo "| 1.  adb tools                 || 7.  apk Re-Engineering        |"
+echo "| 2.  keystore manager          || 8.  apk Optimization          |"
+echo "| 3.  sign apk and update.zip   || 9.  dex code utility          |"
+echo "| 4.  zipalign                  ||10.  draw9patch utilities      |"
+echo "| 5.  change-log creator        ||11.  AU ROM Utility            |"
+echo "| 6.  png swap themer           ||12.  3vodex                    |"
 echo "|-------------------------------||-------------------------------|"
 echo "|                 K. Run dsixda's Android Kitchen                |"
 echo "|----------------------------------------------------------------|"
@@ -354,12 +354,13 @@ case $num in
  3) zasign;;
  4) zipped_up;;
  5) change_log;;
- 6) apk_tool;;
- 7) apk_opt;;
- 8) smali_tool;;
- 9) 9patch;;
-10) romutil;;
-11) odex_script;;
+ 6) ff;;
+ 7) apk_tool;;
+ 8) apk_opt;;
+ 9) smali_tool;;
+10) 9patch;;
+11) romutil;;
+12) odex_script;;
  e|E) extras;;
  i|I) ff;;
  k|K) kitchen_sink;;
