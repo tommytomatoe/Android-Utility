@@ -147,7 +147,7 @@ sign_it ()
 	read ALIAS
 	cd $x
 	for a in *.apk ; do
-	jarsigner -verbose -keystore $w/$KEYSTORE $a $ALIAS	
+	jarsigner -verbose -keystore $w/keystore/$KEYSTORE $a $ALIAS	
 	done
 	enter
 }
