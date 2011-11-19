@@ -1,12 +1,16 @@
-Version: 1.0.8
+Version: 1.0.9
 
 ### Welcome to Android Utility
 # README
 # Author: Tommy Nguyen [tommytomatoe]
-# Date: October 6, 2011
+# Date: November 19, 2011
 # Contact: tommytomatoe@gmail.com
 
-### Update/ October 14, 2011
+### Update.  November 19, 2011
+>Version 1.0.9
+>Restructured dexrm
+
+### Update. October 14, 2011
 >Version 1.0.8
 >fixed keystore script error
 

@@ -23,193 +23,144 @@ enter2()
 }
 
 remove_dex_framework()
-{ echo
-  echo "Making Directories"
-  for fold in "$HOME/Dex/0-Original-FW" "$HOME/Dex/0-Minus-Dex-FW" "$HOME/Dex/0-FW-odex" ; do
-	if [[ -d $fold ]] ; then
-	rm -r $fold
-	mkdir $fold
-	else
-	mkdir $fold
-	fi
+{	echo
+	echo "Making Directories"
+	for fold in "$w/0-Original-FW" "$w/0-Minus-Dex-FW" "$w/0-FW-odex" ; do
+		if ! [[ -d $fold ]] ; then
+			mkdir $fold
+		fi
 	done
-echo 
-echo "Setting Variables"
-a=$HOME/Dex/framework/
-b=$HOME/Dex/0-Original-FW/
-c=$HOME/Dex/0-Minus-Dex-FW/  
-d=$HOME/Dex/0-FW-odex/
-echo ""	
-cd $a
-for j in *jar
-	do 
-		cp $j $HOME/Dex/0-Original-FW/$j
-		cp $j $HOME/Dex/0-Minus-Dex-FW/$j
+	echo 
+	echo "Setting Variables"
+	a=$w/framework
+	b=$w/0-Original-FW
+	c=$w/0-Minus-Dex-FW
+	d=$w/0-FW-odex
+	echo 
+	cd $a
+	for j in *jar ; do 
+		cp $j $b/$j
+		cp $j $c/$j
 	done
-for o in *odex
-	do
-		cp $o $HOME/Dex/0-FW-odex/$o	
+	for o in *odex ; do
+		cp $o $d/$o	
 	done	
-cd $HOME
-cd $c
-for z in *.jar
-	do 
+	cd $HOME
+	cd $c
+	for z in *.jar ; do 
 		echo "Deleting dex from $z"
 		aapt r -v $z classes.dex
 	done
-enter
+	enter
 }
 
 remove_dex_app()
-{ echo
-  echo "Making Directories"
-  for fold in "$HOME/Dex/0-Original-APP" "$HOME/Dex/0-Minus-Dex-APP" "$HOME/Dex/0-APP-odex" ; do
-	if [[ -d $fold ]] ; then
-	rm -r $fold
-	mkdir $fold
-	else
-	mkdir $fold
-	fi
+{	echo
+ 	echo "Making Directories"
+	for fold in "$w/0-Original-APP" "$w/0-Minus-Dex-APP" "$w/0-APP-odex" ; do
+		if ! [[ -d $fold ]] ; then
+			mkdir $fold
+		fi
 	done
-echo
-echo "Setting Variables"
-a=$HOME/Dex/app/
-b=$HOME/Dex/0-Original-APP/
-c=$HOME/Dex/0-Minus-Dex-APP/  
-d=$HOME/Dex/0-App-odex/
-echo ""	
-cd $a
-for a in *apk
-	do 
-		cp $a $HOME/Dex/0-Original-APP/$a
-		cp $a $HOME/Dex/0-Minus-Dex-APP/$a
+	echo
+	echo "Setting Variables"
+	a=$w/app
+	b=$w/0-Original-APP
+	c=$w/0-Minus-Dex-APP
+	d=$w/0-APP-odex
+	echo 
+	cd $a
+	for app in *apk ; do 
+		cp $app $b/$app
+		cp $app $c/$app
 	done
-for o in *odex
-	do
-		cp $o $HOME/Dex/0-App-odex/$o
+	for o in *odex ; do
+		cp $o $d/$o
 	done
-cd $HOME
-cd $c
-for z in *.apk
-	do 
+	cd $HOME
+	cd $c
+	for z in *.apk ; do 
 		echo "Deleting dex from $z"
 		aapt r -v $z classes.dex
 	done
-enter
+	enter
 }
 
 remove_dex_data()
-{ echo
-  echo "Making Directories"
-  for fold in "$HOME/Dex/0-Original-DATA" "$HOME/Dex/0-Minus-Dex-DATA" "$HOME/Dex/0-DATA-odex" ; do
-	if [[ -d $fold ]] ; then
-	rm -r $fold
-	mkdir $fold
-	else
-	mkdir $fold
-	fi
+{	echo
+ 	echo "Making Directories"
+  	for fold in "$w/0-Original-DATA" "$w/0-Minus-Dex-DATA" "$w/0-DATA-odex" ; do
+		if ! [[ -d $fold ]] ; then
+			mkdir $fold
+		fi
 	done
-echo
-echo "Setting Variables"
-a=$HOME/Dex/data/
-b=$HOME/Dex/0-Original-DATA/
-c=$HOME/Dex/0-Minus-Dex-DATA/  
-d=$HOME/Dex/0-DATA-odex/
-echo ""	
-cd $a
-for a in *apk
-	do 
-		cp $a $HOME/Dex/0-Original-DATA/$a
-		cp $a $HOME/Dex/0-Minus-Dex-DATA/$a
+	echo
+	echo "Setting Variables"
+	a=$w/data-app
+	b=$w/0-Original-DATA
+	c=$w/0-Minus-Dex-DATA  
+	d=$w/0-DATA-odex
+	echo	
+	cd $a
+	for app in *apk ; do 
+		cp $app $b/$app
+		cp $app $c/$app
 	done
-for o in *odex
-	do
-		cp $o $HOME/Dex/0-DATA-odex/$o
+	for o in *odex ; do
+		cp $o $d/$o
 	done
-cd $HOME
-cd $c
-for z in *.apk
-	do 
+	cd $HOME
+	cd $c
+	for z in *.apk ; do 
 		echo "Deleting dex from $z"
 		aapt r -v $z classes.dex
 	done
-enter
+	enter
 }
 
 makedir ()
 {	clear
-	w=$HOME/Dex
-	if [[ -s $w ]] ; then
-		echo
-		echo "Dex Folder exists, would you like to start over? [Y/n] [default=N]"
-		read -s -n 1 ans
-		case $ans in 
-		y|Y) echo; makedirA; echo "Dex Folder replaced "; enter;;
-		*) echo; echo "Dex Folder remained unchanged"; enter;;
-		esac
-	else
+	if ! [[ -s $w ]] ; then
 		makedirA
-	fi
-	z=$HOME/bin
-	if [[ -s $z ]] ; then
-		echo
-		echo "$z exists, would you like to start over? [Y/n] [default=N]"
-		read -s -n 1 ans
-		case $ans in 
-		y|Y) echo; mkdir $z; echo "$z replaced "; enter;;
-		*) echo; echo "$z remained unchanged"; enter;;
-		esac
-	else
-		mkdir $z
 	fi
 }	
 
 makedirA ()
-{	y=$HOME/Dex/
-	echo 
+{	echo 
 	echo "Creating New Dex Directory"
-	enter
-	mkdir $y
-	mkdir $y/app
-	mkdir $y/data
-	mkdir $y/framework
+	for folder in $w $w/app $w/data-app $w/framework ; do
+		if ! [[ -s $folder ]] ; then
+			mkdir $folder
+		fi
+	done
 	echo 
 	clear
 }
 
 tt_dex_rm ()
 {	clear
+	w=$HOME/android-utility/working-folder/odex
+	makedir
 	echo
 	echo "               ***"	
 	echo
 	echo "Welcome to the Auto Dex-Removal Utility"
-	echo "Version 0.0.2 aapt"
+	echo "Version 0.1.0 aapt"
 	echo
-	echo "Instructions [Please Read all before starting]:"
-	echo
-	echo "1. Press [t] key to RUN FIRST"
-	echo "2. Place apps and framework files in"
-	echo "   in $HOME/Dex/"
-	echo "3. Choose Options a, b, or c"
-	enter	
-	echo "1. Press [t] key to RUN FIRST"
-	echo "2. Place apps and framework files in"
-	echo "   in $HOME/Dex/"
-	echo "3. Choose Options a, b, or c"
+	echo "#  Place apps in working-folder/oex/app"
+	echo "#  Place jars in working-folder/oex/framework"
+	echo "#  If using 3vodex, your files were automatically pulled for you"
 	echo
 	echo "   Please Choose Option"
 	echo
-	echo "   t. RUN FIRST"
 	echo "   a. dexrm for framework"
 	echo "   b. dexrm for app"
-	echo "   c. dexrm for all in one"
+	echo "   c. dexrm for app and framework"
 	echo "   d. dexrm for data/app"
 	echo "   q. quit program"
-	echo ""
+	echo 
 	echo "   brought to you by"
-	echo "   tommytomatoe"
-	echo ""
-	echo "   enjoy the possibilities..." 
+	echo "   tommytomatoe" 
 	echo
 	echo "               ***"
 	echo
