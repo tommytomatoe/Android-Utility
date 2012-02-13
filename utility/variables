@@ -1,0 +1,58 @@
+#! /bin/bash
+
+# Variable Storage for Android Utility
+# Author: Tommy Nguyen [tommytomatoe]
+# Version: 1.1.0
+# Date: November 21, 2011
+# Contact: tommytomatoe@gmail.com
+
+#controls path to au. default $HOME/android-utility
+AU=$HOME/android-utility
+
+#sets au version number. do not change
+VERSION=`grep Version: $AU/README | sed 's:Version\:\ ::g'`
+
+#kitchen path
+k=$AU/kitchen
+
+# FOR INSTALL SCRIPT
+
+#usr/local/bin
+u=/usr/local/bin
+
+#clean install
+clean=$AU/resources/clean
+
+#aapt path
+caapt=$clean/aapt
+
+#png path for install
+p=$AU/resources/png
+
+#$HOME/bin
+b=$HOME/bin
+
+#working folder
+w=$AU/working-folder
+
+# System functions
+
+#load
+load_dot ()
+{	for DOT in . . . . . . . ; do
+	echo -n "$DOT"
+	sleep .15
+	done
+	echo "."
+}
+
+#enter
+enter()
+{	echo
+	echo "Please press [enter] to continue";
+	read -s -n 1 key
+	if [[ $key = "" ]]; then 
+  		echo
+  		clear
+	fi
+}
