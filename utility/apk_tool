@@ -2,8 +2,8 @@
 
 # Apktool Script Linux
 # Author: Tommy Nguyen [tommytomatoe]
-# Version: 1.0.2
-# Date: August 22, 2011
+# Version: 1.1.0
+# Date: February 13, 2012
 # Contact: tommytomatoe@gmail.com
 
 # Setting Loop Variable
@@ -224,10 +224,8 @@ apktool_s ()
 	echo "|  Apktool Utility                                    |"
 	echo "|-----------------------------------------------------|"
 	echo "|  1.  Install framework first (ie. framework-res.apk)|"
-	echo "|  2.  Decompile Apk                                  | " 
-	echo "|  3.  Decompile Multiple Apk                         | "
-	echo "|  4.  Recompile Apk                                  |"
-	echo "|  5.  Recompile Multiple Apk                         |"
+	echo "|  3.  Decompile Apk - single or multi apks           |"
+	echo "|  5.  Recompile Apk - single or multi apks           |"
 	echo "|-----------------------------------------------------|"
 	echo
 	echo "|  Optional Flavors                                   |"
@@ -236,6 +234,11 @@ apktool_s ()
 	echo "|  b.  Use different version of aapt                  |"
 	echo "|  q.  Go Back to Main Menu                           |"
 	echo "|-----------------------------------------------------|"
+	echo
+	echo "|  OUTDATED COMMANDS - use without support            |"
+	echo "|-----------------------------------------------------|"
+	echo "|  2. Decompile Single Apk   4. Recompile Single Apk  |"
+	echo
 	echo
 	printf %s "  Please Select Feature: "
 	read num

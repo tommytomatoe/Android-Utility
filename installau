@@ -2,8 +2,8 @@
 
 # Installation Script Linux
 # Author: Tommy Nguyen [tommytomatoe]
-# Version: 1.0.5
-# Date: October 06, 2011
+# Version: 1.1.0
+# Date: February 13, 2012
 # Contact: tommytomatoe@gmail.com
 
 # Setting Loop Variable
@@ -12,16 +12,15 @@ APPLE=$1
 
 # Functions
 
-# au.sh
+# path
 bpro ()
-{	b=au.sh
-	c=$HOME/android-utility/resources/clean
-	clear
+{	clear
 	echo "Checking status of PATH..."
 	load_dot
-	if [[ -s /etc/profile.d/$b ]] ; then
+	which andutil
+	if [ $? -eq 0 ] ; then
 		echo
-		echo "$b exists."
+		echo "andutil is in PATH. rejoice"
 		enter
 	else
 		bpro3
@@ -29,12 +28,9 @@ bpro ()
 }
 
 bpro3 ()
-{	b=au.sh
-	echo
-	echo "$b does not exist. Preparing to create $b"
-	sudo cp $c/$b /etc/profile.d/$b
-	sudo chmod 755 /etc/profile.d/$b
-	source /etc/profile.d/au.sh
+{	echo "andutil not in path. Writing to .bashrc"
+	echo "" >> $HOME/.bashrc
+	echo "export PATH=$HOME/bin:$HOME/android-utility:$HOME/android-utility/utility:$HOME/android-sdk/platform-tools/:$HOME/android-sdk/tools:\$\{PATH\}" >> $HOME/.bashrc
 	enter
 }
 
@@ -223,7 +219,6 @@ first_time ()
 	sudo chmod 755 $HOME/bin/*
 	sudo chmod 755 $HOME/android-utility/utility/*
 	sudo chmod 755 $HOME/android-utility/utility/dex/*		
-	source /etc/profile.d/au.sh
 	echo "All Done. Now, enjoy android-utility"
 	enter
 }
@@ -368,3 +363,4 @@ while [ "$APPLE" = "" ]
 do
 	inst
 done
+

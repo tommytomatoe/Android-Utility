@@ -2,8 +2,8 @@
 
 # Android Utility Linux
 # Author: Tommy Nguyen [tommytomatoe]
-# Version: 1.0.8
-# Date: October 7, 2011
+# Version: 1.1.0
+# Date: February 13, 2012
 # Contact: tommytomatoe@gmail.com
 
 #introduction
@@ -14,7 +14,15 @@ echo "Welcome back" $USER,
 echo
 }
 
-##functions
+#load
+load_dot ()
+{	for DOT in . . . . . . . ; do
+	echo -n "$DOT"
+	sleep .15
+	done
+	echo "."
+}
+
 #enter
 enter()
 {	echo
@@ -32,70 +40,12 @@ credits ()
 	echo "   ### Thanks and Credits ###"
 	echo
 	sleep .5
-	echo "Brut.all - apktool.jar and sound advice"
-	sleep .5
-	echo "JesusFreke - baksmali.jar and smali.jar"
-	sleep .5
-	echo "Stericson/JF - testsign.jar"
-	sleep .5
-	echo "Pendo - sound advice/answering questions/awesome sauce"
-	sleep .5
-	echo "Google - AOSP"
-	sleep .5
-	echo "aamikam - sound advice"
-	sleep .5
-	echo "themikmik.com - Awesome sauce"
-	sleep .1
-	echo "xda developers - Roots" 
-	sleep .5
-	echo "JsChiSurf - sound advice"
-	sleep .5
-	echo "dsixda - sound advice"
-	sleep .5
-	echo "Amon_RA - sound advice"
-	sleep .5
-	echo "Igor Pavlov - 7zip"
-	sleep .5
-	echo "Ardfry Imaging, LLC. - pngout"
-	sleep .5
-	echo "Glenn Randers-Pehrson - pngcrush"
-	sleep .5
-	echo "Andrea Mazzoleni - advpng"
-	sleep .5
-	echo "Cosmin Truta - optipng"
-	sleep .5
-	echo "pxb1...@gmail.com - dex2jar"
-	sleep .5
-	echo "Emmanuel Dupuy - JD-GUI"
-	sleep .5
-	echo "misfit and leoisright - constant support"
-	sleep .5
-	echo "Xclusive Rydah, Chingy - testing and ideas"
-	sleep .5
+	for cred in "Brut.all - apktool.jar and sound advice" "JesusFreke - baksmali.jar and smali.jar" "Stericson/JF - testsign.jar" "Pendo - sound advice/answering questions/awesome sauce" "Google - AOSP" "aamikam - sound advice" "themikmik.com - Awesome sauce" "xda developers - Roots" "JsChiSurf - sound advice" "dsixda - sound advice" "Amon_RA - sound advice" "Igor Pavlov - 7zip" "Ardfry Imaging, LLC. - pngout" "Glenn Randers-Pehrson - pngcrush" "Andrea Mazzoleni - advpng" "Cosmin Truta - optipng" "pxb1...@gmail.com - dex2jar" "Emmanuel Dupuy - JD-GUI" "misfit and leoisright - constant support" "Xclusive Rydah, Chingy - testing and ideas" ; do
+		echo $cred
+		sleep .5
+	done
 	echo
-	echo -n T
-	sleep .1
-	echo -n o
-	sleep .1
-	echo -n m
-	sleep .1
-	echo -n m
-	sleep .1
-	echo -n y
-	sleep .1
-	echo -n " " 
-	sleep .1
-	echo -n N
-	sleep .1
-	echo -n g
-	sleep .1
-	echo -n u
-	sleep .1
-	echo -n y
-	sleep .1
-	echo -n e
-	sleep .1
-	echo -n n
+	echo "Tommy Nguyen"
 	sleep .1
 	echo -n " " 
 	sleep .1
@@ -263,15 +213,6 @@ echo
 sleep .25
 }
 
-#load
-load_dot ()
-{	for DOT in . . . . . . . ; do
-	echo -n "$DOT"
-	sleep .15
-	done
-	echo "."
-}
-
 #System Check
 check_s ()
 {
@@ -324,7 +265,7 @@ android ()
 {
 which andutil $>/dev/null
 if [[ "$?" -ne "0" ]] ; then
-	source /etc/profile.d/au.sh
+	export PATH=$HOME/bin:$HOME/android-utility:$HOME/android-utility/utility:${PATH}
 fi
 echo "  Android Utility by tommytomatoe. Version $VERSION. Special Edition"
 echo
@@ -392,3 +333,4 @@ while :
 do
 	android
 done
+

@@ -2,8 +2,8 @@
 
 # Apktool Build Script
 # Author: Tommy Nguyen [tommytomatoe]
-# Version: 1.0.3
-# Date: October 05, 2011
+# Version: 1.1.0
+# Date: February 13, 2012
 # Contact: tommytomatoe@gmail.com
 
 # Setting Loop Variable
@@ -116,26 +116,71 @@ build_m ()
 {	COM="apktool d[ecode]"
 	d=$HOME/android-utility/working-folder/mod-here-multi
 	clear
+	# creating directories
+	if [[ -s $d/new_apps_unsigned ]] ; then
+		echo &>/dev/null
+	else
+		mkdir $d/new_apps_unsigned
+	fi
+	if [[ -s $d/original_apps ]] ; then
+		echo &>/dev/null
+	else
+		mkdir $d/original_apps
+	fi
 	a=`ls -R $d | grep apktool.yml`
 	if [[ "$?" == "0" ]] ; then
 		echo "Android Utility found these Projects: "
 		echo
-		ls $d/Projects | grep -vE '(.apk|original|decompressed|new)'
+		cd $d/Projects
+		for projectName in `ls | grep -vE '(.apk|original|decompressed|new_apps)'`
+		do
+		    i=$(($i+1))
+		    projectArray[$i]=$projectName
+		    echo "  $i. $projectName" >> temp.list
+		done
+		more temp.list
+		rm -f temp.list
 		echo
-		cd $d
-		echo -n "Would you like to build all the projects? [Y/n] "
-		read -n 1 YES
-		case $YES in
-			y|Y) do_it_m;;
-			n|N) one_time;;
-			*) do_it_m;;
-		esac
-	else
+		echo -n "Please enter number of Project (all=0, default=all, quit=q): "
+		read ans
 		echo
-		clear
-		echo "Android Utility did not find a valid project"
-		enter
-	fi
+		if [ "$ans" == "0" ]; then
+			do_it_m
+		fi
+		if [ "$ans" == "" ]; then
+			do_it_m
+		fi	
+		if [ "$ans" == "q" ]; then
+			exit 0
+		fi
+		if [ "`echo $ans | sed 's/[0-9]*//'`" == "" ] || [ "ans"=="1" ]; then
+			projectBuild=${projectArray[$ans]}
+			if [ "$projectBuild" == "" ]; then
+				exit 0
+			fi
+		else
+			exit 0
+		fi
+		apktool b $projectBuild ../new_apps_unsigned/$projectBuild.apk
+		# moving apks
+		cd $HOME/android-utility/working-folder/mod-here-multi
+		count=`ls -1 *.apk 2>/dev/null | wc -l`
+		if [ $count != 0 ]; then
+		for c in *.apk
+		do 
+			mv -v $c original_apps/
+		done
+		fi
+		echo
+		load_dot
+		echo
+		metaAlign
+		else
+			echo
+			clear
+			echo "Android Utility did not find a valid project"
+			enter
+		fi
 	enter
 }
 
@@ -180,7 +225,7 @@ do_it_m ()
 	do
 		echo "Building $b "
 		echo 
-		apktool b -f $b
+		apktool b -f $b ../new_apps_unsigned/$b.apk
 		if [[ "$?" -ne "0" ]] ; then
 		echo "On `date +%b%e_%H%M%S`, $b was not built Properly" >> $HOME/android-utility/log/build_log
 		LOG=true
@@ -190,17 +235,15 @@ do_it_m ()
 
 	# moving apks
 	cd $d
+	count=`ls -1 *.apk 2>/dev/null | wc -l`
+	if [ $count != 0 ]; then
 	for c in *.apk
 	do 
 		echo "Moving $c to original_apps"
 		mv -f $c original_apps/
 	done
+	fi
 	cd $d/Projects
-	for c in `ls | grep -vE '(.apk|original|decompressed|new_apps)'`
-	do	
-		echo "Moving $c to new_apps_unsigned"
-		cp $c/dist/*.apk ../new_apps_unsigned/
-	done
 		if [[ "$LOG" = "true" ]] ; then
 		echo
 		echo "Please check build_log for apk with errors"
@@ -208,21 +251,26 @@ do_it_m ()
 	echo
 	load_dot
 	echo
-	echo -n "Would you like to auto-inject META-INF at this time? [Y/n] "
-	read -s -n 1 ans
-	case $ans in
-	n|N) echo ; echo ; echo "Cancelling META-INF injection" ;;
-	*) echo ; sign_it_sys;;
-	esac
-	echo
-	load_dot
-	echo
-	echo -n "Would you like to auto-zipalign at this time? [Y/n] "
-	read -s -n 1 ans
-	case $ans in
-	n|N) echo ; echo ; echo "Cancelling zipalignment" ;;
-	*) echo ; zipo ;;
-	esac
+	metaAlign
+	enter
+}
+
+metaAlign ()
+{
+		echo -n "Would you like to auto-inject META-INF at this time (equivalent to resigning a system apk)? [Y/n] "
+		read -s -n 1 ans
+		case $ans in
+		n|N) echo ; echo ; echo "Cancelling META-INF injection"; echo; echo "Find new apps in new_apps_unsigned";;
+		*) echo ; sign_it_sys;;
+		esac
+		echo
+		load_dot
+		echo
+		if [[ zipStat -eq 1 ]] ; then
+		echo "Beginning auto-zipalign"
+		zipo
+		fi
+		zipStat=
 }
 
 sign_it_sys ()
@@ -255,6 +303,7 @@ sign_it_sys ()
 		zip $d/new_apps_Signed/$a META-INF/*
 		echo "done with $a"
 	done
+	zipStat=1
 }
 
 zipo ()
@@ -288,30 +337,74 @@ echo "Find new apks in new_apps_Signed"
 
 
 one_time ()
-{		echo	
-		echo
-		echo -n "Please type the name of the project you would like to build: "
-		read ans
-		echo
-		b=`apktool b $ans`
-		if [[ "$?" == "0" ]] ; then
-			apktool b $ans
-		else
-			echo
-			echo "Please enter a valid project name"
-			enter
+{		
+	echo	
+	echo
+	cd $HOME/android-utility/working-folder/mod-here-multi/Projects
+	for projectName in `ls | grep -vE '(.apk|original|decompressed|new_apps)'`
+	do
+	    i=$(($i+1))
+	    projectArray[$i]=$projectName
+	    echo "  $i. $projectName" >> temp.list
+	done
+	more temp.list
+	rm -f temp.list
+	echo
+	echo -n "Please enter number of Project (quit=0, default=1): "
+	read ans
+	echo
+	if [ "$ans" == "0" ]; then
+		exit 0
+	fi
+	if [ "$ans" == "" ]; then
+		ans=1
+	fi	
+	if [ "`echo $ans | sed 's/[0-9]*//'`" == "" ] || [ "ans"=="1" ]; then
+		projectBuild=${projectArray[$ans]}
+		if [ "$projectBuild" == "" ]; then
+			exit 0
 		fi
+	else
+		exit 0
+	fi
+	testBuild=`apktool b $projectBuild`
+	if [[ "$?" == "0" ]] ; then
+		apktool b $projectBuild ../new_apps_unsigned/$projectBuild.apk
+	else
+		echo
+		echo "Please enter a valid project name"
+		enter
+	fi
 
 	# moving apks
 	cd $HOME/android-utility/working-folder/mod-here-multi
+	if [ -e *.apk ] ; then
 	for c in *.apk
 	do 
 		mv -v $c original_apps/
 	done
-	for c in `ls $d/Projects | grep -vE '(.apk|original|decompressed|new_apps)'`
-	do	
-		cp -v $c/dist/*.apk new_apps_unsigned/
-	done
+	fi
+	echo
+	load_dot
+	echo
+	echo -n "Would you like to auto-inject META-INF at this time (equivalent to resigning a system apk)? [Y/n] "
+	read -s -n 1 ans
+	case $ans in
+	n|N) echo ; echo ; echo "Cancelling META-INF injection";;
+	*) echo ; sign_it_sys;;
+	esac
+	echo
+	load_dot
+	echo
+	if [[ zipStat -eq 1 ]] ; then
+	echo -n "Would you like to auto-zipalign at this time? [Y/n] "
+	read -s -n 1 ans
+	case $ans in
+	n|N) echo ; echo ; echo "Cancelling zipalignment" ;;
+	*) echo ; zipo ;;
+	esac
+	fi
+	zipStat=
 }
 
 
