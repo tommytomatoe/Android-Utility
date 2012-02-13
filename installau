@@ -17,6 +17,7 @@ bpro ()
 {	clear
 	echo "Checking status of PATH..."
 	load_dot
+	source $HOME/.bashrc
 	which andutil
 	if [ $? -eq 0 ] ; then
 		echo
@@ -30,7 +31,7 @@ bpro ()
 bpro3 ()
 {	echo "andutil not in path. Writing to .bashrc"
 	echo "" >> $HOME/.bashrc
-	echo "export PATH=$HOME/bin:$HOME/android-utility:$HOME/android-utility/utility:$HOME/android-sdk/platform-tools/:$HOME/android-sdk/tools:\$\{PATH\}" >> $HOME/.bashrc
+	echo "export PATH=$HOME/bin:$HOME/android-utility:$HOME/android-utility/utility:$HOME/android-sdk/platform-tools/:$HOME/android-sdk/tools:\${PATH}" >> $HOME/.bashrc
 	enter
 }
 
@@ -175,7 +176,7 @@ clean_in ()
 	echo "Adding resources to $u and /usr/bin"
 	sudo cp -v $c/aapt-9 $u/aapt
 	sudo cp -v $c/apktool $u/
-	sudo cp -v $c/apktool-1.4.1.jar $u/apktool.jar
+	sudo cp -v $c/apktool-1.4.3.jar $u/apktool.jar
 	echo "Adding resources to $b"
 	load_dot
 	cp -v $c/adb $b/adb
@@ -240,8 +241,9 @@ ins_apktool ()
 	echo "  2.  apktool 1.3.2"
 	echo "  3.  apktool 1.4.1"
 	echo "  4.  apktool 1.4.2 - compiled from source [8.22.2011]"
+	echo "  5.  apktool 1.4.3"
 	echo
-	echo "  5.  apktool 1.3.2 experimental - fixed "-v4" and xml"
+	echo "  6.  apktool 1.3.2 experimental - fixed "-v4" and xml"
 	echo
 	echo "  x.  Keep current version"
 	echo
@@ -252,7 +254,8 @@ ins_apktool ()
 	 2) echo; sudo cp -v $c/apktool1.3.2/apktool.jar $u/; atool_v;;
 	 3) echo; sudo cp -v $c/apktool1.4.1/apktool.jar $u/; atool_v;;
 	 4) echo; sudo cp -v $c/apktool1.4.2/apktool.jar $u/; atool_v;;
-	 5) echo; sudo cp -v $c/apktool1.3.2mod/apktool.jar $u/; atool_v;;
+	 5) echo; sudo cp -v $c/apktool1.4.3/apktool.jar $u/; atool_v;;
+	 6) echo; sudo cp -v $c/apktool1.3.2mod/apktool.jar $u/; atool_v;;
 	 x) echo; echo "Current version has not been changed";;
 	 *) echo; echo "$sel is not a valid option"; echo;;	
 	esac

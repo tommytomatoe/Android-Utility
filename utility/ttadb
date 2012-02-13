@@ -2,8 +2,8 @@
 
 # Android Debug Script Script Linux
 # Author: Tommy Nguyen [tommytomatoe]
-# Version: 1.0.3
-# Date: October 05, 2011
+# Version: 1.1.0
+# Date: February 13, 2012
 # Contact: tommytomatoe@gmail.com
 
 ##FUNCTIONS
@@ -143,7 +143,7 @@ adb_pull()
 	echo
 	for a in "adb pull $DIR$NAM $d"
 	do
-	if [ -e "$d$NAM" ] ; then
+	if [ -e "$d/$NAM" ] ; then
 		echo "Overwrite existing $NAM? [Y/n] [default=Y]"
 		echo
 		read -s -n 1 ans
@@ -264,7 +264,7 @@ adb_push()
 	echo
 	printf %s "[adb push] which file? [ie. Rosie.apk] = "
 	read NAM
-	for a in "adb push $d$NAM $DIR"
+	for a in "adb push $d/$NAM $DIR"
 	do
 	if [[ "$NAM" == "" ]] ; then
 		echo
@@ -288,7 +288,7 @@ adb_inst()
 	echo
 	printf %s "[adb install] which file? [ie. DataApp.apk] = "
 	read INS
-	for a in "adb install $d$INS"
+	for a in "adb install $d/$INS"
 	do
 	if [[ "$INS" == "" ]] ; then
 		echo
@@ -328,8 +328,8 @@ enter_e()
 adb_script() {
 #export PATH
 cd $HOME/android-utility/
-d="$HOME/android-utility/working-folder/mod-here-multi/"
-e="$HOME/android-utility/working-folder/mod-here-solo/"
+d=$HOME/android-utility/working-folder/mod-here-multi
+e=$HOME/android-utility/working-folder/mod-here-solo
 clear
 echo "                   ------------------     "
 echo "                  Android Debug Bridge                  "
@@ -345,6 +345,8 @@ echo "|  6.  hot restart         || 12.  install             |"
 echo "|                                                      |"
 echo "|------------------------------------------------------|"
 echo "|    L. Ultimate Logcat Utility                        |"
+echo "|------------------------------------------------------|"
+echo "|    N. Go to Apktool Utility                          |"
 echo "|------------------------------------------------------|"
 echo "     A. Run if \"no permissions\" message occurs"
 echo "     E. Go to Express Menu (use with 'mod-here-solo')"
@@ -371,6 +373,7 @@ case "$num" in
  i|I) cat $HOME/android-utility/resources/clean/adb.txt | more;;
  e|E) express_adb;;
  l|L) adb_cat;;
+ n|N) andutil n;;
   q) clear; exit;;
  *) echo; echo "Please enter valid option"; enter;
 esac

@@ -267,7 +267,7 @@ which andutil $>/dev/null
 if [[ "$?" -ne "0" ]] ; then
 	export PATH=$HOME/bin:$HOME/android-utility:$HOME/android-utility/utility:${PATH}
 fi
-echo "  Android Utility by tommytomatoe. Version $VERSION. Special Edition"
+echo "  Android Utility by tommytomatoe. Version $VERSION Special Edition"
 echo
 echo "|-------------------------------||-------------------------------|"
 echo "|-------------------------------||-------------------------------|"
@@ -312,6 +312,40 @@ case $num in
 esac
 }
 
+nickMenu ()
+{
+	clear
+	echo "Welcome to Android Application Re-Engineering Manager"
+	echo
+	echo "|----------------------------------------------------------------|"
+	echo "|### `apktool | sed -n 1p` |"
+	echo "|----------------------------------------------------------------|"
+	echo
+	echo "|  Apktool Utility                                    |"
+	echo "|-----------------------------------------------------|"
+	echo "|  1.  Install framework first (ie. framework-res.apk)|"
+	echo "|  2.  Decompile Apk - single or multi apks           |"
+	echo "|  3.  Recompile Apk - single or multi apks           |"
+	echo "|-----------------------------------------------------|"
+	echo
+	echo "|  Optional Flavors                                   |"
+	echo "|-----------------------------------------------------|"
+	echo "|  a.  ADB Utility                                    |"
+	echo "|  q.  quit                                           |"
+	echo
+	printf %s "  Please Select Feature: "
+	read num
+	case $num in
+	1) a_if;;
+	2) apk_dec -m;;
+	3) apk_build -m;;
+	a) ttadb;;
+ 	q) clear; exit;;
+ 	*) echo; echo "$num is not a valid option"; enter;
+	esac
+}
+
+
 VERSION=`grep Version: $HOME/android-utility/README | sed 's:Version\:\ ::g'`
 z=$HOME/android-utility/
 if ! [[ -a $z/resources/.3 ]] ; then
@@ -327,6 +361,15 @@ if ! [[ -a $z/resources/.1 ]] ; then
 	check_s
 else
 	intro
+fi
+
+if [[ ${1} == "n" ]]
+then
+	nickMenu
+while :
+do
+	nickMenu
+done
 fi
 
 while :

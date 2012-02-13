@@ -126,17 +126,19 @@ decode_m ()
 		    apkArray[$i]=$apkName
 		    echo "  $i. $apkName" >> temp.list
 		done
-		more temp.list
+		cat temp.list
 		rm -f temp.list
 		echo
-		echo -n "Please enter number of Apk to decompile (all=0, default=all, quit=q): "
+		echo -n "Please enter number of Apk to decompile (all=0, quit=q): "
 		read ans
 		echo
 		if [ "$ans" == "0" ]; then
 			do_it_m
 		fi
 		if [ "$ans" == "" ]; then
-			do_it_m
+			echo "Please enter a valid option"
+			echo
+			exit 0
 		fi	
 		if [ "$ans" == "q" ]; then
 			exit 0
