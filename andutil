@@ -336,7 +336,7 @@ nickMenu ()
 	printf %s "  Please Select Feature: "
 	read num
 	case $num in
-	1) a_if;;
+	1) echo "woot" ; #a_if;;
 	2) apk_dec -m;;
 	3) apk_build -m;;
 	a) ttadb;;
